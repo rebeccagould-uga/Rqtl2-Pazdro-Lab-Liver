@@ -4,7 +4,7 @@
 
 #LIVER QTL MAPPING - Printing out QTL results
 
-#Load in Liver QTL Mapping - RankZ - Sex.Rdata
+#Load in Kidney QTL Mapping - RankZ - Sex.Rdata
 
 #load the command line tools 
 library(qtl2)
@@ -21,7 +21,7 @@ library (RSQLite)
 
 
 #set working directory to store the plots
-setwd("~/OneDrive - University of Georgia/Pazdro Lab/R01 Redox/Analysis and Results/QTL Mapping - Liver/RankZ/RankZ - sex")
+setwd("~/OneDrive - University of Georgia/Pazdro Lab/R01 Redox/Analysis and Results/QTL Mapping - Kidney/RankZ/RankZ - sex")
 
 
 #tells you all of the qtlscans that you have
@@ -53,18 +53,18 @@ ls(pattern = "qtl")
 ## exporting data
 ####################################################
   #set working directory
-  write_xlsx(list("GSH chr2" = LiverGSH_Genes_MGI_chr2, 
-                  "GSSG chr2" = LiverGSSG_Genes_MGI_chr2, 
-                  "Total GSH chr2" = LiverTotalGSH_Genes_MGI_chr2, 
-                  "GSH GSSG Ratio chr16" = LiverGSH_GSSGRatio_Genes_MGI_chr16),
+  write_xlsx(list("GSH chr2" = KidneyGSH_Genes_MGI_chr2, 
+                  "GSSG chr2" = KidneyGSSG_Genes_MGI_chr2, 
+                  "Total GSH chr2" = KidneyTotalGSH_Genes_MGI_chr2, 
+                  "GSH GSSG Ratio chr16" = KidneyGSH_GSSGRatio_Genes_MGI_chr16),
              "GlutathioneGenesMGI - RankZ sex.xlsx")
   
   #set working directory
-  write_xlsx(list("NADP chr2" = LiverNADP_Genes_MGI_chr2,
-                  "NADP chr8" = LiverNADP_Genes_MGI_chr8,
-                  "NADP NADPH Ratio chr2" = LiverNADP_NADPHRatio_Genes_MGI_chr2,
-                  "NADP NADPH Ratio chr12a" = LiverNADP_NADPHRatio_Genes_MGI_chr12a,
-                  "NADP NADPH Ratio chr12b" = LiverNADP_NADPHRatio_Genes_MGI_chr12b),
+  write_xlsx(list("NADP chr2" = KidneyNADP_Genes_MGI_chr2,
+                  "NADP chr8" = KidneyNADP_Genes_MGI_chr8,
+                  "NADP NADPH Ratio chr2" = KidneyNADP_NADPHRatio_Genes_MGI_chr2,
+                  "NADP NADPH Ratio chr12a" = KidneyNADP_NADPHRatio_Genes_MGI_chr12a,
+                  "NADP NADPH Ratio chr12b" = KidneyNADP_NADPHRatio_Genes_MGI_chr12b),
              "NADSystemsGenesMGI - RankZ sex.xlsx")
   
   #set working directory

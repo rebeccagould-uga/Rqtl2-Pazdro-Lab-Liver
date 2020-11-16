@@ -122,10 +122,10 @@ library (RSQLite)
   pheno$zKidneyGSSG = rankZ(pheno$Kidney_Adj_GSSG)
   pheno$zKidneyTotalGSH = rankZ(pheno$Kidney_Adj_Total_GSH)
   pheno$zKidneyGSH_GSSGRatio = rankZ(pheno$Kidney_Adj_GSH_GSSG_Ratio)
-  pheno$zLiverNADH = rankZ(pheno$Liver_NADH)
-  pheno$zLiverNADP = rankZ(pheno$Liver_NADP)
-  pheno$zLiverNADPH = rankZ(pheno$Liver_NADPH)
-  pheno$zLiverNADP_NADPHRatio = rankZ(pheno$Liver_NADP_NADPH_Ratio)
+  pheno$zKidneyNADH = rankZ(pheno$Kidney_NADH)
+  pheno$zKidneyNADP = rankZ(pheno$Kidney_NADP)
+  pheno$zKidneyNADPH = rankZ(pheno$Kidney_NADPH)
+  pheno$zKidneyNADP_NADPHRatio = rankZ(pheno$Kidney_NADP_NADPH_Ratio)
   pheno$zAST = rankZ(pheno$AST)
   pheno$zALT = rankZ(pheno$ALT)
   pheno$zBUN = rankZ(pheno$BUN)
@@ -167,63 +167,7 @@ library (RSQLite)
   boxplot(pheno$zKidneyGSH_GSSGRatio~pheno$generation, main = "Rank Z Kidney GSH/GSSG Box Plot - by generation")
   #check if it is normally distributed
   qqnorm(pheno$zKidneyGSH_GSSGRatio, main = "Normal QQ Plot - Rank Z Kidney GSH/GSSG")
-  
-#For Liver NADH
-  boxplot(pheno$Liver_NADH, main = "Liver NADH Box Plot")
-  boxplot(pheno$Liver_NADH~pheno$generation, main = "Liver NADH Box Plot - by generation")
-  boxplot(pheno$zLiverNADH, main = "Rank Z Liver NADH Box Plot")
-  boxplot(pheno$zLiverNADH~pheno$generation, main = "Rank Z Liver NADH Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zLiverNADH, main = "Normal QQ Plot - Rank Z Liver NADH")
-  
-#For Liver NADP
-  boxplot(pheno$Liver_NADP, main = "Liver NADP Box Plot")
-  boxplot(pheno$Liver_NADP~pheno$generation, main = "Liver NADP Box Plot - by generation")
-  boxplot(pheno$zLiverNADP, main = "Rank Z Liver NADP Box Plot")
-  boxplot(pheno$zLiverNADP~pheno$generation, main = "Rank Z Liver NADP Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zLiverNADP, main = "Normal QQ Plot - Rank Z Liver NADP")
-  
-#For Liver NADPH
-  boxplot(pheno$Liver_NADPH, main = "Liver NADPH Box Plot")
-  boxplot(pheno$Liver_NADPH~pheno$generation, main = "Liver NADPH Box Plot - by generation")
-  boxplot(pheno$zLiverNADPH, main = "Rank Z Liver NADPH Box Plot")
-  boxplot(pheno$zLiverNADPH~pheno$generation, main = "Rank Z Liver NADPH Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zLiverNADPH, main = "Normal QQ Plot - Rank Z Liver NADPH")
-  
-#For Liver NADP/NADPH Ratio
-  boxplot(pheno$Liver_NADP_NADPH_Ratio, main = "Liver NADP/NADPH Box Plot")
-  boxplot(pheno$Liver_NADP_NADPH_Ratio~pheno$generation, main = "Liver NADP/NADPH Box Plot - by generation")
-  boxplot(pheno$zLiverNADP_NADPHRatio, main = "Rank Z Liver NADP/NADPH Box Plot")
-  boxplot(pheno$zLiverNADP_NADPHRatio~pheno$generation, main = "Rank Z Liver NADP/NADPH Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zLiverNADP_NADPH, main = "Normal QQ Plot - Rank Z Liver NADP/NADPH")
- 
-#For AST
-  boxplot(pheno$AST, main = "AST Box Plot")
-  boxplot(pheno$AST~pheno$generation, main = "AST Box Plot - by generation")
-  boxplot(pheno$zAST, main = "RankZ AST Box Plot")
-  boxplot(pheno$zAST~pheno$generation, main = "RankZ AST Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zAST, main = "Normal QQ Plot - RankZ AST")
-  
-#For ALT
-  boxplot(pheno$ALT, main = "ALT Box Plot")
-  boxplot(pheno$ALT~pheno$generation, main = "ALT Box Plot - by generation")
-  boxplot(pheno$zALT, main = "RankZ ALT Box Plot")
-  boxplot(pheno$zALT~pheno$generation, main = "RankZ ALT Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zALT, main = "Normal QQ Plot - RankZ ALT")
-  
-#For BUN
-  boxplot(pheno$BUN, main = "BUN Box Plot")
-  boxplot(pheno$BUN~pheno$generation, main = "BUN Box Plot - by generation")
-  boxplot(pheno$zBUN, main = "RankZ BUN Box Plot")
-  boxplot(pheno$zBUN~pheno$generation, main = "RankZ BUN Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zBUN, main = "Normal QQ Plot - RankZ BUN")
-  
+
 dev.off()
    
 ####################################################

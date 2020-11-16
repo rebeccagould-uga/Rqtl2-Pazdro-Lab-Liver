@@ -1,4 +1,4 @@
 
-Kidney/.DS_Store
-Kidney/RankZ/.DS_Store
-Liver/Log/.DS_Store
+*.DS_Store
+*.sqlite
+*.rds

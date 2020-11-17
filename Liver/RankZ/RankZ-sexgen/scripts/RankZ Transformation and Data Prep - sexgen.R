@@ -1,5 +1,5 @@
 # R01 GSH DO Mapping Code 
-# Updated August 2020
+# Updated November 2020
 # Becca Gould 
 
 #LIVER QTL MAPPING - RankZ TRANSFORMATION AND DATA PREP
@@ -39,7 +39,7 @@ library (RSQlite)
 
 #Load in the control file to tell R/qtl2 to read the data and title it according to your project. For mine, it's R01_GSH_DO_QTLdata. 
 #For this to work, all of the files in the control file need to be in the folder. Ex: if calling for the "genoprobs" file, it needs to actually be in the folder.
-  R01_GSH_DO_QTLdata <- read_cross2(file = "~/R01_GSH_DO_mapping_Liver/data/R01_GSH_DO_control.json")
+  R01_GSH_DO_QTLdata <- read_cross2(file = "~/Rqtl2-Glutathione-Genetics/data/R01_GSH_DO_control.json")
 
 ####################################################
 ## Genotype probabilities and allele probabilities - provided by Belinda and Vivek
@@ -47,7 +47,7 @@ library (RSQlite)
 
 #read in the genoprobs file that is sorted by chromosomes in numerical order - the 8state.rds is the allele probabilities, the 32state.rds is the genotype probabilities
 #^this is actually the ALlELE probabilities, but for simplicity, we will call it "probs"
-  probs <- readRDS("~/R01_GSH_DO_mapping_Liver/data/Pazdro_GigaMUGA_genoprobs_qced_8state_sorted.rds")
+  probs <- readRDS("~/Rqtl2-Glutathione-Genetics/data/Pazdro_GigaMUGA_genoprobs_qced_8state_sorted.rds")
 
   nrow(data.frame(R01_GSH_DO_QTLdata$gmap[1]))
   #should be 10415
@@ -60,9 +60,9 @@ library (RSQlite)
 ####################################################
 
 #Will need these for the final lesson episodes on SNP association mapping and QTL analysis in Diversity Outbred mice. Make sure they are the most updated versions!
-  query_variants <- create_variant_query_func("~/OneDrive - University of Georgia/Pazdro Lab/R01 Redox/Analysis and Results/QTL Mapping - Liver/data/cc_variants.sqlite")
-  query_genes_mgi <- create_gene_query_func("~/OneDrive - University of Georgia/Pazdro Lab/R01 Redox/Analysis and Results/QTL Mapping - Liver/data/mouse_genes_mgi.sqlite")
-  query_genes <- create_gene_query_func("~/OneDrive - University of Georgia/Pazdro Lab/R01 Redox/Analysis and Results/QTL Mapping - Liver/data/mouse_genes.sqlite")
+  query_variants <- create_variant_query_func("~/Rqtl2-Glutathione-Genetics/data/cc_variants.sqlite")
+  query_genes_mgi <- create_gene_query_func("~/Rqtl2-Glutathione-Genetics/data/mouse_genes_mgi.sqlite")
+  query_genes <- create_gene_query_func("~/Rqtl2-Glutathione-Genetics/data/mouse_genes.sqlite")
 
 ####################################################
 ## Calculating kinship
@@ -84,7 +84,7 @@ library (RSQlite)
 ## Editing the phenotype file to make it R/qtl2-friendly
 ####################################################
 #to have the phenotype file for reference - can be used when plotting the data to see if it needs to be transformed
-  pheno <- read.csv(file = "~/R01_GSH_DO_mapping_Liver/data/R01_GSH_DO_pheno_covar.csv", header = TRUE)
+  pheno <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/data/R01_GSH_DO_pheno_covar.csv", header = TRUE)
 
 #make row names the ID of each sample
   rownames(pheno) <- pheno$id
@@ -136,6 +136,8 @@ library (RSQlite)
   pheno$zAST = rankZ(pheno$AST)
   pheno$zALT = rankZ(pheno$ALT)
   pheno$zBUN = rankZ(pheno$BUN)
+  pheno$zLiver2GSH_GSSGRatio = rankZ(pheno$Liver_Adj_2GSH_GSSG)
+  pheno$zLiverRedoxPotentialGSSG2GSH = rankZ(pheno$Liver_Adj_Redox_Potential_GSSG_2GSH)
 
 #####Plot the transformations  
   
@@ -226,6 +228,22 @@ library (RSQlite)
   boxplot(pheno$zBUN~pheno$generation, main = "RankZ BUN Box Plot - by generation")
   #check if it is normally distributed
   qqnorm(pheno$zBUN, main = "Normal QQ Plot - RankZ BUN")
+  
+#For 2GSH/GSSG Ratio
+  boxplot(pheno$Liver_Adj_2GSH_GSSG, main = "Liver 2GSH/GSSG Box Plot")
+  boxplot(pheno$Liver_Adj_2GSH_GSSG~pheno$generation, main = "Liver 2GSH/GSSG Box Plot - by generation")
+  boxplot(pheno$zLiver2GSH_GSSGRatio, main = "RankZ Liver 2GSH/GSSG Box Plot")
+  boxplot(pheno$zLiver2GSH_GSSGRatio~pheno$generation, main = "RankZ Liver 2GSH/GSSG Box Plot - by generation")
+  #check if it is normally distributed
+  qqnorm(pheno$zLiver2GSH_GSSGRatio, main = "Normal QQ Plot - RankZ Liver 2GSH/GSSG") 
+  
+#For Redox Potential GSSG/2GSH
+  boxplot(pheno$Liver_Adj_Redox_Potential_GSSG_2GSH, main = "Liver Redox Potential GSSG/2GSH Box Plot")
+  boxplot(pheno$Liver_Adj_Redox_Potential_GSSG_2GSH~pheno$generation, main = "Liver Redox Potential GSSG/2GSH Box Plot - by generation")
+  boxplot(pheno$zLiverRedoxPotentialGSSG2GSH, main = "RankZ Liver Redox Potential GSSG/2GSH Box Plot")
+  boxplot(pheno$zLiverRedoxPotentialGSSG2GSH~pheno$generation, main = "RankZ Liver Redox Potential GSSG/2GSH Box Plot - by generation")
+  #check if it is normally distributed
+  qqnorm(pheno$zLiverRedoxPotentialGSSG2GSH, main = "Normal QQ Plot - RankZ Liver Redox Potential GSSG/2GSH") 
   
   
 ####################################################

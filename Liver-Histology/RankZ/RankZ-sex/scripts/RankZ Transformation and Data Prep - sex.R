@@ -118,126 +118,28 @@ library (RSQLite)
   return(qnorm(x))}
   
 #Rank Z transformations of each phenotype
-  pheno$zLiverGSH = rankZ(pheno$Liver_GSH)
-  pheno$zLiverGSSG = rankZ(pheno$Liver_Adj_GSSG)
-  pheno$zLiverTotalGSH = rankZ(pheno$Liver_Adj_Total_GSH)
-  pheno$zLiverGSH_GSSGRatio = rankZ(pheno$Liver_Adj_GSH_GSSG_Ratio)
-  pheno$zLiverNADH = rankZ(pheno$Liver_NADH)
-  pheno$zLiverNADP = rankZ(pheno$Liver_NADP)
-  pheno$zLiverNADPH = rankZ(pheno$Liver_NADPH)
-  pheno$zLiverNADP_NADPHRatio = rankZ(pheno$Liver_NADP_NADPH_Ratio)
-  pheno$zAST = rankZ(pheno$AST)
-  pheno$zALT = rankZ(pheno$ALT)
-  pheno$zBUN = rankZ(pheno$BUN)
-  pheno$zLiver2GSH_GSSGRatio = rankZ(pheno$Liver_Adj_2GSH_GSSG)
-  pheno$zLiverRedoxPotentialGSSG2GSH = rankZ(pheno$Liver_Adj_Redox_Potential_GSSG_2GSH)
+  pheno$zSteatosis = rankZ(pheno$Liver_Steatosis)
+  pheno$zBallooning = rankZ(pheno$Liver_Ballooning)
   
 
 #####Plot the transformations  
   
-#For Liver GSH
-  boxplot(pheno$Liver_GSH, main = "Liver GSH Box Plot")
-  boxplot(pheno$Liver_GSH~pheno$generation, main = "Liver GSH Box Plot - by generation")
-  boxplot(pheno$zLiverGSH, main = "Rank Z Liver GSH Box Plot")
-  boxplot(pheno$zLiverGSH~pheno$generation, main = "Rank Z Liver GSH Box Plot - by generation")
+
+#For Steatosis
+  boxplot(pheno$Steatosis, main = "Liver Steatosis Box Plot")
+  boxplot(pheno$Steatosis~pheno$generation, main = "Liver Steatosis Box Plot - by generation")
+  boxplot(pheno$zSteatosis, main = "RankZ Liver Steatosis Box Plot")
+  boxplot(pheno$zSteatosis~pheno$generation, main = "RankZ Liver Steatosis Box Plot - by generation")
   #check if it is normally distributed
-  qqnorm(pheno$zLiverGSH, main = "Normal QQ Plot - Rank Z Liver GSH")
+  qqnorm(pheno$zSteatosis, main = "Normal QQ Plot - RankZ Liver Steatosis") 
   
-#For Liver GSSG
-  boxplot(pheno$Liver_Adj_GSSG, main = "Liver GSSG Box Plot")
-  boxplot(pheno$Liver_Adj_GSSG~pheno$generation, main = "Liver GSSG Box Plot - by generation")
-  boxplot(pheno$zLiverGSSG, main = "Rank Z Liver GSSG Box Plot")
-  boxplot(pheno$zLiverGSSG~pheno$generation, main = "Rank Z Liver GSSG Box Plot - by generation")
+#For Ballooning
+  boxplot(pheno$Ballooning, main = "Liver Ballooning Box Plot")
+  boxplot(pheno$Ballooning~pheno$generation, main = "Liver Ballooning Box Plot - by generation")
+  boxplot(pheno$zBallooning, main = "RankZ Liver Ballooning Box Plot")
+  boxplot(pheno$zBallooning~pheno$generation, main = "RankZ Liver ReBallooning - by generation")
   #check if it is normally distributed
-  qqnorm(pheno$zLiverGSSG, main = "Normal QQ Plot - Rank Z Liver GSSG")
-  
-#For Liver Total GSH
-  boxplot(pheno$Liver_Adj_Total_GSH, main = "Liver Total GSH Box Plot")
-  boxplot(pheno$Liver_Adj_Total_GSH~pheno$generation, main = "Liver Total GSH Box Plot - by generation")
-  boxplot(pheno$zLiverTotalGSH, main = "Rank Z Liver Total GSH Box Plot")
-  boxplot(pheno$zLiverTotalGSH~pheno$generation, main = "Rank Z Liver Total GSH Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zLiverTotalGSH, main = "Normal QQ Plot - Rank Z Liver Total GSH")
-  
-#For Liver GSH/GSSG Ratio
-  boxplot(pheno$Liver_Adj_GSH_GSSG_Ratio, main = "Liver GSH/GSSG Box Plot")
-  boxplot(pheno$Liver_Adj_GSH_GSSG_Ratio~pheno$generation, main = "Liver GSH/GSSG Box Plot - by generation")
-  boxplot(pheno$zLiverGSH_GSSGRatio, main = "Rank Z Liver GSH/GSSG Box Plot")
-  boxplot(pheno$zLiverGSH_GSSGRatio~pheno$generation, main = "Rank Z Liver GSH/GSSG Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zLiverGSH_GSSGRatio, main = "Normal QQ Plot - Rank Z Liver GSH/GSSG")
-  
-#For Liver NADH
-  boxplot(pheno$Liver_NADH, main = "Liver NADH Box Plot")
-  boxplot(pheno$Liver_NADH~pheno$generation, main = "Liver NADH Box Plot - by generation")
-  boxplot(pheno$zLiverNADH, main = "Rank Z Liver NADH Box Plot")
-  boxplot(pheno$zLiverNADH~pheno$generation, main = "Rank Z Liver NADH Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zLiverNADH, main = "Normal QQ Plot - Rank Z Liver NADH")
-  
-#For Liver NADP
-  boxplot(pheno$Liver_NADP, main = "Liver NADP Box Plot")
-  boxplot(pheno$Liver_NADP~pheno$generation, main = "Liver NADP Box Plot - by generation")
-  boxplot(pheno$zLiverNADP, main = "Rank Z Liver NADP Box Plot")
-  boxplot(pheno$zLiverNADP~pheno$generation, main = "Rank Z Liver NADP Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zLiverNADP, main = "Normal QQ Plot - Rank Z Liver NADP")
-  
-#For Liver NADPH
-  boxplot(pheno$Liver_NADPH, main = "Liver NADPH Box Plot")
-  boxplot(pheno$Liver_NADPH~pheno$generation, main = "Liver NADPH Box Plot - by generation")
-  boxplot(pheno$zLiverNADPH, main = "Rank Z Liver NADPH Box Plot")
-  boxplot(pheno$zLiverNADPH~pheno$generation, main = "Rank Z Liver NADPH Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zLiverNADPH, main = "Normal QQ Plot - Rank Z Liver NADPH")
-  
-#For Liver NADP/NADPH Ratio
-  boxplot(pheno$Liver_NADP_NADPH_Ratio, main = "Liver NADP/NADPH Box Plot")
-  boxplot(pheno$Liver_NADP_NADPH_Ratio~pheno$generation, main = "Liver NADP/NADPH Box Plot - by generation")
-  boxplot(pheno$zLiverNADP_NADPHRatio, main = "Rank Z Liver NADP/NADPH Box Plot")
-  boxplot(pheno$zLiverNADP_NADPHRatio~pheno$generation, main = "Rank Z Liver NADP/NADPH Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zLiverNADP_NADPH, main = "Normal QQ Plot - Rank Z Liver NADP/NADPH")
- 
-#For AST
-  boxplot(pheno$AST, main = "AST Box Plot")
-  boxplot(pheno$AST~pheno$generation, main = "AST Box Plot - by generation")
-  boxplot(pheno$zAST, main = "RankZ AST Box Plot")
-  boxplot(pheno$zAST~pheno$generation, main = "RankZ AST Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zAST, main = "Normal QQ Plot - RankZ AST")
-  
-#For ALT
-  boxplot(pheno$ALT, main = "ALT Box Plot")
-  boxplot(pheno$ALT~pheno$generation, main = "ALT Box Plot - by generation")
-  boxplot(pheno$zALT, main = "RankZ ALT Box Plot")
-  boxplot(pheno$zALT~pheno$generation, main = "RankZ ALT Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zALT, main = "Normal QQ Plot - RankZ ALT")
-  
-#For BUN
-  boxplot(pheno$BUN, main = "BUN Box Plot")
-  boxplot(pheno$BUN~pheno$generation, main = "BUN Box Plot - by generation")
-  boxplot(pheno$zBUN, main = "RankZ BUN Box Plot")
-  boxplot(pheno$zBUN~pheno$generation, main = "RankZ BUN Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zBUN, main = "Normal QQ Plot - RankZ BUN")
-  
-#For 2GSH/GSSG Ratio
-  boxplot(pheno$Liver_Adj_2GSH_GSSG, main = "Liver 2GSH/GSSG Box Plot")
-  boxplot(pheno$Liver_Adj_2GSH_GSSG~pheno$generation, main = "Liver 2GSH/GSSG Box Plot - by generation")
-  boxplot(pheno$zLiver2GSH_GSSGRatio, main = "RankZ Liver 2GSH/GSSG Box Plot")
-  boxplot(pheno$zLiver2GSH_GSSGRatio~pheno$generation, main = "RankZ Liver 2GSH/GSSG Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zLiver2GSH_GSSGRatio, main = "Normal QQ Plot - RankZ Liver 2GSH/GSSG") 
-  
-#For Redox Potential GSSG/2GSH
-  boxplot(pheno$Liver_Adj_Redox_Potential_GSSG_2GSH, main = "Liver Redox Potential GSSG/2GSH Box Plot")
-  boxplot(pheno$Liver_Adj_Redox_Potential_GSSG_2GSH~pheno$generation, main = "Liver Redox Potential GSSG/2GSH Box Plot - by generation")
-  boxplot(pheno$zLiverRedoxPotentialGSSG2GSH, main = "RankZ Liver Redox Potential GSSG/2GSH Box Plot")
-  boxplot(pheno$zLiverRedoxPotentialGSSG2GSH~pheno$generation, main = "RankZ Liver Redox Potential GSSG/2GSHBox Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zLiverRedoxPotentialGSSG2GSH, main = "Normal QQ Plot - RankZ Liver Redox Potential GSSG/2GSH") 
+  qqnorm(pheno$zBallooning, main = "Normal QQ Plot - RankZ Liver Ballooning") 
   
    
 ####################################################

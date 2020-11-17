@@ -4,7 +4,7 @@
 
 #LIVER HISTOLOGY MAPPING - STEATOSIS
 
-#Load in Liver-Histology-Mapping-RankZ-1000-perm-sexgen.Rdata
+#Load in Liver-Histology-Mapping-RankZ-1000-perm-sex.Rdata
 #Run RankZ Transformation and Data Prep R Script before doing this**
 
 
@@ -27,11 +27,11 @@ library (RSQLite)
 ## Plot Genome Scans with Permutation Tests
 ####################################################
 
-qtlscan_Steatosis <- scan1(genoprobs = probs, pheno = pheno["zSteatosis"], kinship = kinship_loco, addcovar = sexgen, cores=10)
-perm_Steatosis <- scan1perm(genoprobs = probs, pheno = pheno["zSteatosis"], addcovar = sexgen, n_perm = 1000, cores=10)
+qtlscan_Steatosis <- scan1(genoprobs = probs, pheno = pheno["zSteatosis"], kinship = kinship_loco, addcovar = sex, cores=10)
+perm_Steatosis <- scan1perm(genoprobs = probs, pheno = pheno["zSteatosis"], addcovar = sex, n_perm = 1000, cores=10)
 
 #set working directory
-pdf(file = "Steatosis QTL Results - RankZ sexgen.pdf")
+pdf(file = "Steatosis QTL Results - RankZ sex.pdf")
 ##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##
 
   par(mar=c(4.1, 4.1, 2.6, 2.6))
@@ -52,7 +52,7 @@ pdf(file = "Steatosis QTL Results - RankZ sexgen.pdf")
 
 write_xlsx(list("Steatosis gmap (cM)" = gmap_peaksSteatosis,
                 "Steatosis pmap (Mbp)" = peaksSteatosis),
-                "Steatosis Peaks - RankZ sexgen.xlsx")
+                "Steatosis Peaks - RankZ sex.xlsx")
 
 
 ####################################################
@@ -64,7 +64,7 @@ write_xlsx(list("Steatosis gmap (cM)" = gmap_peaksSteatosis,
 
   #using gmap (cM)
   chr = 2
-  coef_blup_Steatosis_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zSteatosis"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
+  coef_blup_Steatosis_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zSteatosis"], kinship = kinship_loco[[chr]], addcovar = sex, cores = 10)
   plot_coefCC(x = coef_blup_Steatosis_chr2, map = R01_Steatosis_DO_QTLdata$gmap, scan1_output = qtlscan_Steatosis, main = "Steatosis BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
   xlim <- c(45,65)
   plot_coefCC(x = coef_blup_Steatosis_chr2, map = R01_Steatosis_DO_QTLdata$gmap, scan1_output = qtlscan_Steatosis, main = "Steatosis BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
@@ -78,7 +78,7 @@ write_xlsx(list("Steatosis gmap (cM)" = gmap_peaksSteatosis,
   pander(peaksSteatosis)
   #based on peaksSteatosis, peak of interest is ~109 Mbp
   variants_Steatosis_chr2 <- query_variants(chr, 107, 111)
-  out_snps_Steatosis_chr2 <- scan1snps(genoprobs = probs, map = R01_Steatosis_DO_QTLdata$pmap, pheno = pheno["zSteatosis"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
+  out_snps_Steatosis_chr2 <- scan1snps(genoprobs = probs, map = R01_Steatosis_DO_QTLdata$pmap, pheno = pheno["zSteatosis"], kinship = kinship_loco[[chr]], addcovar = sex, query_func = query_variants,
                                       chr = chr, start = 107, end = 111, keep_all_snps = TRUE)
   plot_snpasso(out_snps_Steatosis_chr2$lod, out_snps_Steatosis_chr2$snpinfo, main = "Steatosis SNPs")
   
@@ -93,8 +93,8 @@ dev.off()
 ## Make a Manhattan plot of the results; use altcol to define a color alternate for chromosomes and gap=0 to have no gap between chromosomes
 ####################################################
 
-pdf(file = "Steatosis GWAS - RankZ sexgen.pdf")
-out_gwas_Steatosis <- scan1snps(genoprobs = probs, map = R01_Steatosis_DO_QTLdata$pmap, pheno = pheno["zSteatosis"], kinship = kinship_loco, addcovar = sexgen, query_func=query_variants, cores=10)
+pdf(file = "Steatosis GWAS - RankZ sex.pdf")
+out_gwas_Steatosis <- scan1snps(genoprobs = probs, map = R01_Steatosis_DO_QTLdata$pmap, pheno = pheno["zSteatosis"], kinship = kinship_loco, addcovar = sex, query_func=query_variants, cores=10)
 par(mar=c(4.1, 4.1, 2.6, 2.6))
 plot(out_gwas_Steatosis$lod, out_gwas_Steatosis$snpinfo, altcol="green4", gap=0, main = "Steatosis GWAS", ylim = c(0,6))
 dev.off()

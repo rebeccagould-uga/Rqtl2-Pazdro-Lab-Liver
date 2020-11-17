@@ -52,7 +52,7 @@ pdf(file = "Redox Potential GSSG 2GSH QTL Results - RankZ sex.pdf")
   
   write_xlsx(list("LiverRedoxPotentialGSSG2GSH gmap (cM)" = gmap_peaksLiverRedoxPotentialGSSG2GSH,
                   "LiverRedoxPotentialGSSG2GSH pmap (Mbp)" = peaksLiverRedoxPotentialGSSG2GSH),
-             "Redox Potential GSSG 2GSH Peaks - RankZ sex.xlsx")
+             "Redox Potential Peaks - RankZ sex.xlsx")
 
 
 ####################################################

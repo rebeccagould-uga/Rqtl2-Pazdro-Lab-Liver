@@ -2,7 +2,7 @@
 # Updated November 2020
 # Becca Gould 
 
-#LIVER QTL MAPPING - RankZ TRANSFORMATION AND DATA PREP
+#LIVER HISTOLOGY MAPPING - RankZ TRANSFORMATION AND DATA PREP
 
 #Make a folder under users (for me, my user is "becca") and title it based on your project. For mine, it's R01_GSH_DO_mapping. Then make a data, results, scripts, and docs folder.
 

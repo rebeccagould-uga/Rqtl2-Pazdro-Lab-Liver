@@ -11,6 +11,5 @@
 # 1) RankZ Transformation and Data.R 
 # 2) Individual phenotype scripts...
 # 3) Exporting QTL Results.R
-# 4) Allele Plots - RankZ Sex.R
 
 

@@ -1,8 +1,8 @@
 # R01 GSH DO Mapping Code 
-# Updated September 2020
+# Updated November 2020
 # Becca Gould 
 
-#LIVER QTL MAPPING - READ ME SCRIPT
+#LIVER QTL AND BLOOD VALUES MAPPING - READ ME SCRIPT
 
 #Load in Liver QTL Mapping - RankZ - Sex.Rdata
 

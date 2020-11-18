@@ -50,8 +50,8 @@ pdf(file = "Redox Potential GSSG 2GSH QTL Results - RankZ sex.pdf")
   print(peaksLiverRedoxPotentialGSSG2GSH)
   
   
-  write_xlsx(list("LiverRedoxPotentialGSSG2GSH gmap (cM)" = gmap_peaksLiverRedoxPotentialGSSG2GSH,
-                  "LiverRedoxPotentialGSSG2GSH pmap (Mbp)" = peaksLiverRedoxPotentialGSSG2GSH),
+  write_xlsx(list("LiverRedoxPotential gmap (cM)" = gmap_peaksLiverRedoxPotentialGSSG2GSH,
+                  "LiverRedoxPotential pmap (Mbp)" = peaksLiverRedoxPotentialGSSG2GSH),
              "Redox Potential Peaks - RankZ sex.xlsx")
 
 
@@ -59,6 +59,60 @@ pdf(file = "Redox Potential GSSG 2GSH QTL Results - RankZ sex.pdf")
 ## Estimate QTL Effects (Coefficients) + Connect to SNP and Gene Databases
 ####################################################
 
+#For Liver Redox Potential GSSG/2GSH --- Chromosome 2
+  par(mar=c(4.1, 4.1, 2.6, 2.6))
+  
+  #using gmap (cM)
+  chr = 2
+  coef_blup_LiverRedoxPotentialGSSG2GSH_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zLiverRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sex, cores = 10)
+  plot_coefCC(x = coef_blup_LiverRedoxPotentialGSSG2GSH_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverRedoxPotentialGSSG2GSH, main = "Liver Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+  xlim <- c(45,65)
+  plot_coefCC(x = coef_blup_LiverRedoxPotentialGSSG2GSH_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverRedoxPotentialGSSG2GSH, main = "Liver Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+  
+  #using pmap (Mbp)
+  chr = 2
+  #could use ci_lo or ci_hi, but for this case, I want a specific chromosome 2 peak
+  #start = peaksGSH[peaksGSH$chr ==  chr,"ci_lo"]
+  #end = peaksGSH[peaksGSH$chr == chr, "ci_hi"] 
+  
+  pander(peaksGSH)
+  #based on peaksGSH, peak of interest is ~109 Mbp
+  variants_LiverRedoxPotentialGSSG2GSH_chr2 <- query_variants(chr, 107, 111)
+  out_snps_LiverRedoxPotentialGSSG2GSH_chr2 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zLiverRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sex, query_func = query_variants,
+                                      chr = chr, start = 107, end = 111, keep_all_snps = TRUE)
+  plot_snpasso(out_snps_LiverRedoxPotentialGSSG2GSH_chr2$lod, out_snps_LiverRedoxPotentialGSSG2GSH_chr2$snpinfo, main = "Liver Redox Potential GSSG/2GSH SNPs")
+  
+  LiverRedoxPotentialGSSG2GSH_Genes_MGI_chr2 <- query_genes_mgi(chr = chr, start = 107, end = 111)
+  plot(out_snps_LiverRedoxPotentialGSSG2GSH_chr2$lod, out_snps_LiverRedoxPotentialGSSG2GSH_chr2$snpinfo, drop_hilit=1.5, genes = LiverRedoxPotentialGSSG2GSH_Genes_MGI_chr2, main = "Liver Redox Potential GSSG/2GSH Genes MGI")
+
+  
+#For Liver Redox Potential GSSG/2GSH --- Chromosome 15
+  par(mar=c(4.1, 4.1, 2.6, 2.6))
+  
+  #using gmap (cM)
+  chr = 15
+  coef_blup_LiverRedoxPotentialGSSG2GSH_chr15 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zLiverRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sex, cores = 10)
+  plot_coefCC(x = coef_blup_LiverRedoxPotentialGSSG2GSH_chr15, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverRedoxPotentialGSSG2GSH, main = "Liver Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+  xlim <- c(10,30)
+  plot_coefCC(x = coef_blup_LiverRedoxPotentialGSSG2GSH_chr15, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverRedoxPotentialGSSG2GSH, main = "Liver Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+  
+  #using pmap (Mbp)
+  chr = 15
+  #could use ci_lo or ci_hi, but for this case, I want a specific chromosome 2 peak
+  #start = peaksGSH[peaksGSH$chr ==  chr,"ci_lo"]
+  #end = peaksGSH[peaksGSH$chr == chr, "ci_hi"] 
+  
+  pander(peaksGSH)
+  #based on peaksGSH, peak of interest is ~109 Mbp
+  variants_LiverRedoxPotentialGSSG2GSH_chr15 <- query_variants(chr, 53, 55)
+  out_snps_LiverRedoxPotentialGSSG2GSH_chr15 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zLiverRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sex, query_func = query_variants,
+                                                         chr = chr, start = 53, end = 55, keep_all_snps = TRUE)
+  plot_snpasso(out_snps_LiverRedoxPotentialGSSG2GSH_chr15$lod, out_snps_LiverRedoxPotentialGSSG2GSH_chr15$snpinfo, main = "Liver Redox Potential GSSG/2GSH SNPs")
+  
+  LiverRedoxPotentialGSSG2GSH_Genes_MGI_chr15 <- query_genes_mgi(chr = chr, start = 53, end = 55)
+  plot(out_snps_LiverRedoxPotentialGSSG2GSH_chr15$lod, out_snps_LiverRedoxPotentialGSSG2GSH_chr15$snpinfo, drop_hilit=1.5, genes = LiverRedoxPotentialGSSG2GSH_Genes_MGI_chr15, main = "Liver Redox Potential GSSG/2GSH Genes MGI")
+
+  
 #For Liver Redox Potential GSSG/2GSH --- Chromosome 16
   par(mar=c(4.1, 4.1, 2.6, 2.6))
   

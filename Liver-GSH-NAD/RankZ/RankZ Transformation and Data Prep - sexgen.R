@@ -2,7 +2,7 @@
 # Updated November 2020
 # Becca Gould 
 
-#LIVER QTL MAPPING - RankZ TRANSFORMATION AND DATA PREP
+#LIVER GLUTATHIONE AND BLOOD QTL MAPPING - RankZ TRANSFORMATION AND DATA PREP
 
 #Make a folder under users (for me, my user is "becca") and title it based on your project. For mine, it's R01_GSH_DO_mapping. Then make a data, results, scripts, and docs folder.
 
@@ -19,9 +19,8 @@ library(devtools)
 library(jsonlite)
 library (data.table)
 library (RcppEigen)
-library (pander)
 library (writexl)
-library (RSQLite)
+library (RSQlite)
 
 #For all plots, use these parameters to keep everything consistent. You can adjust them accordingly.
 #par(mar=c(4.1, 4.1, 2.6, 2.6))
@@ -100,6 +99,14 @@ library (RSQLite)
   pheno$sex <- as.numeric(pheno$sex)
   pheno$generation <- as.numeric(pheno$generation)  
 
+  #when I ran this, it still gives a faulty covariate file
+  #sex <- (pheno$sex == "1")*1
+  #names(sex) <- rownames(pheno$sex)
+  #sex
+  #gen <- (pheno$generation)
+  #names(gen) <- rownames(pheno$generation)
+  #gen
+
 #check pheno file
   pheno[1:10,]
   str(pheno)
@@ -131,7 +138,6 @@ library (RSQLite)
   pheno$zBUN = rankZ(pheno$BUN)
   pheno$zLiver2GSH_GSSGRatio = rankZ(pheno$Liver_Adj_2GSH_GSSG)
   pheno$zLiverRedoxPotentialGSSG2GSH = rankZ(pheno$Liver_Adj_Redox_Potential_GSSG_2GSH)
-  
 
 #####Plot the transformations  
   
@@ -167,6 +173,22 @@ library (RSQLite)
   #check if it is normally distributed
   qqnorm(pheno$zLiverGSH_GSSGRatio, main = "Normal QQ Plot - Rank Z Liver GSH/GSSG")
   
+#For 2GSH/GSSG Ratio
+  boxplot(pheno$Liver_Adj_2GSH_GSSG, main = "Liver 2GSH/GSSG Box Plot")
+  boxplot(pheno$Liver_Adj_2GSH_GSSG~pheno$generation, main = "Liver 2GSH/GSSG Box Plot - by generation")
+  boxplot(pheno$zLiver2GSH_GSSGRatio, main = "RankZ Liver 2GSH/GSSG Box Plot")
+  boxplot(pheno$zLiver2GSH_GSSGRatio~pheno$generation, main = "RankZ Liver 2GSH/GSSG Box Plot - by generation")
+  #check if it is normally distributed
+  qqnorm(pheno$zLiver2GSH_GSSGRatio, main = "Normal QQ Plot - RankZ Liver 2GSH/GSSG") 
+  
+#For Redox Potential GSSG/2GSH
+  boxplot(pheno$Liver_Adj_Redox_Potential_GSSG_2GSH, main = "Liver Redox Potential GSSG/2GSH Box Plot")
+  boxplot(pheno$Liver_Adj_Redox_Potential_GSSG_2GSH~pheno$generation, main = "Liver Redox Potential GSSG/2GSH Box Plot - by generation")
+  boxplot(pheno$zLiverRedoxPotentialGSSG2GSH, main = "RankZ Liver Redox Potential GSSG/2GSH Box Plot")
+  boxplot(pheno$zLiverRedoxPotentialGSSG2GSH~pheno$generation, main = "RankZ Liver Redox Potential GSSG/2GSH Box Plot - by generation")
+  #check if it is normally distributed
+  qqnorm(pheno$zLiverRedoxPotentialGSSG2GSH, main = "Normal QQ Plot - RankZ Liver Redox Potential GSSG/2GSH") 
+  
 #For Liver NADH
   boxplot(pheno$Liver_NADH, main = "Liver NADH Box Plot")
   boxplot(pheno$Liver_NADH~pheno$generation, main = "Liver NADH Box Plot - by generation")
@@ -198,58 +220,19 @@ library (RSQLite)
   boxplot(pheno$zLiverNADP_NADPHRatio~pheno$generation, main = "Rank Z Liver NADP/NADPH Box Plot - by generation")
   #check if it is normally distributed
   qqnorm(pheno$zLiverNADP_NADPH, main = "Normal QQ Plot - Rank Z Liver NADP/NADPH")
- 
-#For AST
-  boxplot(pheno$AST, main = "AST Box Plot")
-  boxplot(pheno$AST~pheno$generation, main = "AST Box Plot - by generation")
-  boxplot(pheno$zAST, main = "RankZ AST Box Plot")
-  boxplot(pheno$zAST~pheno$generation, main = "RankZ AST Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zAST, main = "Normal QQ Plot - RankZ AST")
+
   
-#For ALT
-  boxplot(pheno$ALT, main = "ALT Box Plot")
-  boxplot(pheno$ALT~pheno$generation, main = "ALT Box Plot - by generation")
-  boxplot(pheno$zALT, main = "RankZ ALT Box Plot")
-  boxplot(pheno$zALT~pheno$generation, main = "RankZ ALT Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zALT, main = "Normal QQ Plot - RankZ ALT")
-  
-#For BUN
-  boxplot(pheno$BUN, main = "BUN Box Plot")
-  boxplot(pheno$BUN~pheno$generation, main = "BUN Box Plot - by generation")
-  boxplot(pheno$zBUN, main = "RankZ BUN Box Plot")
-  boxplot(pheno$zBUN~pheno$generation, main = "RankZ BUN Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zBUN, main = "Normal QQ Plot - RankZ BUN")
-  
-#For 2GSH/GSSG Ratio
-  boxplot(pheno$Liver_Adj_2GSH_GSSG, main = "Liver 2GSH/GSSG Box Plot")
-  boxplot(pheno$Liver_Adj_2GSH_GSSG~pheno$generation, main = "Liver 2GSH/GSSG Box Plot - by generation")
-  boxplot(pheno$zLiver2GSH_GSSGRatio, main = "RankZ Liver 2GSH/GSSG Box Plot")
-  boxplot(pheno$zLiver2GSH_GSSGRatio~pheno$generation, main = "RankZ Liver 2GSH/GSSG Box Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zLiver2GSH_GSSGRatio, main = "Normal QQ Plot - RankZ Liver 2GSH/GSSG") 
-  
-#For Redox Potential GSSG/2GSH
-  boxplot(pheno$Liver_Adj_Redox_Potential_GSSG_2GSH, main = "Liver Redox Potential GSSG/2GSH Box Plot")
-  boxplot(pheno$Liver_Adj_Redox_Potential_GSSG_2GSH~pheno$generation, main = "Liver Redox Potential GSSG/2GSH Box Plot - by generation")
-  boxplot(pheno$zLiverRedoxPotentialGSSG2GSH, main = "RankZ Liver Redox Potential GSSG/2GSH Box Plot")
-  boxplot(pheno$zLiverRedoxPotentialGSSG2GSH~pheno$generation, main = "RankZ Liver Redox Potential GSSG/2GSHBox Plot - by generation")
-  #check if it is normally distributed
-  qqnorm(pheno$zLiverRedoxPotentialGSSG2GSH, main = "Normal QQ Plot - RankZ Liver Redox Potential GSSG/2GSH") 
-  
-   
 ####################################################
 ## add covariates
 ####################################################
 
+#because of how large my cohorts were, it is important to account for generation + sex
+
 #adding sex and generation as covariates
 sexgen = model.matrix(~ sex + generation, data = pheno)[,-1]
 
-  
   #doing it this way does not transfer the row names correctly
-  #sex = model.matrix(~ sex + gen)[,-1]
+  #sexgen = model.matrix(~ sex + gen)[,-1]
 
 
 #For heritability calculation, need a linear mixed model
@@ -258,7 +241,8 @@ sexgen = model.matrix(~ sex + generation, data = pheno)[,-1]
   
 kinship_lmm <- calc_kinship(probs = probs, use_allele_probs = TRUE, cores = 10)
 
-#adding sex as covariate to compare to sex
+#adding sex as covariate to compare to sexgen
 sex = model.matrix(~ sex, data = pheno)[,-1] 
+
 
 

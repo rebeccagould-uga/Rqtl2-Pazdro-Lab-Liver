@@ -2,9 +2,10 @@
 # Updated September 2020
 # Becca Gould 
 
-#LIVER QTL MAPPING - Printing out QTL results
+#LIVER HISTOLOGY AND BLOOD (AST AND ALT) MAPPING - Exporting QTL Results
 
-#Load in Liver QTL Mapping - RankZ - SexGen.Rdata
+#Load in Liver-Histology-Blood-RankZ-SexGen.Rdata
+#Run RankZ Transformation and Data Prep R Script before doing this**
 
 #load the command line tools 
 library(qtl2)

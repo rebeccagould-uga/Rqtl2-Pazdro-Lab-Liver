@@ -2,9 +2,9 @@
 # Updated September 2020
 # Becca Gould 
 
-#LIVER QTL MAPPING - Printing out QTL results
+#LIVER GLUTATHIONE + NAD MAPPING - Exporting QTL Results
 
-#Load in Liver QTL Mapping - RankZ - Sex.Rdata
+#Load in Liver-GSH-NAD-RankZ-Sex.Rdata
 
 #load the command line tools 
 library(qtl2)

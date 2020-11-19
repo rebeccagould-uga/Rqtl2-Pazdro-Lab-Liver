@@ -2,14 +2,14 @@
 # Updated September 2020
 # Becca Gould 
 
-#LIVER QTL MAPPING - Allele Plots
+#LIVER GLUTATHIONE + NAD MAPPING - Allele Plots
+
 #Creates Heat Maps that shows the individual CC founder allele contribution at a specific SNP from the Giga MUGA
 
 #Created by Becca Gould with Sue McClatchy on 9/24/2020
 #Based on Greg Keele's heat map code
 
-#Load in Liver QTL Mapping - RankZ - SexGen.Rdata
-
+#Load in Liver-GSH-NAD-RankZ-SexGen.Rdata
 
 #load the command line tools 
 library(qtl2)

@@ -2,9 +2,9 @@
 # Updated November 2020
 # Becca Gould 
 
-#LIVER HISTOLOGY MAPPING - STEATOSIS
+#LIVER HISTOLOGY AND BLOOD (AST AND ALT) MAPPING - Steatosis
 
-#Load in Liver-Histology-Mapping-RankZ-1000-perm-sexgen.Rdata
+#Load in Liver-Histology-Blood-RankZ-SexGen.Rdata
 #Run RankZ Transformation and Data Prep R Script before doing this**
 
 

@@ -2,9 +2,9 @@
 # Updated November 2020
 # Becca Gould 
 
-#LIVER QTL MAPPING - Redox Potential GSSG/2GSH
+#LIVER GLUTATHIONE + NAD MAPPING - Redox Potential GSSG/2GSH
 
-#Load in Liver QTL Mapping - RankZ 1000 perm - sexgen.Rdata
+#Load in Liver-GSH-NAD-RankZ-SexGen.Rdata
 #Run RankZ Transformation and Data Prep R Script before doing this**
 
 

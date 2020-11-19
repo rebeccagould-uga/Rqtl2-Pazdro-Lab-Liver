@@ -2,11 +2,10 @@
 # Updated November 2020
 # Becca Gould 
 
-#LIVER QTL MAPPING - 2GSH/GSSG Ratio
+#LIVER GLUTATHIONE + NAD MAPPING - 2GSH/GSSG Ratio
 
-#Load in Liver QTL Mapping - RankZ 1000 perm - sex.Rdata
+#Load in Liver-GSH-NAD-RankZ-Sex.Rdata
 #Run RankZ Transformation and Data Prep R Script before doing this**
-
 
 setwd("/users/becca/R01_GSH_DO_mapping_Liver/data")
 

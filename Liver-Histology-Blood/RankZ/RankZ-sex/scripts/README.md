@@ -2,7 +2,7 @@
 # Updated November 2020
 # Becca Gould 
 
-#LIVER HISTOLOGY AND BLOOD MAPPING - READ ME SCRIPT
+#LIVER HISTOLOGY AND BLOOD (AST AND ALT) MAPPING - READ ME SCRIPT
 
 #Load in Liver-Histology-Blood-RankZ-Sex.Rdata
 

@@ -2,9 +2,9 @@
 # Updated August 2020
 # Becca Gould 
 
-#LIVER QTL MAPPING - NADPH
+#LIVER GLUTATHIONE + NAD MAPPING - NADPH
 
-#Load in Liver QTL Mapping - RankZ 1000 perm - sex.Rdata
+#Load in Liver-GSH-NAD-RankZ-Sex.Rdata
 #Run RankZ Transformation and Data Prep R Script before doing this**
 
 

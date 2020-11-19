@@ -2,13 +2,16 @@
 # Updated August 2020
 # Becca Gould 
 
-#LIVER QTL MAPPING - RankZ TRANSFORMATION AND DATA PREP
+#LIVER GLUTATHIONE + NAD MAPPING - GSH WITH GSSG COVAR
+
+#Load in Liver-GSH-NAD-RankZ-SexGen.Rdata
+#Run RankZ Transformation and Data Prep R Script before doing this**
 
 #Make a folder under users (for me, my user is "becca") and title it based on your project. For mine, it's R01_GSH_DO_mapping. Then make a data, results, scripts, and docs folder.
 
 setwd("/users/becca/R01_GSH_DO_mapping_Liver/data")
 
-#I can use "~" instead of "/users/becca/" everytime as it represents my home base
+#I can use "~" instead of "/users/becca/" every time as it represents my home base
 
 #load the command line tools - see https://github.com/Rdatatable/data.table/wiki/Installation for more information - must do every time you open up the Rproject!
 library(qtl2)

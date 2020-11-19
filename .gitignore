@@ -3,7 +3,4 @@
 *.sqlite
 *.rds
 *.RData
-Liver/RankZ/RankZ-sex/miQTL/.DS_Store
 .Rproj.user
-Liver/Box-and-QQ-plots/Box-Plots/RankZ/.DS_Store
-.DS_Store

@@ -2,13 +2,13 @@
 # Updated November 2020
 # Becca Gould 
 
-#Kidney QTL MAPPING - GSH GSSG Ratio
+#KIDNEY GLUTATHIONE + BLOOD (BUN) MAPPING - GSH/GSSG Ratio
 
 #Load in Kidney-QTL-Mapping-RankZ-sexgen.Rdata
 #Run RankZ Transformation and Data Prep R Script before doing this**
 
 
-setwd("/users/becca/R01_GSH_DO_mapping_Kidney/data")
+#setwd
 
 library(qtl2)
 library (tidyverse)

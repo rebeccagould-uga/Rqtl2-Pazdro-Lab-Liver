@@ -1,8 +1,8 @@
 # R01 GSH DO Mapping Code 
-# Updated August 2020
+# Updated November 2020
 # Becca Gould 
 
-#KIDNEY QTL MAPPING - RankZ TRANSFORMATION AND DATA PREP
+#KIDNEY GLUTATHIONE + BLOOD (BUN) MAPPING - GSH with GSSG covar
 
 #Make a folder under users (for me, my user is "becca") and title it based on your project. For mine, it's R01_GSH_DO_mapping. Then make a data, results, scripts, and docs folder.
 

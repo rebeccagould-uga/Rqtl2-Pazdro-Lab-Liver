@@ -1,14 +1,14 @@
-# R01 AST DO Mapping Code 
-# Updated August 2020
+# R01 GSH DO Mapping Code 
+# Updated November 2020
 # Becca Gould 
 
-#LIVER GLUTATHIONE + NAD MAPPING - AST
+#LIVER HISTOLOGY AND BLOOD QTL MAPPING - AST
 
-#Load in Liver-GSH-NAD-RankZ-Sex.Rdata
+#Load in Liver-GSH-NAD-RankZ-SexGen.Rdata
 #Run RankZ Transformation and Data Prep R Script before doing this**
 
 
-setwd("/users/becca/R01_GSH_DO_mapping_Liver/data")
+#setwd
 
 library(qtl2)
 library (tidyverse)
@@ -26,11 +26,11 @@ library (RSQLite)
 ## Plot Genome Scans with Permutation Tests
 ####################################################
 
-  qtlscan_AST <- scan1(genoprobs = probs, pheno = pheno["zAST"], kinship = kinship_loco, addcovar = sex, cores=10)
-  perm_AST <- scan1perm(genoprobs = probs, pheno = pheno["zAST"], addcovar = sex, n_perm = 1000, cores=10)
- 
+  qtlscan_AST <- scan1(genoprobs = probs, pheno = pheno["zAST"], kinship = kinship_loco, addcovar = sexgen, cores=10)
+  perm_AST <- scan1perm(genoprobs = probs, pheno = pheno["zAST"], addcovar = sexgen, n_perm = 1000, cores=10)
+
 #set working directory
-pdf(file = "AST QTL Results - RankZ sex.pdf")
+pdf(file = "AST-QTL-Results-RankZ-sexgen.pdf")
 ##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##
   
   par(mar=c(4.1, 4.1, 2.6, 2.6))
@@ -51,19 +51,44 @@ pdf(file = "AST QTL Results - RankZ sex.pdf")
   
   write_xlsx(list("AST gmap (cM)" = gmap_peaksAST,
                   "AST pmap (Mbp)" = peaksAST),
-             "AST Peaks - RankZ sex.xlsx")
+             "AST-Peaks-RankZ-sexgen.xlsx")
   
-
 ####################################################
 ## Estimate QTL Effects (Coefficients) + Connect to SNP and Gene Databases
 ####################################################
 
+#For AST --- Chromosome 2
+  par(mar=c(4.1, 4.1, 2.6, 2.6))
+  
+  #using gmap (cM)
+  chr = 2
+  coef_blup_AST_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zAST"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
+  plot_coefCC(x = coef_blup_AST_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_AST, main = "AST BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+  xlim <- c(1,20)
+  plot_coefCC(x = coef_blup_AST_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_AST, main = "AST BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+  
+  #using pmap (Mbp)
+  chr = 2
+  #could use ci_lo and ci_hi, but in this case I want a specific chr 2 position
+  #start = peaksAST[peaksAST$chr ==  chr,"ci_lo"]
+  #end = peaksAST[peaksAST$chr == chr, "ci_hi"] 
+  
+  pander(peaksAST)
+  #based on peaksAST, peak of interest is ~12 Mbp
+  variants_AST_chr2 <- query_variants(chr, 10, 13.5)
+  out_snps_AST_chr2 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zAST"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
+                                  chr = chr, start = 10, end = 13.5, keep_all_snps = TRUE)
+  plot_snpasso(out_snps_AST_chr2$lod, out_snps_AST_chr2$snpinfo, main = "AST SNPs")
+  
+  AST_Genes_MGI_chr2 <- query_genes_mgi(chr = chr, start = 10, end = 13.5)
+  plot(out_snps_AST_chr2$lod, out_snps_AST_chr2$snpinfo, drop_hilit=1.5, genes = AST_Genes_MGI_chr2, main = "AST Genes MGI")
+  
 #For AST --- Chromosome 16
   par(mar=c(4.1, 4.1, 2.6, 2.6))
 
   #using gmap (cM)
   chr = 16
-  coef_blup_AST_chr16 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zAST"], kinship = kinship_loco[[chr]], addcovar = sex, cores = 10)
+  coef_blup_AST_chr16 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zAST"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
   plot_coefCC(x = coef_blup_AST_chr16, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_AST, main = "AST BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
   xlim <- c(25,45)
   plot_coefCC(x = coef_blup_AST_chr16, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_AST, main = "AST BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
@@ -73,11 +98,11 @@ pdf(file = "AST QTL Results - RankZ sex.pdf")
   #could also specify a Mbp location on a specific chromosome, but will use ci_lo and ci_hi
   start = peaksAST[peaksAST$chr ==  chr,"ci_lo"]
   end = peaksAST[peaksAST$chr == chr, "ci_hi"] 
-    
+  
   pander(peaksAST)
   #based on peaksAST, peak of interest is ~57 Mbp
-  variants_AST_chr16 <- query_variants(chr, start - 1, end + 1)
-  out_snps_AST_chr16 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zAST"], kinship = kinship_loco[[chr]], addcovar = sex, query_func = query_variants,
+  variants_AST_chr16 <- query_variants(chr, start -1, end + 1)
+  out_snps_AST_chr16 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zAST"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
                                          chr = chr, start = start - 1, end = end + 1, keep_all_snps = TRUE)
   plot_snpasso(out_snps_AST_chr16$lod, out_snps_AST_chr16$snpinfo, main = "AST SNPs")
     
@@ -85,15 +110,15 @@ pdf(file = "AST QTL Results - RankZ sex.pdf")
   plot(out_snps_AST_chr16$lod, out_snps_AST_chr16$snpinfo, drop_hilit=1.5, genes = AST_Genes_MGI_chr16, main = "AST Genes MGI")
 
 dev.off()
-  
+
   
 ####################################################
 ## GWAS SNP Association Scan
 ## Make a Manhattan plot of the results; use altcol to define a color alternate for chromosomes and gap=0 to have no gap between chromosomes
 ####################################################
 
-pdf(file = "AST GWAS - RankZ sex.pdf")
-out_gwas_AST <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zAST"], kinship = kinship_loco, addcovar = sex, query_func=query_variants, cores=10)
+pdf(file = "AST-GWAS-RankZ-sexgen.pdf")
+out_gwas_AST <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zAST"], kinship = kinship_loco, addcovar = sexgen, query_func=query_variants, cores=10)
 par(mar=c(4.1, 4.1, 2.6, 2.6))
 plot(out_gwas_AST$lod, out_gwas_AST$snpinfo, altcol="green4", gap=0, main = "AST GWAS", ylim = c(0,6))
 dev.off()

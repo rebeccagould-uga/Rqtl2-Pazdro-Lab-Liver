@@ -2,13 +2,12 @@
 # Updated August 2020
 # Becca Gould 
 
-#LIVER GLUTATHIONE + NAD MAPPING - ALT
+#LIVER HISTOLOGY AND BLOOD MAPPING - ALT
 
-#Load in Liver-GSH-NAD-RankZ-SexGen.Rdata
+#Load in Liver-GSH-NAD-RankZ-Sex.Rdata
 #Run RankZ Transformation and Data Prep R Script before doing this**
 
-
-setwd("/users/becca/R01_GSH_DO_mapping_Liver/data")
+#set wd 
 
 library(qtl2)
 library (tidyverse)
@@ -22,15 +21,17 @@ library (pander)
 library (writexl)
 library (RSQLite)
 
+
 ####################################################
 ## Plot Genome Scans with Permutation Tests
 ####################################################
 
-qtlscan_ALT <- scan1(genoprobs = probs, pheno = pheno["zALT"], kinship = kinship_loco, addcovar = sexgen, cores=10)
-perm_ALT <- scan1perm(genoprobs = probs, pheno = pheno["zALT"], addcovar = sexgen, n_perm = 1000, cores=10)
+  qtlscan_ALT <- scan1(genoprobs = probs, pheno = pheno["zALT"], kinship = kinship_loco, addcovar = sex, cores=10)
+  perm_ALT <- scan1perm(genoprobs = probs, pheno = pheno["zALT"], addcovar = sex, n_perm = 1000, cores=10)
+
   
 #set working directory
-pdf(file = "ALT QTL Results - RankZ sexgen.pdf")
+pdf(file = "ALT QTL-Results-RankZ-sex.pdf")
 ##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##
   
   par(mar=c(4.1, 4.1, 2.6, 2.6))
@@ -51,18 +52,17 @@ pdf(file = "ALT QTL Results - RankZ sexgen.pdf")
   
   write_xlsx(list("ALT gmap (cM)" = gmap_peaksALT,
                   "ALT pmap (Mbp)" = peaksALT),
-             "ALT Peaks - RankZ sexgen.xlsx")
+             "ALT-Peaks-RankZ-sex.xlsx")
   
 dev.off()
-
 
 ####################################################
 ## GWAS SNP Association Scan
 ## Make a Manhattan plot of the results; use altcol to define a color alternate for chromosomes and gap=0 to have no gap between chromosomes
 ####################################################
 
-pdf(file = "ALT GWAS - RankZ sexgen.pdf")
-out_gwas_ALT <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zALT"], kinship = kinship_loco, addcovar = sexgen, query_func=query_variants, cores=10)
+pdf(file = "ALT-GWAS-RankZ-sex.pdf")
+out_gwas_ALT <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zALT"], kinship = kinship_loco, addcovar = sex, query_func=query_variants, cores=10)
 par(mar=c(4.1, 4.1, 2.6, 2.6))
 plot(out_gwas_ALT$lod, out_gwas_ALT$snpinfo, altcol="green4", gap=0, main = "ALT GWAS", ylim = c(0,6))
 dev.off()

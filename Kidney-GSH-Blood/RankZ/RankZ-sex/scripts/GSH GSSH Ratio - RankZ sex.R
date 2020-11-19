@@ -1,8 +1,8 @@
 # R01 GSH DO Mapping Code 
-# Updated August 2020
+# Updated November 2020
 # Becca Gould 
 
-#Kidney QTL MAPPING - GSH GSSG Ratio
+#KIDNEY GLUTATHIONE + BLOOD (BUN) MAPPING - GSH/GSSG Ratio
 
 #Load in Kidney QTL Mapping - RankZ 1000 perm - sex.Rdata
 #Run RankZ Transformation and Data Prep R Script before doing this**

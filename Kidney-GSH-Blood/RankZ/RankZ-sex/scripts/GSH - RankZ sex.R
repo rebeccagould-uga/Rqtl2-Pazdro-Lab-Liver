@@ -2,9 +2,9 @@
 # Updated November 2020
 # Becca Gould 
 
-#Kidney QTL MAPPING - GSH
+#KIDNEY GLUTATHIONE + BLOOD (BUN) MAPPING - GSH
 
-#Load in Kidney-QTL-Mapping-RankZ-sexgen.Rdata
+#Load in Kidney QTL Mapping - RankZ 1000 perm - sex.Rdata
 #Run RankZ Transformation and Data Prep R Script before doing this**
 
 
@@ -27,11 +27,11 @@ library (RSQLite)
 ## Plot Genome Scans with Permutation Tests
 ####################################################
 
-qtlscan_KidneyGSH <- scan1(genoprobs = probs, pheno = pheno["zKidneyGSH"], kinship = kinship_loco, addcovar = sexgen, cores=10)
-perm_KidneyGSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyGSH"], addcovar = sexgen, n_perm = 1000, cores=10)
+qtlscan_KidneyGSH <- scan1(genoprobs = probs, pheno = pheno["zKidneyGSH"], kinship = kinship_loco, addcovar = sex, cores=10)
+perm_KidneyGSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyGSH"], addcovar = sex, n_perm = 1000, cores=10)
 
 #set working directory
-pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
+pdf(file = "GSH QTL Results - RankZ sex.pdf")
 ##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##
 
   par(mar=c(4.1, 4.1, 2.6, 2.6))
@@ -52,7 +52,7 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
 
 write_xlsx(list("GSH gmap (cM)" = gmap_peaksGSH,
                 "GSH pmap (Mbp)" = peaksGSH),
-                "GSH Peaks - RankZ sexgen.xlsx")
+                "GSH Peaks - RankZ sex.xlsx")
 
 
 ####################################################
@@ -64,7 +64,7 @@ write_xlsx(list("GSH gmap (cM)" = gmap_peaksGSH,
 
   #using gmap (cM)
   chr = 2
-  coef_blup_KidneyGSH_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
+  coef_blup_KidneyGSH_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyGSH"], kinship = kinship_loco[[chr]], addcovar = sex, cores = 10)
   plot_coefCC(x = coef_blup_KidneyGSH_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSH, main = "Kidney GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
   xlim <- c(45,65)
   plot_coefCC(x = coef_blup_KidneyGSH_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSH, main = "Kidney GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
@@ -78,7 +78,7 @@ write_xlsx(list("GSH gmap (cM)" = gmap_peaksGSH,
   pander(peaksGSH)
   #based on peaksGSH, peak of interest is ~109 Mbp
   variants_KidneyGSH_chr2 <- query_variants(chr, 107, 111)
-  out_snps_KidneyGSH_chr2 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
+  out_snps_KidneyGSH_chr2 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyGSH"], kinship = kinship_loco[[chr]], addcovar = sex, query_func = query_variants,
                                       chr = chr, start = 107, end = 111, keep_all_snps = TRUE)
   plot_snpasso(out_snps_KidneyGSH_chr2$lod, out_snps_KidneyGSH_chr2$snpinfo, main = "Kidney GSH SNPs")
   
@@ -93,8 +93,8 @@ dev.off()
 ## Make a Manhattan plot of the results; use altcol to define a color alternate for chromosomes and gap=0 to have no gap between chromosomes
 ####################################################
 
-pdf(file = "GSH GWAS - RankZ sexgen.pdf")
-out_gwas_KidneyGSH <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyGSH"], kinship = kinship_loco, addcovar = sexgen, query_func=query_variants, cores=10)
+pdf(file = "GSH GWAS - RankZ sex.pdf")
+out_gwas_KidneyGSH <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyGSH"], kinship = kinship_loco, addcovar = sex, query_func=query_variants, cores=10)
 par(mar=c(4.1, 4.1, 2.6, 2.6))
 plot(out_gwas_KidneyGSH$lod, out_gwas_KidneyGSH$snpinfo, altcol="green4", gap=0, main = "Kidney GSH GWAS", ylim = c(0,6))
 dev.off()

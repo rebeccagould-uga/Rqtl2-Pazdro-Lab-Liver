@@ -204,7 +204,7 @@ sexgen = model.matrix(~ sex + generation, data = pheno)[,-1]
   
 kinship_lmm <- calc_kinship(probs = probs, use_allele_probs = TRUE, cores = 10)
 
-#adding sex as covariate to compare to sex
+#adding sex as covariate to compare to sexgen
 sex = model.matrix(~ sex, data = pheno)[,-1] 
 
 

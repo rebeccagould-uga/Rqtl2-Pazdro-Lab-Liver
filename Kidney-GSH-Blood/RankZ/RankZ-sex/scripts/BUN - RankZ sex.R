@@ -1,14 +1,14 @@
-# R01 BUN DO Mapping Code 
-# Updated August 2020
+# R01 GSH DO Mapping Code 
+# Updated November 2020
 # Becca Gould 
 
-#LIVER GLUTATHIONE + NAD MAPPING - BUN
+#KIDNEY GLUTATHIONE + BLOOD (BUN) MAPPING - BUN
 
-#Load in Liver-GSH-NAD-RankZ-Sex.Rdata
+#Load in Kidney-GSH-Blood-RankZ-Sex.Rdata
 #Run RankZ Transformation and Data Prep R Script before doing this**
 
 
-setwd("/users/becca/R01_GSH_DO_mapping_Liver/data")
+setwd("/users/becca/R01_GSH_DO_mapping_Kidney/data")
 
 library(qtl2)
 library (tidyverse)
@@ -30,7 +30,7 @@ qtlscan_BUN <- scan1(genoprobs = probs, pheno = pheno["zBUN"], kinship = kinship
 perm_BUN <- scan1perm(genoprobs = probs, pheno = pheno["zBUN"], addcovar = sex, n_perm = 1000, cores=10)
   
 #set working directory
-pdf(file = "BUN QTL Results - RankZ sex.pdf")
+pdf(file = "BUN-QTL-Results-RankZ-sex.pdf")
 ##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##
   
   par(mar=c(4.1, 4.1, 2.6, 2.6))
@@ -51,7 +51,7 @@ pdf(file = "BUN QTL Results - RankZ sex.pdf")
   
   write_xlsx(list("BUN gmap (cM)" = gmap_peaksBUN,
                   "BUN pmap (Mbp)" = peaksBUN),
-             "BUN Peaks - RankZ sex.xlsx")
+             "BUN-Peaks-RankZ-sex.xlsx")
 
 dev.off()  
 
@@ -60,7 +60,7 @@ dev.off()
 ## Make a Manhattan plot of the results; use altcol to define a color alternate for chromosomes and gap=0 to have no gap between chromosomes
 ####################################################
 
-pdf(file = "BUN GWAS - RankZ sex.pdf")
+pdf(file = "BUN-GWAS-RankZ-sex.pdf")
 out_gwas_BUN <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zBUN"], kinship = kinship_loco, addcovar = sex, query_func=query_variants, cores=10)
 par(mar=c(4.1, 4.1, 2.6, 2.6))
 plot(out_gwas_BUN$lod, out_gwas_BUN$snpinfo, altcol="green4", gap=0, main = "BUN GWAS", ylim = c(0,6))

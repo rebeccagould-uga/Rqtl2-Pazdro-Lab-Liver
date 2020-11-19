@@ -67,10 +67,5 @@ ls(pattern = "qtl")
                   "NADP NADPH Ratio chr12b" = LiverNADP_NADPHRatio_Genes_MGI_chr12b),
              "NADSystemsGenesMGI - RankZ sex.xlsx")
   
-  #set working directory
-  write_xlsx(list("AST chr16" = AST_Genes_MGI_chr16),
-             "BloodValuesGenesMGI - RankZ sex.xlsx")
-  
-  
   
 

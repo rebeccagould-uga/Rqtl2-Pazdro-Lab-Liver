@@ -2,7 +2,7 @@
 # Updated September 2020
 # Becca Gould 
 
-#LIVER QTL MAPPING - Printing out QTL results
+#KIDNEY GLUTATHIONE + BLOOD (BUN) MAPPING - Exporting QTL results
 
 #Load in Kidney QTL Mapping - RankZ - Sex.Rdata
 
@@ -21,8 +21,6 @@ library (RSQLite)
 
 
 #set working directory to store the plots
-setwd("~/OneDrive - University of Georgia/Pazdro Lab/R01 Redox/Analysis and Results/QTL Mapping - Kidney/RankZ/RankZ - sex")
-
 
 #tells you all of the qtlscans that you have
 ls(pattern = "qtl")
@@ -42,12 +40,6 @@ ls(pattern = "qtl")
   qtl_gmap
   
   
-####################################################
-## exporting QTL results
-####################################################
-
-#is there a way to make a loop to export QTL results?
-  
 
 ####################################################
 ## exporting data
@@ -57,7 +49,7 @@ ls(pattern = "qtl")
                   "GSSG chr2" = KidneyGSSG_Genes_MGI_chr2, 
                   "Total GSH chr2" = KidneyTotalGSH_Genes_MGI_chr2, 
                   "GSH GSSG Ratio chr16" = KidneyGSH_GSSGRatio_Genes_MGI_chr16),
-             "GlutathioneGenesMGI - RankZ sex.xlsx")
+             "GlutathioneGenesMGI-RankZ-sex.xlsx")
   
   #set working directory
   write_xlsx(list("NADP chr2" = KidneyNADP_Genes_MGI_chr2,
@@ -65,11 +57,10 @@ ls(pattern = "qtl")
                   "NADP NADPH Ratio chr2" = KidneyNADP_NADPHRatio_Genes_MGI_chr2,
                   "NADP NADPH Ratio chr12a" = KidneyNADP_NADPHRatio_Genes_MGI_chr12a,
                   "NADP NADPH Ratio chr12b" = KidneyNADP_NADPHRatio_Genes_MGI_chr12b),
-             "NADSystemsGenesMGI - RankZ sex.xlsx")
+             "NADSystemsGenesMGI-RankZ-sex.xlsx")
   
-  #set working directory
-  write_xlsx(list("AST chr16" = AST_Genes_MGI_chr16),
-             "BloodValuesGenesMGI - RankZ sex.xlsx")
+  #set working directory - no BUN results
+  #write_xlsx(list("AST chr16" = AST_Genes_MGI_chr16), "BloodValuesGenesMGI-RankZ-sex.xlsx")
   
   
   

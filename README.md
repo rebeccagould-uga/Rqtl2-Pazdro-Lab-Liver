@@ -2,9 +2,10 @@ QTL Analysis for the R01 Defining the Genetic Architecture of the Glutathione Re
 
 
 This GitHub repository has all scripts for:
-Liver - Log transformation (not optimal)
-Liver - RankZ transformation (optimal)
-Kidney - RankZ transformation (optimal)
+Liver Glutathione + NAD QTL Analysis - Log transformation (not optimal)
+Liver Glutathione + NAD QTL Analysis - RankZ transformation (optimal)
+Liver Histology + Serum AST+ALT Analysis - RankZ transformation (optimal)
+Kidney Glutathione + Serum BUN QTL Analysis - RankZ transformation (optimal)
 
 QTL Analysis Reports can be found in Becca's OneDrive files
 

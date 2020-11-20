@@ -26,7 +26,7 @@ library (RSQLite)
 ## Plot Genome Scans with Permutation Tests
 ####################################################
 
-  qtlscan_AST <- scan1(genoprobs = probs, pheno = pheno["zAST"], kinship = kinship_loco, addcovar = sexgen, cores=10)
+  qtlscan_AST <- scan1(genoprobs = probs, pheno = pheno["zAST"], kinship = kinship_loco, addcovar = sexgen, cores=2)
   perm_AST <- scan1perm(genoprobs = probs, pheno = pheno["zAST"], addcovar = sexgen, n_perm = 1000, cores=10)
 
 #set working directory
@@ -62,7 +62,7 @@ pdf(file = "AST-QTL-Results-RankZ-sexgen.pdf")
   
   #using gmap (cM)
   chr = 2
-  coef_blup_AST_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zAST"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
+  coef_blup_AST_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zAST"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores=2)
   plot_coefCC(x = coef_blup_AST_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_AST, main = "AST BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
   xlim <- c(1,20)
   plot_coefCC(x = coef_blup_AST_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_AST, main = "AST BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
@@ -88,7 +88,7 @@ pdf(file = "AST-QTL-Results-RankZ-sexgen.pdf")
 
   #using gmap (cM)
   chr = 16
-  coef_blup_AST_chr16 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zAST"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
+  coef_blup_AST_chr16 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zAST"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores=2)
   plot_coefCC(x = coef_blup_AST_chr16, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_AST, main = "AST BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
   xlim <- c(25,45)
   plot_coefCC(x = coef_blup_AST_chr16, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_AST, main = "AST BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
@@ -118,7 +118,7 @@ dev.off()
 ####################################################
 
 pdf(file = "AST-GWAS-RankZ-sexgen.pdf")
-out_gwas_AST <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zAST"], kinship = kinship_loco, addcovar = sexgen, query_func=query_variants, cores=10)
+out_gwas_AST <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zAST"], kinship = kinship_loco, addcovar = sexgen, query_func=query_variants, cores=2)
 par(mar=c(4.1, 4.1, 2.6, 2.6))
 plot(out_gwas_AST$lod, out_gwas_AST$snpinfo, altcol="green4", gap=0, main = "AST GWAS", ylim = c(0,6))
 dev.off()
@@ -127,8 +127,8 @@ dev.off()
 ## Heritability calculation - the ratio of genetic variance to total variance using a linear mixed model
 ####################################################
 
-herit_AST_sex <- est_herit(pheno["zAST"], kinship_lmm, sex, cores = 10)
-herit_AST_sexgen <- est_herit(pheno["zAST"], kinship_lmm, sexgen, cores = 10)
+herit_AST_sex <- est_herit(pheno["zAST"], kinship_lmm, sex, cores=2)
+herit_AST_sexgen <- est_herit(pheno["zAST"], kinship_lmm, sexgen, cores=2)
 
 
 

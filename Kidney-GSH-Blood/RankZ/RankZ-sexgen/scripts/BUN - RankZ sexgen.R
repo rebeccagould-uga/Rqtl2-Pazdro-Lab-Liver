@@ -26,7 +26,7 @@ library (RSQLite)
 ## Plot Genome Scans with Permutation Tests
 ####################################################
 
-  qtlscan_BUN <- scan1(genoprobs = probs, pheno = pheno["zBUN"], kinship = kinship_loco, addcovar = sexgen, cores=10)
+  qtlscan_BUN <- scan1(genoprobs = probs, pheno = pheno["zBUN"], kinship = kinship_loco, addcovar = sexgen, cores=2)
   perm_BUN <- scan1perm(genoprobs = probs, pheno = pheno["zBUN"], addcovar = sexgen, n_perm = 1000, cores=10)
   
 #set working directory
@@ -61,7 +61,7 @@ dev.off()
 ####################################################
 
 pdf(file = "BUN-GWAS-RankZ-sexgen.pdf")
-out_gwas_BUN <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zBUN"], kinship = kinship_loco, addcovar = sexgen, query_func=query_variants, cores=10)
+out_gwas_BUN <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zBUN"], kinship = kinship_loco, addcovar = sexgen, query_func=query_variants, cores=2)
 par(mar=c(4.1, 4.1, 2.6, 2.6))
 plot(out_gwas_BUN$lod, out_gwas_BUN$snpinfo, altcol="green4", gap=0, main = "BUN GWAS", ylim = c(0,6))
 dev.off()
@@ -70,8 +70,8 @@ dev.off()
 ## Heritability calculation - the ratio of genetic variance to total variance using a linear mixed model
 ####################################################
 
-  herit_BUN_sex <- est_herit(pheno["zBUN"], kinship_lmm, sex, cores = 10)
-  herit_BUN_sexgen <- est_herit(pheno["zBUN"], kinship_lmm, sexgen, cores = 10)
+  herit_BUN_sex <- est_herit(pheno["zBUN"], kinship_lmm, sex, cores=2)
+  herit_BUN_sexgen <- est_herit(pheno["zBUN"], kinship_lmm, sexgen, cores=2)
 
 
 

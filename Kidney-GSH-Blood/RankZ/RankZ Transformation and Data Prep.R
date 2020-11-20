@@ -6,7 +6,6 @@
 
 #setwd
 
-
 #load the command line tools - see https://github.com/Rdatatable/data.table/wiki/Installation for more information - must do every time you open up the Rproject!
 library(qtl2)
 library (tidyverse)

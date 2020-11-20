@@ -2,8 +2,6 @@
 # Updated November 2020
 # Becca Gould 
 
-#LIVER HISTOLOGY AND BLOOD (AST AND ALT) QTL MAPPING - READ ME SCRIPT
-
 #Load in Liver-Histology-Mapping-RankZ-SexGen.Rdata
 
 #Order in which to run scripts:

@@ -4,11 +4,8 @@
 
 #KIDNEY GLUTATHIONE AND BLOOD MAPPING - RankZ TRANSFORMATION AND DATA PREP
 
-#Make a folder under users (for me, my user is "becca") and title it based on your project. For mine, it's R01_GSH_DO_mapping. Then make a data, results, scripts, and docs folder.
-
 #setwd
 
-#I can use "~" instead of "/users/becca/" everytime as it represents my home base
 
 #load the command line tools - see https://github.com/Rdatatable/data.table/wiki/Installation for more information - must do every time you open up the Rproject!
 library(qtl2)
@@ -40,7 +37,7 @@ library (RSQLite)
 
 #Load in the control file to tell R/qtl2 to read the data and title it according to your project. For mine, it's R01_GSH_DO_QTLdata. 
 #For this to work, all of the files in the control file need to be in the folder. Ex: if calling for the "genoprobs" file, it needs to actually be in the folder.
-  R01_GSH_DO_QTLdata <- read_cross2(file = "~/OneDrive - University of Georgia/Pazdro Lab/R01 Redox/Analysis and Results/QTL Mapping/data/R01_GSH_DO_control.json")
+  R01_GSH_DO_QTLdata <- read_cross2(file = "~/Rqtl2-Glutathione-Genetics/data/R01_GSH_DO_control.json")
 
 ####################################################
 ## Genotype probabilities and allele probabilities - provided by Belinda and Vivek
@@ -48,7 +45,7 @@ library (RSQLite)
 
 #read in the genoprobs file that is sorted by chromosomes in numerical order - the 8state.rds is the allele probabilities, the 32state.rds is the genotype probabilities
 #^this is actually the ALlELE probabilities, but for simplicity, we will call it "probs"
-  probs <- readRDS("~/OneDrive - University of Georgia/Pazdro Lab/R01 Redox/Analysis and Results/QTL Mapping/data/Pazdro_GigaMUGA_genoprobs_qced_8state_sorted.rds")
+  probs <- readRDS("~/Rqtl2-Glutathione-Genetics/data/Pazdro_GigaMUGA_genoprobs_qced_8state_sorted.rds")
 
   nrow(data.frame(R01_GSH_DO_QTLdata$gmap[1]))
   #should be 10415
@@ -61,9 +58,9 @@ library (RSQLite)
 ####################################################
 
 #Will need these for the final lesson episodes on SNP association mapping and QTL analysis in Diversity Outbred mice. Make sure they are the most updated versions!
-  query_variants <- create_variant_query_func("~/OneDrive - University of Georgia/Pazdro Lab/R01 Redox/Analysis and Results/QTL Mapping - Kidney/data/cc_variants.sqlite")
-  query_genes_mgi <- create_gene_query_func("~/OneDrive - University of Georgia/Pazdro Lab/R01 Redox/Analysis and Results/QTL Mapping - Kidney/data/mouse_genes_mgi.sqlite")
-  query_genes <- create_gene_query_func("~/OneDrive - University of Georgia/Pazdro Lab/R01 Redox/Analysis and Results/QTL Mapping - Kidney/data/mouse_genes.sqlite")
+  query_variants <- create_variant_query_func("~/Rqtl2-Glutathione-Genetics/data/cc_variants.sqlite")
+  query_genes_mgi <- create_gene_query_func("~/Rqtl2-Glutathione-Genetics/data/mouse_genes_mgi.sqlite")
+  query_genes <- create_gene_query_func("~/Rqtl2-Glutathione-Genetics/data/mouse_genes.sqlite")
 
 ####################################################
 ## Calculating kinship
@@ -71,7 +68,7 @@ library (RSQLite)
 
 #calculate the kinship loco
 #you can increase the cores amount if you have more cores in your computer. For mine, I have 18 cores available so to speed it up, I'll use 10 of them.
-  kinship_loco <- calc_kinship(probs = probs, "loco", use_allele_probs = TRUE, cores = 10)
+  kinship_loco <- calc_kinship(probs = probs, "loco", use_allele_probs = TRUE, cores = 2)
 
 #Create the r plot of the kinship matrix
 #pdf('output/rplot_kinship.pdf')
@@ -85,7 +82,7 @@ library (RSQLite)
 ## Editing the phenotype file to make it R/qtl2-friendly
 ####################################################
 #to have the phenotype file for reference - can be used when plotting the data to see if it needs to be transformed
-  pheno <- read.csv(file = "~/OneDrive - University of Georgia/Pazdro Lab/R01 Redox/Analysis and Results/QTL Mapping/data/R01_GSH_DO_pheno_covar.csv", header = TRUE)
+  pheno <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/data/R01_GSH_DO_pheno_covar.csv", header = TRUE)
 
 #make row names the ID of each sample
   rownames(pheno) <- pheno$id
@@ -122,12 +119,6 @@ library (RSQLite)
   pheno$zKidneyGSSG = rankZ(pheno$Kidney_Adj_GSSG)
   pheno$zKidneyTotalGSH = rankZ(pheno$Kidney_Adj_Total_GSH)
   pheno$zKidneyGSH_GSSGRatio = rankZ(pheno$Kidney_Adj_GSH_GSSG_Ratio)
-  pheno$zKidneyNADH = rankZ(pheno$Kidney_NADH)
-  pheno$zKidneyNADP = rankZ(pheno$Kidney_NADP)
-  pheno$zKidneyNADPH = rankZ(pheno$Kidney_NADPH)
-  pheno$zKidneyNADP_NADPHRatio = rankZ(pheno$Kidney_NADP_NADPH_Ratio)
-  pheno$zAST = rankZ(pheno$AST)
-  pheno$zALT = rankZ(pheno$ALT)
   pheno$zBUN = rankZ(pheno$BUN)
 
 #####Plot the transformations  
@@ -202,7 +193,7 @@ sexgen = model.matrix(~ sex + generation, data = pheno)[,-1]
 #####make kinship function using linear mixed model, not loco
 #####default type of kinship is "overall" aka "linear mixed model" -- did not need to specify a type
   
-kinship_lmm <- calc_kinship(probs = probs, use_allele_probs = TRUE, cores = 10)
+kinship_lmm <- calc_kinship(probs = probs, use_allele_probs = TRUE, cores = 2)
 
 #adding sex as covariate to compare to sexgen
 sex = model.matrix(~ sex, data = pheno)[,-1] 

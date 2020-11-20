@@ -2,8 +2,6 @@
 # Updated November 2020
 # Becca Gould 
 
-#LIVER QTL AND BLOOD VALUES MAPPING - READ ME SCRIPT
-
 #Load in Liver-GSH-NAD-RankZ-Sex.Rdata
 
 #Order in which to run scripts:

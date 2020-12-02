@@ -16,7 +16,7 @@ library(ggpubr)
 
 
 
-data <- read.csv(file = "~/OneDrive - University of Georgia/Pazdro Lab/R01 Redox/Analysis and Results/Statistics/Correlation Plots/Raw data.csv")
+data <- read.csv(file = "~/Rqtl2-Glutaxthione-Genetics/correlations/data.csv")
 head(data, 6)
 
 #to look up a specific correlation

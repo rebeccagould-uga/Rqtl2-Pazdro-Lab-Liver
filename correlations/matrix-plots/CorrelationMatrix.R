@@ -9,15 +9,15 @@
 #plot info reference: https://www.displayr.com/how-to-create-a-correlation-matrix-in-r/
 
 #load my data into the session using read.csv function
-rawdata <- read.csv(file = "~/OneDrive - University of Georgia/Pazdro Lab/R01 Redox/Analysis and Results/Statistics/Correlation Plots/Correlation Matrix/Raw data matrix.csv")
+rawdata <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/correlations/data.csv")
 head(rawdata, 6)
 
 rownames(rawdata) <- rawdata$Mouse
 #checking pheno file
 rawdata[1:10,]
 
-#remove column 1 (Mouse ID)
-data = subset(rawdata, select = -c(1))
+#remove column 1-3 (Mouse ID, sex, and generation)
+data = subset(rawdata, select = -c(1,2,3))
 
 #run correlations for all observations
 #use complete.obs tells R to handle missing values by case-wise deletion
@@ -96,7 +96,7 @@ png(height=1500, width=1500, pointsize=25, file="correlation-matrix-number.png")
   dev.off()
 
   
-png(height=1500, width=1500, pointsize=25, file="correlation-matrix-circle2.png") #create a PNG file called correlation-matrix-circle
+png(height=1500, width=1500, pointsize=25, file="correlation-matrix-circle.png") #create a PNG file called correlation-matrix-circle
   corrplot(data_coefficients, 
            method = "circle", #could do circle, number, or pie as well
            type = "lower", #full correlation matrix, upper or lower

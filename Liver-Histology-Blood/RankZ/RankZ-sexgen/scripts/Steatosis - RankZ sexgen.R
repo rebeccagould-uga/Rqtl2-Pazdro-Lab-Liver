@@ -36,17 +36,17 @@ pdf(file = "Steatosis QTL Results - RankZ sexgen.pdf")
 
   par(mar=c(4.1, 4.1, 2.6, 2.6))
   threshold_Steatosis = summary(perm_Steatosis, alpha = c(0.2, 0.1, 0.05))
-  plot_scan1(x = qtlscan_Steatosis, map = R01_Steatosis_DO_QTLdata$gmap,  main = "Genome Scan for Steatosis", ylim = c(0,11))
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Steatosis", ylim = c(0,11))
   abline(h = threshold_Steatosis, col = c("purple", "red", "blue"), lwd = 2)
 
 #using gmap (cM)
-  find_peaks(scan1_output = qtlscan_Steatosis, map = R01_Steatosis_DO_QTLdata$gmap, threshold = summary(perm_Steatosis, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
-  gmap_peaksSteatosis <- find_peaks(scan1_output = qtlscan_Steatosis, map = R01_Steatosis_DO_QTLdata$gmap, threshold = summary(perm_Steatosis, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
+  find_peaks(scan1_output = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_Steatosis, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
+  gmap_peaksSteatosis <- find_peaks(scan1_output = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_Steatosis, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
   print(gmap_peaksSteatosis)
   
 #using pmap (Mbp)
-  find_peaks(scan1_output = qtlscan_Steatosis, map = R01_Steatosis_DO_QTLdata$pmap, threshold = summary(perm_Steatosis, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
-  peaksSteatosis <- find_peaks(scan1_output = qtlscan_Steatosis, map = R01_Steatosis_DO_QTLdata$pmap, threshold = summary(perm_Steatosis, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
+  find_peaks(scan1_output = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$pmap, threshold = summary(perm_Steatosis, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
+  peaksSteatosis <- find_peaks(scan1_output = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$pmap, threshold = summary(perm_Steatosis, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
   print(peaksSteatosis)
   
 
@@ -65,9 +65,9 @@ write_xlsx(list("Steatosis gmap (cM)" = gmap_peaksSteatosis,
   #using gmap (cM)
   chr = 2
   coef_blup_Steatosis_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zSteatosis"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
-  plot_coefCC(x = coef_blup_Steatosis_chr2, map = R01_Steatosis_DO_QTLdata$gmap, scan1_output = qtlscan_Steatosis, main = "Steatosis BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+  plot_coefCC(x = coef_blup_Steatosis_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_Steatosis, main = "Steatosis BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
   xlim <- c(45,65)
-  plot_coefCC(x = coef_blup_Steatosis_chr2, map = R01_Steatosis_DO_QTLdata$gmap, scan1_output = qtlscan_Steatosis, main = "Steatosis BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+  plot_coefCC(x = coef_blup_Steatosis_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_Steatosis, main = "Steatosis BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
   
   #using pmap (Mbp)
   chr = 2
@@ -78,7 +78,7 @@ write_xlsx(list("Steatosis gmap (cM)" = gmap_peaksSteatosis,
   pander(peaksSteatosis)
   #based on peaksSteatosis, peak of interest is ~109 Mbp
   variants_Steatosis_chr2 <- query_variants(chr, 107, 111)
-  out_snps_Steatosis_chr2 <- scan1snps(genoprobs = probs, map = R01_Steatosis_DO_QTLdata$pmap, pheno = pheno["zSteatosis"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
+  out_snps_Steatosis_chr2 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zSteatosis"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
                                       chr = chr, start = 107, end = 111, keep_all_snps = TRUE)
   plot_snpasso(out_snps_Steatosis_chr2$lod, out_snps_Steatosis_chr2$snpinfo, main = "Steatosis SNPs")
   
@@ -94,7 +94,7 @@ dev.off()
 ####################################################
 
 pdf(file = "Steatosis GWAS - RankZ sexgen.pdf")
-out_gwas_Steatosis <- scan1snps(genoprobs = probs, map = R01_Steatosis_DO_QTLdata$pmap, pheno = pheno["zSteatosis"], kinship = kinship_loco, addcovar = sexgen, query_func=query_variants, cores=10)
+out_gwas_Steatosis <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zSteatosis"], kinship = kinship_loco, addcovar = sexgen, query_func=query_variants, cores=10)
 par(mar=c(4.1, 4.1, 2.6, 2.6))
 plot(out_gwas_Steatosis$lod, out_gwas_Steatosis$snpinfo, altcol="green4", gap=0, main = "Steatosis GWAS", ylim = c(0,6))
 dev.off()

@@ -125,6 +125,7 @@ library (RSQlite)
   pheno$zALT = rankZ(pheno$ALT)
   pheno$zSteatosis = rankZ(pheno$Liver_Steatosis)
   pheno$zBallooning = rankZ(pheno$Liver_Ballooning)
+  pheno$zFibrosis = rankZ(pheno$Liver_Fibrosis)
   
   
 #####Plot the transformations  
@@ -147,7 +148,7 @@ library (RSQlite)
   boxplot(pheno$Ballooning, main = "Liver Ballooning Box Plot")
   boxplot(pheno$Ballooning~pheno$generation, main = "Liver Ballooning Box Plot - by generation")
   boxplot(pheno$zBallooning, main = "RankZ Liver Ballooning Box Plot")
-  boxplot(pheno$zBallooning~pheno$generation, main = "RankZ Liver ReBallooning - by generation")
+  boxplot(pheno$zBallooning~pheno$generation, main = "RankZ Liver Ballooning - by generation")
   #check if it is normally distributed
   qqnorm(pheno$zBallooning, main = "Normal QQ Plot - RankZ Liver Ballooning") 
   
@@ -166,6 +167,14 @@ library (RSQlite)
   boxplot(pheno$zALT~pheno$generation, main = "RankZ ALT - by generation")
   #check if it is normally distributed
   qqnorm(pheno$zALT, main = "Normal QQ Plot - RankZ ALT") 
+  
+#For Fibrosis
+  boxplot(pheno$Fibrosis, main = "Liver Fibrosis Box Plot")
+  boxplot(pheno$Fibrosis~pheno$generation, main = "Liver Fibrosis Box Plot - by generation")
+  boxplot(pheno$zFibrosis, main = "RankZ Liver Fibrosis Box Plot")
+  boxplot(pheno$zFibrosis~pheno$generation, main = "RankZ Liver ReFibrosis - by generation")
+  #check if it is normally distributed
+  qqnorm(pheno$zFibrosis, main = "Normal QQ Plot - RankZ Liver Fibrosis") 
   
 dev.off()
   

@@ -48,4 +48,8 @@ ls(pattern = "qtl")
 write_xlsx(list(  "AST chr2" = AST_Genes_MGI_chr2,
                   "AST chr16" = AST_Genes_MGI_chr16),
              "BloodValuesGenesMGI - rankZ sexgen.xlsx")
+
+  
+  
+  
   

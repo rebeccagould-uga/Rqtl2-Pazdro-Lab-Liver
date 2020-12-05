@@ -63,28 +63,12 @@ write_xlsx(list("Steatosis gmap (cM)" = gmap_peaksSteatosis,
   par(mar=c(4.1, 4.1, 2.6, 2.6))
 
   #using gmap (cM)
-  chr = 2
-  coef_blup_Steatosis_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zSteatosis"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
-  plot_coefCC(x = coef_blup_Steatosis_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_Steatosis, main = "Steatosis BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
-  xlim <- c(45,65)
-  plot_coefCC(x = coef_blup_Steatosis_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_Steatosis, main = "Steatosis BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
-  
-  #using pmap (Mbp)
-  chr = 2
-  #could use ci_lo or ci_hi, but for this case, I want a specific chromosome 2 peak
-  #start = peaksSteatosis[peaksSteatosis$chr ==  chr,"ci_lo"]
-  #end = peaksSteatosis[peaksSteatosis$chr == chr, "ci_hi"] 
-  
-  pander(peaksSteatosis)
-  #based on peaksSteatosis, peak of interest is ~109 Mbp
-  variants_Steatosis_chr2 <- query_variants(chr, 107, 111)
-  out_snps_Steatosis_chr2 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zSteatosis"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
-                                      chr = chr, start = 107, end = 111, keep_all_snps = TRUE)
-  plot_snpasso(out_snps_Steatosis_chr2$lod, out_snps_Steatosis_chr2$snpinfo, main = "Steatosis SNPs")
-  
-  Steatosis_Genes_MGI_chr2 <- query_genes_mgi(chr = chr, start = 107, end = 111)
-  plot(out_snps_Steatosis_chr2$lod, out_snps_Steatosis_chr2$snpinfo, drop_hilit=1.5, genes = Steatosis_Genes_MGI_chr2, main = "Steatosis Genes MGI")
-  
+  chr = 18
+  coef_blup_Steatosis_chr18 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zSteatosis"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
+  plot_coefCC(x = coef_blup_Steatosis_chr18, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_Steatosis, main = "Steatosis BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+  xlim <- c(15,40)
+  plot_coefCC(x = coef_blup_Steatosis_chr18, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_Steatosis, main = "Steatosis BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
 dev.off()
   
   
@@ -103,6 +87,6 @@ dev.off()
 ## Heritability calculation - the ratio of genetic variance to total variance using a linear mixed model
 ####################################################
 
-herit_Steatosis_sex <- est_herit(pheno["zSteatosis"], kinship_lmm, sex, cores = 10)
-herit_Steatosis_sexgen <- est_herit(pheno["zSteatosis"], kinship_lmm, sexgen, cores = 10)
+herit_Steatosis_sex <- est_herit(pheno["zSteatosis"], kinship_lmm, sex, cores = 2)
+herit_Steatosis_sexgen <- est_herit(pheno["zSteatosis"], kinship_lmm, sexgen, cores = 2)
 

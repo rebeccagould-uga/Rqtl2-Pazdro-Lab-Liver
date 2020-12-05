@@ -63,14 +63,14 @@ write_xlsx(list("Ballooning gmap (cM)" = gmap_peaksBallooning,
   par(mar=c(4.1, 4.1, 2.6, 2.6))
 
   #using gmap (cM)
-  chr = 2
-  coef_blup_Ballooning_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zBallooning"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
-  plot_coefCC(x = coef_blup_Ballooning_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_Ballooning, main = "Ballooning BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
-  xlim <- c(45,65)
-  plot_coefCC(x = coef_blup_Ballooning_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_Ballooning, main = "Ballooning BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+  chr = 6
+  coef_blup_Ballooning_chr6 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zBallooning"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
+  plot_coefCC(x = coef_blup_Ballooning_chr6, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_Ballooning, main = "Ballooning BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+  xlim <- c(0,25)
+  plot_coefCC(x = coef_blup_Ballooning_chr6, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_Ballooning, main = "Ballooning BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
   
   #using pmap (Mbp)
-  chr = 2
+  chr = 6
   #could use ci_lo or ci_hi, but for this case, I want a specific chromosome 2 peak
   #start = peaksBallooning[peaksBallooning$chr ==  chr,"ci_lo"]
   #end = peaksBallooning[peaksBallooning$chr == chr, "ci_hi"] 
@@ -103,6 +103,6 @@ dev.off()
 ## Heritability calculation - the ratio of genetic variance to total variance using a linear mixed model
 ####################################################
 
-herit_Ballooning_sex <- est_herit(pheno["zBallooning"], kinship_lmm, sex, cores = 10)
-herit_Ballooning_sexgen <- est_herit(pheno["zBallooning"], kinship_lmm, sexgen, cores = 10)
+herit_Ballooning_sex <- est_herit(pheno["zBallooning"], kinship_lmm, sex, cores = 2)
+herit_Ballooning_sexgen <- est_herit(pheno["zBallooning"], kinship_lmm, sexgen, cores = 2)
 

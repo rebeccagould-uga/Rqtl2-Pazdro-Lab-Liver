@@ -59,16 +59,32 @@ write_xlsx(list("Steatosis gmap (cM)" = gmap_peaksSteatosis,
 ## Estimate QTL Effects (Coefficients) + Connect to SNP and Gene Databases
 ####################################################
 
-#For Steatosis --- Chromosome 2
+#For Steatosis --- Chromosome 18
   par(mar=c(4.1, 4.1, 2.6, 2.6))
 
   #using gmap (cM)
   chr = 18
   coef_blup_Steatosis_chr18 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zSteatosis"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
   plot_coefCC(x = coef_blup_Steatosis_chr18, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_Steatosis, main = "Steatosis BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
-  xlim <- c(15,40)
+  xlim <- c(0,20)
   plot_coefCC(x = coef_blup_Steatosis_chr18, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_Steatosis, main = "Steatosis BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
-
+  
+  #using pmap (Mbp)
+  chr = 18
+  #could use ci_lo and ci_hi, but in this case I want a specific chr 2 position
+  #start = peaksSteatosis[peaksSteatosis$chr ==  chr,"ci_lo"]
+  #end = peaksSteatosis[peaksSteatosis$chr == chr, "ci_hi"] 
+  
+  pander(peaksSteatosis)
+  #based on peaksAST, peak of interest is ~12 Mbp
+  variants_Steatosis_chr18 <- query_variants(chr, 16, 18)
+  out_snps_Steatosis_chr18 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zSteatosis"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
+                                 chr = chr, start = 16, end = 18, keep_all_snps = TRUE)
+  plot_snpasso(out_snps_Steatosis_chr18$lod, out_snps_Steatosis_chr18$snpinfo, main = "Steatosis SNPs")
+  
+  Steatosis_Genes_MGI_chr18 <- query_genes_mgi(chr = chr, start = 16, end = 18)
+  plot(out_snps_Steatosis_chr18$lod, out_snps_Steatosis_chr18$snpinfo, drop_hilit=1.5, genes = Steatosis_Genes_MGI_chr18, main = "Steatosis Genes MGI")
+  
 dev.off()
   
   

@@ -66,7 +66,9 @@ write_xlsx(list("Ballooning gmap (cM)" = gmap_peaksBallooning,
   chr = 6
   coef_blup_Ballooning_chr6 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zBallooning"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
   plot_coefCC(x = coef_blup_Ballooning_chr6, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_Ballooning, main = "Ballooning BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
-  xlim <- c(0,25)
+  xlim <- c(5,30)
+  plot_coefCC(x = coef_blup_Ballooning_chr6, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_Ballooning, main = "Ballooning BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+  xlim <- c(60,80)
   plot_coefCC(x = coef_blup_Ballooning_chr6, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_Ballooning, main = "Ballooning BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
   
   #using pmap (Mbp)
@@ -77,13 +79,13 @@ write_xlsx(list("Ballooning gmap (cM)" = gmap_peaksBallooning,
   
   pander(peaksBallooning)
   #based on peaksBallooning, peak of interest is ~109 Mbp
-  variants_Ballooning_chr2 <- query_variants(chr, 107, 111)
-  out_snps_Ballooning_chr2 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zBallooning"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
-                                      chr = chr, start = 107, end = 111, keep_all_snps = TRUE)
-  plot_snpasso(out_snps_Ballooning_chr2$lod, out_snps_Ballooning_chr2$snpinfo, main = "Ballooning SNPs")
+  variants_Ballooning_chr6 <- query_variants(chr, 35, 37)
+  out_snps_Ballooning_chr6 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zBallooning"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
+                                      chr = chr, start = 35, end = 37, keep_all_snps = TRUE)
+  plot_snpasso(out_snps_Ballooning_chr6$lod, out_snps_Ballooning_chr6$snpinfo, main = "Ballooning SNPs")
   
-  Ballooning_Genes_MGI_chr2 <- query_genes_mgi(chr = chr, start = 107, end = 111)
-  plot(out_snps_Ballooning_chr2$lod, out_snps_Ballooning_chr2$snpinfo, drop_hilit=1.5, genes = Ballooning_Genes_MGI_chr2, main = "Ballooning Genes MGI")
+  Ballooning_Genes_MGI_chr6 <- query_genes_mgi(chr = chr, start = 35, end = 37)
+  plot(out_snps_Ballooning_chr6$lod, out_snps_Ballooning_chr6$snpinfo, drop_hilit=1.5, genes = Ballooning_Genes_MGI_chr6, main = "Ballooning Genes MGI")
   
 dev.off()
   

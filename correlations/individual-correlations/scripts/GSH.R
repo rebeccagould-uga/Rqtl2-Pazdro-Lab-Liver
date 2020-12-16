@@ -19,9 +19,6 @@ library(ggpubr)
 data <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/correlations/data.csv")
 head(data, 6)
 
-#to look up a specific correlation
-cor.test(x = data$LiverWeight, y = data$AST, method = "spearman", use = "complete.obs")
-
 
 #setwd
 pdf(file = "GSH-correlation-plots.pdf") #create a file called GSH-correlation-plots
@@ -337,13 +334,39 @@ p24 <- ggscatter(data, x = "GSH", y = "GSHGSSGRatio",
           ylab = "GSH/GSSG")
 
 
-ggarrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, ncol = 1, nrow = 2)
+####
+
+p25 <- ggscatter(data, x = "GSH", y = "EhGSSG2GSH", 
+                 color = "black", #color of points
+                 add = "reg.line", #add regression line
+                 add.params = list(color = "black", fill = "darkgray"), #customize regression line
+                 conf.int = TRUE, #add confidence interval
+                 cor.coef = TRUE, #add correlation coefficient
+                 cor.coeff.args = list(method = "spearman", label.x.npc = "center", label.sep = "\n"),
+                 cor.method = "spearman",
+                 xlab = "GSH (nmol/mg)", 
+                 ylab = "Eh GSSG/2GSH")
+
+p26 <- ggscatter(data, x = "GSH", y = "EhGSSG2GSH", 
+                 color = "black", #color of points
+                 add = "reg.line", #add regression line
+                 add.params = list(color = "black", fill = "darkgray"), #customize regression line
+                 conf.int = TRUE, #add confidence interval
+                 cor.coef = TRUE, #add correlation coefficient
+                 cor.coeff.args = list(method = "spearman", label.x.npc = "center", label.sep = "\n"),
+                 cor.method = "spearman",
+                 facet.by = "Sex",
+                 panel.labs = list(Sex = c("F", "M")),
+                 xlab = "GSH (nmol/mg)", 
+                 ylab = "Eh GSSG/2GS")
+
+ggarrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, ncol = 1, nrow = 2)
 
 
 # be sure to turn the graphics output off at the end!
 dev.off()
 
 pdf(file = "overall-GSH-correlation-plots.pdf")
-ggarrange(p1, p3, p5, p7, p9, p11, p13, p15, p17, p19, p21, p23, ncol = 1, nrow = 2)
+ggarrange(p1, p3, p5, p7, p9, p11, p13, p15, p17, p19, p21, p23, p25, ncol = 1, nrow = 2)
 dev.off()
 

@@ -1,0 +1,2 @@
+".y."	"p"	"p.adj"	"p.format"	"p.signif"	"method"	".y..1"	"p.1"	"p.adj.1"	"p.format.1"	"p.signif.1"	"method.1"
+"1"	"GSH"	0.513850080041384	0.51	"0.51"	"ns"	"Kruskal-Wallis"	"GSSG"	0.251781564690036	0.25	"0.25"	"ns"	"Kruskal-Wallis"

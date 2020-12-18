@@ -106,3 +106,55 @@ dev.off()
 herit_LiverRedoxPotentialGSSG2GSH_sex <- est_herit(pheno["zLiverRedoxPotentialGSSG2GSH"], kinship_lmm, sex, cores = 10)
 herit_LiverRedoxPotentialGSSG2GSH_sexgen <- est_herit(pheno["zLiverRedoxPotentialGSSG2GSH"], kinship_lmm, sexgen, cores = 10)
 
+
+
+##################################################################
+## Checking other glutathione genes 
+##################################################################
+
+#set working directory
+pdf(file = "Redox Potential Other Genes - QTL Results - RankZ sexgen.pdf")
+##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##
+
+#Glutathione Peroxidase (Gpx1) - Chr 9 59.24 cM
+chr = 9
+coef_blup_LiverRedoxPotentialGSSG2GSH_chr9 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zLiverRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+plot_coefCC(x = coef_blup_LiverRedoxPotentialGSSG2GSH_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverRedoxPotentialGSSG2GSH, main = "Liver Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(58.5,60)
+plot_coefCC(x = coef_blup_LiverRedoxPotentialGSSG2GSH_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverRedoxPotentialGSSG2GSH, main = "Gpx1 Position -- Liver Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+#Glutathione cysteine ligase - catalytic subunit (Gclc) - Chr 9 43.36 cM
+chr = 9
+#coef_blup_LiverRedoxPotentialGSSG2GSH_chr9 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zLiverRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+#plot_coefCC(x = coef_blup_LiverRedoxPotentialGSSG2GSH_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverRedoxPotentialGSSG2GSH, main = "Liver Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(42.5,44)
+plot_coefCC(x = coef_blup_LiverRedoxPotentialGSSG2GSH_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverRedoxPotentialGSSG2GSH, main = "Gclc Position -- Liver Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+#Glutamate-cysteine ligase – modifier subunit (Gclm) - Chr 3 52.94 cM
+chr = 3
+coef_blup_LiverRedoxPotentialGSSG2GSH_chr3 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zLiverRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+plot_coefCC(x = coef_blup_LiverRedoxPotentialGSSG2GSH_chr3, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverRedoxPotentialGSSG2GSH, main = "Liver Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(51.5,53.5)
+plot_coefCC(x = coef_blup_LiverRedoxPotentialGSSG2GSH_chr3, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverRedoxPotentialGSSG2GSH, main = "Gclm Position -- Liver Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+#Glutathione synthetase (Gss) - Chr 2 77.26 cM
+chr = 2
+coef_blup_LiverRedoxPotentialGSSG2GSH_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zLiverRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+plot_coefCC(x = coef_blup_LiverRedoxPotentialGSSG2GSH_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverRedoxPotentialGSSG2GSH, main = "Liver Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(76.5,78)
+plot_coefCC(x = coef_blup_LiverRedoxPotentialGSSG2GSH_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverRedoxPotentialGSSG2GSH, main = "Gss Position -- Liver Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+
+#Glutathione reductase  (Gsr) - Chr 8 20.69 cM
+chr = 8
+coef_blup_LiverRedoxPotentialGSSG2GSH_chr8 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zLiverRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+plot_coefCC(x = coef_blup_LiverRedoxPotentialGSSG2GSH_chr8, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverRedoxPotentialGSSG2GSH, main = "Liver Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(19,22.5)
+plot_coefCC(x = coef_blup_LiverRedoxPotentialGSSG2GSH_chr8, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverRedoxPotentialGSSG2GSH, main = "Gsr Position -- Liver Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+dev.off()
+
+######################
+
+
+

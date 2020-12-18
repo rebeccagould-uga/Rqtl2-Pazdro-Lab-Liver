@@ -118,4 +118,54 @@ herit_LiverTotalGSH_sex <- est_herit(pheno["zLiverTotalGSH"], kinship_lmm, sex, 
 
 
 
+##################################################################
+## Checking other glutathione genes 
+##################################################################
+
+#set working directory
+pdf(file = "Total GSH Other Genes - QTL Results - RankZ sexgen.pdf")
+##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##
+
+#Glutathione Peroxidase (Gpx1) - Chr 9 59.24 cM
+chr = 9
+coef_blup_LiverTotalGSH_chr9 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zLiverTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+plot_coefCC(x = coef_blup_LiverTotalGSH_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH, main = "Liver Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(58.5,60)
+plot_coefCC(x = coef_blup_LiverTotalGSH_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH, main = "Gpx1 Position -- Liver Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+#Glutathione cysteine ligase - catalytic subunit (Gclc) - Chr 9 43.36 cM
+chr = 9
+#coef_blup_LiverTotalGSH_chr9 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zLiverTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+#plot_coefCC(x = coef_blup_LiverTotalGSH_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH, main = "Liver Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(42.5,44)
+plot_coefCC(x = coef_blup_LiverTotalGSH_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH, main = "Gclc Position -- Liver Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+#Glutamate-cysteine ligase – modifier subunit (Gclm) - Chr 3 52.94 cM
+chr = 3
+coef_blup_LiverTotalGSH_chr3 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zLiverTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+plot_coefCC(x = coef_blup_LiverTotalGSH_chr3, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH, main = "Liver Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(51.5,53.5)
+plot_coefCC(x = coef_blup_LiverTotalGSH_chr3, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH, main = "Gclm Position -- Liver Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+#Glutathione synthetase (Gss) - Chr 2 77.26 cM
+chr = 2
+coef_blup_LiverTotalGSH_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zLiverTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+plot_coefCC(x = coef_blup_LiverTotalGSH_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH, main = "Liver Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(76.5,78)
+plot_coefCC(x = coef_blup_LiverTotalGSH_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH, main = "Gss Position -- Liver Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+
+#Glutathione reductase  (Gsr) - Chr 8 20.69 cM
+chr = 8
+coef_blup_LiverTotalGSH_chr8 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zLiverTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+plot_coefCC(x = coef_blup_LiverTotalGSH_chr8, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH, main = "Liver Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(19,22.5)
+plot_coefCC(x = coef_blup_LiverTotalGSH_chr8, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH, main = "Gsr Position -- Liver Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+dev.off()
+
+######################
+
+
+
 

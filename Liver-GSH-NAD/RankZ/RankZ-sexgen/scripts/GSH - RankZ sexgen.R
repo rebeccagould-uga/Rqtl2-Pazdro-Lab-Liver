@@ -148,11 +148,16 @@ plot_coefCC(x = coef_blup_LiverGSH_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_ou
 chr = 8
 coef_blup_LiverGSH_chr8 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zLiverGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
 plot_coefCC(x = coef_blup_LiverGSH_chr8, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverGSH, main = "Liver GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
-xlim <- c(19.5,21.5)
+xlim <- c(19,22.5)
 plot_coefCC(x = coef_blup_LiverGSH_chr8, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverGSH, main = "Gsr Position -- Liver GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
 
+dev.off()
 
 ######################
+
+
+
+
 
 
 

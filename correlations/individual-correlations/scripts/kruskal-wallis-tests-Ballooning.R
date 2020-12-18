@@ -49,7 +49,7 @@ KW_ALT <- compare_means(formula = ALT ~ Ballooning, data = data, method = "krusk
 KW_BUN <- compare_means(formula = BUN ~ Ballooning, data = data, method = "kruskal.test", paired = FALSE)
 KW_Glucose <- compare_means(formula = Glucose ~ Ballooning, data = data, method = "kruskal.test", paired = FALSE)
 KW_LiverWeight <- compare_means(formula = LiverWeight ~ Ballooning, data = data, method = "kruskal.test", paired = FALSE)
-KW_Ballooning <- compare_means(formula = Ballooning ~ Ballooning, data = data, method = "kruskal.test", paired = FALSE)
+KW_Steatosis <- compare_means(formula = Steatosis ~ Ballooning, data = data, method = "kruskal.test", paired = FALSE)
 
 
 library(writexl)
@@ -67,7 +67,7 @@ write_xlsx(list("GSH" = KW_GSH,
                 "BUN"=KW_BUN,
                 "Glucose"=KW_Glucose,
                 "LiverWeight"=KW_LiverWeight,
-                "Ballooning"=KW_Ballooning),
+                "Steatosis"=KW_Steatosis),
            "KWtests-Ballooning.xlsx")
 
 

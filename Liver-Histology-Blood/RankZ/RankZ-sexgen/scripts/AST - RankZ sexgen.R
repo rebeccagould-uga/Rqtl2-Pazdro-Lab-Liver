@@ -70,17 +70,17 @@ pdf(file = "AST-QTL-Results-RankZ-sexgen.pdf")
   #using pmap (Mbp)
   chr = 2
   #could use ci_lo and ci_hi, but in this case I want a specific chr 2 position
-  #start = peaksAST[peaksAST$chr ==  chr,"ci_lo"]
-  #end = peaksAST[peaksAST$chr == chr, "ci_hi"] 
+  start = peaksAST[peaksAST$chr ==  chr,"ci_lo"]
+  end = peaksAST[peaksAST$chr == chr, "ci_hi"] 
   
   pander(peaksAST)
   #based on peaksAST, peak of interest is ~12 Mbp
-  variants_AST_chr2 <- query_variants(chr, 10, 13.5)
+  variants_AST_chr2 <- query_variants(chr, start, end)
   out_snps_AST_chr2 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zAST"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
-                                  chr = chr, start = 10, end = 13.5, keep_all_snps = TRUE)
+                                  chr = chr, start = start, end = end, keep_all_snps = TRUE)
   plot_snpasso(out_snps_AST_chr2$lod, out_snps_AST_chr2$snpinfo, main = "AST SNPs")
   
-  AST_Genes_MGI_chr2 <- query_genes_mgi(chr = chr, start = 10, end = 13.5)
+  AST_Genes_MGI_chr2 <- query_genes_mgi(chr = chr, start = start, end = end)
   plot(out_snps_AST_chr2$lod, out_snps_AST_chr2$snpinfo, drop_hilit=1.5, genes = AST_Genes_MGI_chr2, main = "AST Genes MGI")
   
 #For AST --- Chromosome 16

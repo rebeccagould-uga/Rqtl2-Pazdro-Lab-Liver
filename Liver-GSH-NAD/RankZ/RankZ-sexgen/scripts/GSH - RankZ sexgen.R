@@ -20,7 +20,7 @@ library (data.table)
 library (RcppEigen)
 library (pander)
 library (writexl)
-library (RSQlite)
+library (RSQLite)
 
 ####################################################
 ## Plot Genome Scans with Permutation Tests
@@ -157,7 +157,8 @@ dev.off()
 
 
 
+xpos <- xpos_scan1(R01_GSH_DO_QTLdata$gmap,chr=14,thechr = peaksGSH$chr, thepos = peaksGSH$pos)
 
-
+MAF <- calc_raw_maf(R01_GSH_DO_QTLdata)
 
 

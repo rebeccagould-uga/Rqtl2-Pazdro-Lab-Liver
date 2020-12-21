@@ -16,9 +16,8 @@ rownames(rawdata) <- rawdata$Mouse
 #checking pheno file
 rawdata[1:10,]
 
-#remove column 1-3 (Mouse ID, sex, and generation, Steatosis, Ballooning, and Fibrosis)
-#can't perform spearman's on histological grades
-data = subset(rawdata, select = -c(1,2,3,22,23,24))
+#remove column 1-3 (Mouse ID, sex, and generation)
+data = subset(rawdata, select = -c(1,2,3))
 
 #run correlations for all observations
 #use complete.obs tells R to handle missing values by case-wise deletion

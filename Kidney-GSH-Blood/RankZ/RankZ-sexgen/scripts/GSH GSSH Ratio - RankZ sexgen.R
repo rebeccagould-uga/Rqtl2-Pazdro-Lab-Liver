@@ -27,7 +27,7 @@ library (RSQLite)
 ####################################################
 
 #for Kidney GSH/GSSG Ratio
-qtlscan_KidneyGSH_GSSGRatio<- scan1(genoprobs = probs, pheno = pheno["zKidneyGSH_GSSGRatio"], kinship = kinship_loco, addcovar = sexgen, cores=10)
+qtlscan_KidneyGSH_GSSGRatio<- scan1(genoprobs = probs, pheno = pheno["zKidneyGSH_GSSGRatio"], kinship = kinship_loco, addcovar = sexgen, cores=2)
 perm_KidneyGSH_GSSGRatio <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyGSH_GSSGRatio"], addcovar = sexgen, n_perm = 1000, cores=10)
 
 #set working directory
@@ -103,6 +103,6 @@ dev.off()
 ## Heritability calculation - the ratio of genetic variance to total variance using a linear mixed model
 ####################################################
 
-herit_KidneyGSH_GSSGRatio_sex <- est_herit(pheno["zKidneyGSH_GSSGRatio"], kinship_lmm, sex, cores = 10)
-herit_KidneyGSH_GSSGRatio_sexgen <- est_herit(pheno["zKidneyGSH_GSSGRatio"], kinship_lmm, sexgen, cores = 10)
+herit_KidneyGSH_GSSGRatio_sex <- est_herit(pheno["zKidneyGSH_GSSGRatio"], kinship_lmm, sex, cores = 2)
+herit_KidneyGSH_GSSGRatio_sexgen <- est_herit(pheno["zKidneyGSH_GSSGRatio"], kinship_lmm, sexgen, cores = 2)
 

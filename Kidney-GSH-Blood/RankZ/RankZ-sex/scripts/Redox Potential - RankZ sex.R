@@ -4,7 +4,7 @@
 
 #KIDNEY GLUTATHIONE + BLOOD (BUN) MAPPING - Redox Potential GSSG/2GSH
 
-#Load in Kidney-QTL-Mapping-RankZ-sexgen.Rdata
+#Load in Kidney-QTL-Mapping-RankZ-sex.Rdata
 #Run RankZ Transformation and Data Prep R Script before doing this**
 
 
@@ -27,11 +27,11 @@ library (RSQLite)
 ####################################################
 
 #for Kidney Redox Potential GSSG 2GSH
-qtlscan_KidneyRedoxPotentialGSSG2GSH<- scan1(genoprobs = probs, pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco, addcovar = sexgen, cores=2)
-perm_KidneyRedoxPotentialGSSG2GSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], addcovar = sexgen, n_perm = 1000, cores=10)
+qtlscan_KidneyRedoxPotentialGSSG2GSH<- scan1(genoprobs = probs, pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco, addcovar = sex, cores=2)
+perm_KidneyRedoxPotentialGSSG2GSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], addcovar = sex, n_perm = 1000, cores=10)
 
 #set working directory
-pdf(file = "Redox Potential GSSG 2GSH QTL Results - RankZ sexgen.pdf")
+pdf(file = "Redox Potential GSSG 2GSH QTL Results - RankZ sex.pdf")
 ##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##
 
   par(mar=c(4.1, 4.1, 2.6, 2.6))
@@ -52,7 +52,7 @@ pdf(file = "Redox Potential GSSG 2GSH QTL Results - RankZ sexgen.pdf")
   
   write_xlsx(list("KidneyRedoxPotential gmap (cM)" = gmap_peaksKidneyRedoxPotentialGSSG2GSH,
                   "KidneyRedoxPotential pmap (Mbp)" = peaksKidneyRedoxPotentialGSSG2GSH),
-             "Redox Potential GSSG 2GSH Peaks - RankZ sexgen.xlsx")
+             "Redox Potential GSSG 2GSH Peaks - RankZ sex.xlsx")
 
 
 ####################################################
@@ -64,7 +64,7 @@ pdf(file = "Redox Potential GSSG 2GSH QTL Results - RankZ sexgen.pdf")
   
   #using gmap (cM)
   chr = 16
-  coef_blup_KidneyRedoxPotentialGSSG2GSH_chr16 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
+  coef_blup_KidneyRedoxPotentialGSSG2GSH_chr16 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sex, cores = 10)
   plot_coefCC(x = coef_blup_KidneyRedoxPotentialGSSG2GSH_chr16, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyRedoxPotentialGSSG2GSH, main = "Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
   xlim <- c(0,12)
   plot_coefCC(x = coef_blup_KidneyRedoxPotentialGSSG2GSH_chr16, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyRedoxPotentialGSSG2GSH, main = "Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
@@ -78,7 +78,7 @@ pdf(file = "Redox Potential GSSG 2GSH QTL Results - RankZ sexgen.pdf")
   pander(peaksKidneyRedoxPotentialGSSG2GSH)
   #based on peaksKidneyRedoxPotentialGSSG2GSH, peak of interest is ~9 Mbp
   variants_KidneyRedoxPotentialGSSG2GSH_chr16 <- query_variants(chr, 7, 11)
-  out_snps_KidneyRedoxPotentialGSSG2GSH_chr16 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
+  out_snps_KidneyRedoxPotentialGSSG2GSH_chr16 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sex, query_func = query_variants,
                                                  chr = chr, start = 7, end = 11, keep_all_snps = TRUE)
   plot_snpasso(out_snps_KidneyRedoxPotentialGSSG2GSH_chr16$lod, out_snps_KidneyRedoxPotentialGSSG2GSH_chr16$snpinfo, main = "Kidney Redox Potential GSSG/2GSH SNPs")
   
@@ -93,8 +93,8 @@ dev.off()
 ## Make a Manhattan plot of the results; use altcol to define a color alternate for chromosomes and gap=0 to have no gap between chromosomes
 ####################################################
 
-pdf(file = "Redox-Potential-GSSG-2GSH-GWAS-RankZ-sexgen.pdf")
-out_gwas_KidneyRedoxPotentialGSSG2GSH <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco, addcovar = sexgen, query_func=query_variants, cores=10)
+pdf(file = "Redox-Potential-GSSG-2GSH-GWAS-RankZ-sex.pdf")
+out_gwas_KidneyRedoxPotentialGSSG2GSH <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco, addcovar = sex, query_func=query_variants, cores=10)
 par(mar=c(4.1, 4.1, 2.6, 2.6))
 plot(out_gwas_KidneyRedoxPotentialGSSG2GSH$lod, out_gwas_KidneyRedoxPotentialGSSG2GSH$snpinfo, altcol="green4", gap=0, main = "Kidney Redox Potential GSSG/2GSH GWAS", ylim = c(0,6))
 dev.off()
@@ -104,7 +104,7 @@ dev.off()
 ####################################################
 
 herit_KidneyRedoxPotentialGSSG2GSH_sex <- est_herit(pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship_lmm, sex, cores = 2)
-herit_KidneyRedoxPotentialGSSG2GSH_sexgen <- est_herit(pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship_lmm, sexgen, cores = 2)
+herit_KidneyRedoxPotentialGSSG2GSH_sex <- est_herit(pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship_lmm, sex, cores = 2)
 
 
 
@@ -113,33 +113,33 @@ herit_KidneyRedoxPotentialGSSG2GSH_sexgen <- est_herit(pheno["zKidneyRedoxPotent
 ##################################################################
 
 #set working directory
-pdf(file = "Redox Potential Other Genes - QTL Results - RankZ sexgen.pdf")
+pdf(file = "Redox Potential Other Genes - QTL Results - RankZ sex.pdf")
 ##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##
 
 #Glutathione Peroxidase (Gpx1) - Chr 9 59.24 cM
 chr = 9
-coef_blup_KidneyRedoxPotentialGSSG2GSH_chr9 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+coef_blup_KidneyRedoxPotentialGSSG2GSH_chr9 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sex, cores = 2)
 plot_coefCC(x = coef_blup_KidneyRedoxPotentialGSSG2GSH_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyRedoxPotentialGSSG2GSH, main = "Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
 xlim <- c(58.5,60)
 plot_coefCC(x = coef_blup_KidneyRedoxPotentialGSSG2GSH_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyRedoxPotentialGSSG2GSH, main = "Gpx1 Position -- Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
 
 #Glutathione cysteine ligase - catalytic subunit (Gclc) - Chr 9 43.36 cM
 chr = 9
-#coef_blup_KidneyRedoxPotentialGSSG2GSH_chr9 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+#coef_blup_KidneyRedoxPotentialGSSG2GSH_chr9 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sex, cores = 2)
 #plot_coefCC(x = coef_blup_KidneyRedoxPotentialGSSG2GSH_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyRedoxPotentialGSSG2GSH, main = "Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
 xlim <- c(42.5,44)
 plot_coefCC(x = coef_blup_KidneyRedoxPotentialGSSG2GSH_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyRedoxPotentialGSSG2GSH, main = "Gclc Position -- Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
 
 #Glutamate-cysteine ligase – modifier subunit (Gclm) - Chr 3 52.94 cM
 chr = 3
-coef_blup_KidneyRedoxPotentialGSSG2GSH_chr3 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+coef_blup_KidneyRedoxPotentialGSSG2GSH_chr3 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sex, cores = 2)
 plot_coefCC(x = coef_blup_KidneyRedoxPotentialGSSG2GSH_chr3, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyRedoxPotentialGSSG2GSH, main = "Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
 xlim <- c(51.5,53.5)
 plot_coefCC(x = coef_blup_KidneyRedoxPotentialGSSG2GSH_chr3, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyRedoxPotentialGSSG2GSH, main = "Gclm Position -- Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
 
 #Glutathione synthetase (Gss) - Chr 2 77.26 cM
 chr = 2
-coef_blup_KidneyRedoxPotentialGSSG2GSH_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+coef_blup_KidneyRedoxPotentialGSSG2GSH_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sex, cores = 2)
 plot_coefCC(x = coef_blup_KidneyRedoxPotentialGSSG2GSH_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyRedoxPotentialGSSG2GSH, main = "Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
 xlim <- c(76.5,78)
 plot_coefCC(x = coef_blup_KidneyRedoxPotentialGSSG2GSH_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyRedoxPotentialGSSG2GSH, main = "Gss Position -- Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
@@ -147,7 +147,7 @@ plot_coefCC(x = coef_blup_KidneyRedoxPotentialGSSG2GSH_chr2, map = R01_GSH_DO_QT
 
 #Glutathione reductase  (Gsr) - Chr 8 20.69 cM
 chr = 8
-coef_blup_KidneyRedoxPotentialGSSG2GSH_chr8 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+coef_blup_KidneyRedoxPotentialGSSG2GSH_chr8 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sex, cores = 2)
 plot_coefCC(x = coef_blup_KidneyRedoxPotentialGSSG2GSH_chr8, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyRedoxPotentialGSSG2GSH, main = "Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
 xlim <- c(19,22.5)
 plot_coefCC(x = coef_blup_KidneyRedoxPotentialGSSG2GSH_chr8, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyRedoxPotentialGSSG2GSH, main = "Gsr Position -- Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)

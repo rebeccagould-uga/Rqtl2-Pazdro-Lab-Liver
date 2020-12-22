@@ -1,10 +1,10 @@
 # R01 GSH DO Mapping Code 
-# Updated September 2020
+# Updated December 2020
 # Becca Gould 
 
 #KIDNEY GLUTATHIONE + BLOOD (BUN) MAPPING - Exporting QTL results
 
-#Load in Kidney QTL Mapping - RankZ - Sex.Rdata
+#Load in Kidney-QTL-Mapping-RankZ-sex.Rdata
 
 #load the command line tools 
 library(qtl2)
@@ -21,6 +21,8 @@ library (RSQLite)
 
 
 #set working directory to store the plots
+
+#setwd
 
 #tells you all of the qtlscans that you have
 ls(pattern = "qtl")
@@ -39,7 +41,7 @@ ls(pattern = "qtl")
   #shows you all of the results - check that these match your records
   qtl_gmap
   
-  
+
 
 ####################################################
 ## exporting data
@@ -60,8 +62,7 @@ ls(pattern = "qtl")
              "NADSystemsGenesMGI-RankZ-sex.xlsx")
   
   #set working directory - no BUN results
-  #write_xlsx(list("AST chr16" = AST_Genes_MGI_chr16), "BloodValuesGenesMGI-RankZ-sex.xlsx")
-  
+  #write_xlsx(list("BUN chr16" = BUN_Genes_MGI_chr16), "BloodValuesGenesMGI-RankZ-sex.xlsx")
   
   
 

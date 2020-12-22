@@ -1,10 +1,10 @@
 # R01 GSH DO Mapping Code 
-# Updated November 2020
+# Updated December 2020
 # Becca Gould 
 
 #KIDNEY GLUTATHIONE + BLOOD (BUN) MAPPING - BUN
 
-#Load in Kidney-GSH-Blood-RankZ-Sex.Rdata
+#Load in Kidney-GSH-Blood-RankZ-SexGen.Rdata
 #Run RankZ Transformation and Data Prep R Script before doing this**
 
 
@@ -26,8 +26,8 @@ library (RSQLite)
 ## Plot Genome Scans with Permutation Tests
 ####################################################
 
-qtlscan_BUN <- scan1(genoprobs = probs, pheno = pheno["zBUN"], kinship = kinship_loco, addcovar = sex, cores=2)
-perm_BUN <- scan1perm(genoprobs = probs, pheno = pheno["zBUN"], addcovar = sex, n_perm = 1000, cores=10)
+  qtlscan_BUN <- scan1(genoprobs = probs, pheno = pheno["zBUN"], kinship = kinship_loco, addcovar = sex, cores=2)
+  perm_BUN <- scan1perm(genoprobs = probs, pheno = pheno["zBUN"], addcovar = sex, n_perm = 1000, cores=10)
   
 #set working directory
 pdf(file = "BUN-QTL-Results-RankZ-sex.pdf")
@@ -52,7 +52,7 @@ pdf(file = "BUN-QTL-Results-RankZ-sex.pdf")
   write_xlsx(list("BUN gmap (cM)" = gmap_peaksBUN,
                   "BUN pmap (Mbp)" = peaksBUN),
              "BUN-Peaks-RankZ-sex.xlsx")
-
+  
 dev.off()  
 
 ####################################################

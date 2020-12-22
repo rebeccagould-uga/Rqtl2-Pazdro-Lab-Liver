@@ -27,7 +27,7 @@ library (RSQLite)
 ## Plot Genome Scans with Permutation Tests
 ####################################################
 
-qtlscan_KidneyTotalGSH<- scan1(genoprobs = probs, pheno = pheno["zKidneyTotalGSH"], kinship = kinship_loco, addcovar = sexgen, cores=10)
+qtlscan_KidneyTotalGSH<- scan1(genoprobs = probs, pheno = pheno["zKidneyTotalGSH"], kinship = kinship_loco, addcovar = sexgen, cores=2)
 perm_KidneyTotalGSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyTotalGSH"], addcovar = sexgen, n_perm = 1000, cores=10)
 
 #set working directory
@@ -103,7 +103,7 @@ dev.off()
 ## Heritability calculation - the ratio of genetic variance to total variance using a linear mixed model
 ####################################################
 
-herit_KidneyTotalGSH_sex <- est_herit(pheno["zKidneyTotalGSH"], kinship_lmm, sex, cores = 10)
-herit_KidneyTotalGSH_sexgen <- est_herit(pheno["zKidneyTotalGSH"], kinship_lmm, sexgen, cores = 10)
+herit_KidneyTotalGSH_sex <- est_herit(pheno["zKidneyTotalGSH"], kinship_lmm, sex, cores = 2)
+herit_KidneyTotalGSH_sexgen <- est_herit(pheno["zKidneyTotalGSH"], kinship_lmm, sexgen, cores = 2)
 
 

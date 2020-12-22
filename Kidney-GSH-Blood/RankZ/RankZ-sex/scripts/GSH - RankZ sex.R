@@ -1,14 +1,14 @@
 # R01 GSH DO Mapping Code 
-# Updated November 2020
+# Updated December 2020
 # Becca Gould 
 
 #KIDNEY GLUTATHIONE + BLOOD (BUN) MAPPING - GSH
 
-#Load in Kidney QTL Mapping - RankZ 1000 perm - sex.Rdata
+#Load in Kidney-QTL-Mapping-RankZ-sex.Rdata
 #Run RankZ Transformation and Data Prep R Script before doing this**
 
 
-setwd("/users/becca/R01_GSH_DO_mapping_Kidney/data")
+#setwd
 
 library(qtl2)
 library (tidyverse)
@@ -27,7 +27,7 @@ library (RSQLite)
 ## Plot Genome Scans with Permutation Tests
 ####################################################
 
-qtlscan_KidneyGSH <- scan1(genoprobs = probs, pheno = pheno["zKidneyGSH"], kinship = kinship_loco, addcovar = sex, cores=10)
+qtlscan_KidneyGSH <- scan1(genoprobs = probs, pheno = pheno["zKidneyGSH"], kinship = kinship_loco, addcovar = sex, cores=2)
 perm_KidneyGSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyGSH"], addcovar = sex, n_perm = 1000, cores=10)
 
 #set working directory
@@ -93,7 +93,7 @@ dev.off()
 ## Make a Manhattan plot of the results; use altcol to define a color alternate for chromosomes and gap=0 to have no gap between chromosomes
 ####################################################
 
-pdf(file = "GSH GWAS - RankZ sex.pdf")
+pdf(file = "GSH-GWAS-RankZ-sex.pdf")
 out_gwas_KidneyGSH <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyGSH"], kinship = kinship_loco, addcovar = sex, query_func=query_variants, cores=10)
 par(mar=c(4.1, 4.1, 2.6, 2.6))
 plot(out_gwas_KidneyGSH$lod, out_gwas_KidneyGSH$snpinfo, altcol="green4", gap=0, main = "Kidney GSH GWAS", ylim = c(0,6))
@@ -103,6 +103,6 @@ dev.off()
 ## Heritability calculation - the ratio of genetic variance to total variance using a linear mixed model
 ####################################################
 
-herit_KidneyGSH_sex <- est_herit(pheno["zKidneyGSH"], kinship_lmm, sex, cores = 10)
-herit_KidneyGSH_sexgen <- est_herit(pheno["zKidneyGSH"], kinship_lmm, sexgen, cores = 10)
+herit_KidneyGSH_sex <- est_herit(pheno["zKidneyGSH"], kinship_lmm, sex, cores = 2)
+herit_KidneyGSH_sexgen <- est_herit(pheno["zKidneyGSH"], kinship_lmm, sexgen, cores = 2)
 

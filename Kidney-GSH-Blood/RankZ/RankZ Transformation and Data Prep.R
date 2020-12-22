@@ -125,7 +125,7 @@ library (RSQLite)
 #####Plot the transformations  
 
   #set working directory
-  pdf(file = "Box Plots and QQ Norm Plots - RankZ and Raw.pdf")
+  pdf(file = "Box-Plots-and-QQ-Norm-Plots-RankZ-and-Raw.pdf")
   ##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##
   
 #For Kidney GSH
@@ -137,44 +137,52 @@ library (RSQLite)
   qqnorm(pheno$zKidneyGSH, main = "Normal QQ Plot - Rank Z Kidney GSH")
   
 #For Kidney GSSG
-  boxplot(pheno$Kidney_Adj_GSSG, main = "Kidney GSSG Box Plot")
-  boxplot(pheno$Kidney_Adj_GSSG~pheno$generation, main = "Kidney GSSG Box Plot - by generation")
+  boxplot(pheno$Kidney_Unadj_GSSG, main = "Kidney GSSG Box Plot")
+  boxplot(pheno$Kidney_Unadj_GSSG~pheno$generation, main = "Kidney GSSG Box Plot - by generation")
   boxplot(pheno$zKidneyGSSG, main = "Rank Z Kidney GSSG Box Plot")
   boxplot(pheno$zKidneyGSSG~pheno$generation, main = "Rank Z Kidney GSSG Box Plot - by generation")
   #check if it is normally distributed
   qqnorm(pheno$zKidneyGSSG, main = "Normal QQ Plot - Rank Z Kidney GSSG")
   
 #For Kidney Total GSH
-  boxplot(pheno$Kidney_Adj_Total_GSH, main = "Kidney Total GSH Box Plot")
-  boxplot(pheno$Kidney_Adj_Total_GSH~pheno$generation, main = "Kidney Total GSH Box Plot - by generation")
+  boxplot(pheno$Kidney_Unadj_Total_GSH, main = "Kidney Total GSH Box Plot")
+  boxplot(pheno$Kidney_Unadj_Total_GSH~pheno$generation, main = "Kidney Total GSH Box Plot - by generation")
   boxplot(pheno$zKidneyTotalGSH, main = "Rank Z Kidney Total GSH Box Plot")
   boxplot(pheno$zKidneyTotalGSH~pheno$generation, main = "Rank Z Kidney Total GSH Box Plot - by generation")
   #check if it is normally distributed
   qqnorm(pheno$zKidneyTotalGSH, main = "Normal QQ Plot - Rank Z Kidney Total GSH")
   
 #For Kidney GSH/GSSG Ratio
-  boxplot(pheno$Kidney_Adj_GSH_GSSG_Ratio, main = "Kidney GSH/GSSG Box Plot")
-  boxplot(pheno$Kidney_Adj_GSH_GSSG_Ratio~pheno$generation, main = "Kidney GSH/GSSG Box Plot - by generation")
+  boxplot(pheno$Kidney_Unadj_GSH_GSSG_Ratio, main = "Kidney GSH/GSSG Box Plot")
+  boxplot(pheno$Kidney_Unadj_GSH_GSSG_Ratio~pheno$generation, main = "Kidney GSH/GSSG Box Plot - by generation")
   boxplot(pheno$zKidneyGSH_GSSGRatio, main = "Rank Z Kidney GSH/GSSG Box Plot")
   boxplot(pheno$zKidneyGSH_GSSGRatio~pheno$generation, main = "Rank Z Kidney GSH/GSSG Box Plot - by generation")
   #check if it is normally distributed
   qqnorm(pheno$zKidneyGSH_GSSGRatio, main = "Normal QQ Plot - Rank Z Kidney GSH/GSSG")
 
 #For 2GSH/GSSG Ratio
-  boxplot(pheno$Kidney_Adj_2GSH_GSSG, main = "Kidney 2GSH/GSSG Box Plot")
-  boxplot(pheno$Kidney_Adj_2GSH_GSSG~pheno$generation, main = "Kidney 2GSH/GSSG Box Plot - by generation")
+  boxplot(pheno$Kidney_Unadj_2GSH_GSSG, main = "Kidney 2GSH/GSSG Box Plot")
+  boxplot(pheno$Kidney_Unadj_2GSH_GSSG~pheno$generation, main = "Kidney 2GSH/GSSG Box Plot - by generation")
   boxplot(pheno$zKidney2GSH_GSSGRatio, main = "RankZ Kidney 2GSH/GSSG Box Plot")
   boxplot(pheno$zKidney2GSH_GSSGRatio~pheno$generation, main = "RankZ Kidney 2GSH/GSSG Box Plot - by generation")
   #check if it is normally distributed
   qqnorm(pheno$zKidney2GSH_GSSGRatio, main = "Normal QQ Plot - RankZ Kidney 2GSH/GSSG") 
   
 #For Redox Potential GSSG/2GSH
-  boxplot(pheno$Kidney_Adj_Redox_Potential_GSSG_2GSH, main = "Kidney Redox Potential GSSG/2GSH Box Plot")
-  boxplot(pheno$Kidney_Adj_Redox_Potential_GSSG_2GSH~pheno$generation, main = "Kidney Redox Potential GSSG/2GSH Box Plot - by generation")
+  boxplot(pheno$Kidney_Unadj_Redox_Potential_GSSG_2GSH, main = "Kidney Redox Potential GSSG/2GSH Box Plot")
+  boxplot(pheno$Kidney_Unadj_Redox_Potential_GSSG_2GSH~pheno$generation, main = "Kidney Redox Potential GSSG/2GSH Box Plot - by generation")
   boxplot(pheno$zKidneyRedoxPotentialGSSG2GSH, main = "RankZ Kidney Redox Potential GSSG/2GSH Box Plot")
   boxplot(pheno$zKidneyRedoxPotentialGSSG2GSH~pheno$generation, main = "RankZ Kidney Redox Potential GSSG/2GSH Box Plot - by generation")
   #check if it is normally distributed
   qqnorm(pheno$zKidneyRedoxPotentialGSSG2GSH, main = "Normal QQ Plot - RankZ Kidney Redox Potential GSSG/2GSH") 
+  
+#For BUN
+  boxplot(pheno$BUN, main = "BUN Box Plot")
+  boxplot(pheno$BUN~pheno$generation, main = "BUN Box Plot - by generation")
+  boxplot(pheno$zBUN, main = "RankZ BUN Box Plot")
+  boxplot(pheno$zBUN~pheno$generation, main = "RankZ BUN Box Plot - by generation")
+  #check if it is normally distributed
+  qqnorm(pheno$zBUN, main = "Normal QQ Plot - RankZ BUN") 
   
 dev.off()
    

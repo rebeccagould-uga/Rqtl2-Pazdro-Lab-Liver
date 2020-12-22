@@ -115,9 +115,11 @@ library (RSQLite)
   
 #Rank Z transformations of each phenotype
   pheno$zKidneyGSH = rankZ(pheno$Kidney_GSH)
-  pheno$zKidneyGSSG = rankZ(pheno$Kidney_Adj_GSSG)
-  pheno$zKidneyTotalGSH = rankZ(pheno$Kidney_Adj_Total_GSH)
-  pheno$zKidneyGSH_GSSGRatio = rankZ(pheno$Kidney_Adj_GSH_GSSG_Ratio)
+  pheno$zKidneyGSSG = rankZ(pheno$Kidney_Unadj_GSSG)
+  pheno$zKidneyTotalGSH = rankZ(pheno$Kidney_Unadj_Total_GSH)
+  pheno$zKidneyGSH_GSSGRatio = rankZ(pheno$Kidney_Unadj_GSH_GSSG_Ratio)
+  pheno$zKidney2GSH_GSSGRatio = rankZ(pheno$Kidney_Unadj_2GSH_GSSG)
+  pheno$zKidneyRedoxPotentialGSSG2GSH = rankZ(pheno$Kidney_Unadj_Redox_Potential_GSSG_2GSH)
   pheno$zBUN = rankZ(pheno$BUN)
 
 #####Plot the transformations  

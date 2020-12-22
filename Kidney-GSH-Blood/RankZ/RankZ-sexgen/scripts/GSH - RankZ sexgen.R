@@ -93,7 +93,7 @@ dev.off()
 ## Make a Manhattan plot of the results; use altcol to define a color alternate for chromosomes and gap=0 to have no gap between chromosomes
 ####################################################
 
-pdf(file = "GSH GWAS - RankZ sexgen.pdf")
+pdf(file = "GSH-GWAS-RankZ-sexgen.pdf")
 out_gwas_KidneyGSH <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyGSH"], kinship = kinship_loco, addcovar = sexgen, query_func=query_variants, cores=10)
 par(mar=c(4.1, 4.1, 2.6, 2.6))
 plot(out_gwas_KidneyGSH$lod, out_gwas_KidneyGSH$snpinfo, altcol="green4", gap=0, main = "Kidney GSH GWAS", ylim = c(0,6))

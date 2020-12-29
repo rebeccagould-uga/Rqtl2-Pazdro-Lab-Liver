@@ -1,5 +1,5 @@
 # R01 GSH DO Mapping Code 
-# Updated November 2020
+# Updated December 2020
 # Becca Gould 
 
 #KIDNEY GLUTATHIONE + BLOOD (BUN) MAPPING - GSSG
@@ -57,32 +57,6 @@ write_xlsx(list("GSSG gmap (cM)" = gmap_peaksGSSG,
 ## Estimate QTL Effects (Coefficients) + Connect to SNP and Gene Databases
 ####################################################
 
-#For Kidney GSSG --- Chromosome 2
-  par(mar=c(4.1, 4.1, 2.6, 2.6))
-  
-  #using gmap (cM)
-  chr = 2
-  coef_blup_KidneyGSSG_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyGSSG"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
-  plot_coefCC(x = coef_blup_KidneyGSSG_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSSG, main = "Kidney GSSG BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
-  xlim <- c(40,65)
-  plot_coefCC(x = coef_blup_KidneyGSSG_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSSG, main = "Kidney GSSG BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
-  
-  #using pmap (Mbp)
-  chr = 2
-  #could use ci_lo or ci_hi, but for this case, I want a specific chromosome 2 peak
-  #start = peaksGSSG[peaksGSSG$chr ==  chr,"ci_lo"]
-  #end = peaksGSSG[peaksGSSG$chr == chr, "ci_hi"] 
-  
-  pander(peaksGSSG)
-  #based on peaksGSH, peak of interest is ~109 Mbp
-  variants_KidneyGSSG_chr2 <- query_variants(chr, 105, 112)
-  out_snps_KidneyGSSG_chr2 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyGSSG"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
-                                       chr = chr, start = 105, end = 112, keep_all_snps = TRUE)
-  plot_snpasso(out_snps_KidneyGSSG_chr2$lod, out_snps_KidneyGSSG_chr2$snpinfo, main = "Kidney GSSG SNPs")
-  
-  KidneyGSSG_Genes_MGI_chr2 <- query_genes_mgi(chr = chr, start = 105, end = 112)
-  plot(out_snps_KidneyGSSG_chr2$lod, out_snps_KidneyGSSG_chr2$snpinfo, drop_hilit=1.5, genes = KidneyGSSG_Genes_MGI_chr2, main = "Kidney GSSG Genes MGI") 
-  
 dev.off()  
   
   
@@ -103,5 +77,53 @@ dev.off()
 
 herit_KidneyGSSG_sex <- est_herit(pheno["zKidneyGSSG"], kinship_lmm, sex, cores = 2)
 herit_KidneyGSSG_sexgen <- est_herit(pheno["zKidneyGSSG"], kinship_lmm, sexgen, cores = 2)
+
+
+##################################################################
+## Checking other glutathione genes 
+##################################################################
+
+#set working directory
+pdf(file = "GSSG Other Genes - QTL Results - RankZ sexgen.pdf")
+##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##
+
+#Glutathione Peroxidase (Gpx1) - Chr 9 59.24 cM
+chr = 9
+coef_blup_KidneyGSSG_chr9 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyGSSG"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+plot_coefCC(x = coef_blup_KidneyGSSG_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSSG, main = "Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(58.5,60)
+plot_coefCC(x = coef_blup_KidneyGSSG_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSSG, main = "Gpx1 Position -- Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+#Glutathione cysteine ligase - catalytic subunit (Gclc) - Chr 9 43.36 cM
+chr = 9
+#coef_blup_KidneyGSSG_chr9 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyGSSG"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+#plot_coefCC(x = coef_blup_KidneyGSSG_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSSG, main = "Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(42.5,44)
+plot_coefCC(x = coef_blup_KidneyGSSG_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSSG, main = "Gclc Position -- Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+#Glutamate-cysteine ligase – modifier subunit (Gclm) - Chr 3 52.94 cM
+chr = 3
+coef_blup_KidneyGSSG_chr3 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyGSSG"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+plot_coefCC(x = coef_blup_KidneyGSSG_chr3, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSSG, main = "Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(51.5,53.5)
+plot_coefCC(x = coef_blup_KidneyGSSG_chr3, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSSG, main = "Gclm Position -- Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+#Glutathione synthetase (Gss) - Chr 2 77.26 cM
+chr = 2
+coef_blup_KidneyGSSG_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyGSSG"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+plot_coefCC(x = coef_blup_KidneyGSSG_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSSG, main = "Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(76.5,78)
+plot_coefCC(x = coef_blup_KidneyGSSG_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSSG, main = "Gss Position -- Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+#Glutathione reductase  (Gsr) - Chr 8 20.69 cM
+chr = 8
+coef_blup_KidneyGSSG_chr8 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyGSSG"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+plot_coefCC(x = coef_blup_KidneyGSSG_chr8, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSSG, main = "Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(19,22.5)
+plot_coefCC(x = coef_blup_KidneyGSSG_chr8, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSSG, main = "Gsr Position -- Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+dev.off()
+
+######################
 
 

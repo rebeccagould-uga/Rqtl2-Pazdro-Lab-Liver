@@ -59,31 +59,31 @@ write_xlsx(list("Total GSH gmap (cM)" = gmap_peaksTotalGSH,
 ## Estimate QTL Effects (Coefficients) + Connect to SNP and Gene Databases
 ####################################################
 
-#For Kidney Total GSH --- Chromosome 2 
+#For Kidney Total GSH --- Chromosome X
   par(mar=c(4.1, 4.1, 2.6, 2.6))
   
   #using gmap (cM)
-  chr = 2
-  coef_blup_KidneyTotalGSH_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
-  plot_coefCC(x = coef_blup_KidneyTotalGSH_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Kidney Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+  chr = X
+  coef_blup_KidneyTotalGSH_chrX <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
+  plot_coefCC(x = coef_blup_KidneyTotalGSH_chrX, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Kidney Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
   xlim <- c(45,65)
-  plot_coefCC(x = coef_blup_KidneyTotalGSH_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Kidney Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+  plot_coefCC(x = coef_blup_KidneyTotalGSH_chrX, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Kidney Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
   
   #using pmap (Mbp)
-  chr = 2
-  #could use ci_lo or ci_hi, but for this case, I want a specific chromosome 2 peak
+  chr = X
+  #could use ci_lo or ci_hi, but for this case, I want a specific chromosome X peak
   #start = peaksTotalGSH[peaksTotalGSH$chr ==  chr,"ci_lo"]
   #end = peaksTotalGSH[peaksTotalGSH$chr == chr, "ci_hi"] 
   
   pander(peaksTotalGSH)
   #based on peaksTotalGSH, peak of interest is ~109 Mbp
-  variants_KidneyTotalGSH_chr2 <- query_variants(chr, 107, 111)
-  out_snps_KidneyTotalGSH_chr2 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
+  variants_KidneyTotalGSH_chrX <- query_variants(chr, 107, 111)
+  out_snps_KidneyTotalGSH_chrX <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
                                            chr = chr, start = 107, end = 111, keep_all_snps = TRUE)
-  plot_snpasso(out_snps_KidneyTotalGSH_chr2$lod, out_snps_KidneyTotalGSH_chr2$snpinfo, main = "Kidney Total GSH SNPs")
+  plot_snpasso(out_snps_KidneyTotalGSH_chrX$lod, out_snps_KidneyTotalGSH_chrX$snpinfo, main = "Kidney Total GSH SNPs")
   
-  KidneyTotalGSH_Genes_MGI_chr2 <- query_genes_mgi(chr = chr, start = 107, end = 111)
-  plot(out_snps_KidneyTotalGSH_chr2$lod, out_snps_KidneyTotalGSH_chr2$snpinfo, drop_hilit=1.5, genes = KidneyTotalGSH_Genes_MGI_chr2, main = "Kidney Total GSH Genes MGI")
+  KidneyTotalGSH_Genes_MGI_chrX <- query_genes_mgi(chr = chr, start = 107, end = 111)
+  plot(out_snps_KidneyTotalGSH_chrX$lod, out_snps_KidneyTotalGSH_chrX$snpinfo, drop_hilit=1.5, genes = KidneyTotalGSH_Genes_MGI_chrX, main = "Kidney Total GSH Genes MGI")
   
 dev.off()
 
@@ -105,5 +105,54 @@ dev.off()
 
 herit_KidneyTotalGSH_sex <- est_herit(pheno["zKidneyTotalGSH"], kinship_lmm, sex, cores = 2)
 herit_KidneyTotalGSH_sexgen <- est_herit(pheno["zKidneyTotalGSH"], kinship_lmm, sexgen, cores = 2)
+
+
+##################################################################
+## Checking other glutathione genes 
+##################################################################
+
+#set working directory
+pdf(file = "Total GSH Other Genes - QTL Results - RankZ sexgen.pdf")
+##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##
+
+#Glutathione Peroxidase (Gpx1) - Chr 9 59.24 cM
+chr = 9
+coef_blup_KidneyTotalGSH_chr9 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+plot_coefCC(x = coef_blup_KidneyTotalGSH_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(58.5,60)
+plot_coefCC(x = coef_blup_KidneyTotalGSH_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Gpx1 Position -- Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+#Glutathione cysteine ligase - catalytic subunit (Gclc) - Chr 9 43.36 cM
+chr = 9
+#coef_blup_KidneyTotalGSH_chr9 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+#plot_coefCC(x = coef_blup_KidneyTotalGSH_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(42.5,44)
+plot_coefCC(x = coef_blup_KidneyTotalGSH_chr9, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Gclc Position -- Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+#Glutamate-cysteine ligase – modifier subunit (Gclm) - Chr 3 52.94 cM
+chr = 3
+coef_blup_KidneyTotalGSH_chr3 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+plot_coefCC(x = coef_blup_KidneyTotalGSH_chr3, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(51.5,53.5)
+plot_coefCC(x = coef_blup_KidneyTotalGSH_chr3, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Gclm Position -- Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+#Glutathione synthetase (Gss) - Chr 2 77.26 cM
+chr = 2
+coef_blup_KidneyTotalGSH_chr2 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+plot_coefCC(x = coef_blup_KidneyTotalGSH_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(76.5,78)
+plot_coefCC(x = coef_blup_KidneyTotalGSH_chr2, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Gss Position -- Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+#Glutathione reductase  (Gsr) - Chr 8 20.69 cM
+chr = 8
+coef_blup_KidneyTotalGSH_chr8 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+plot_coefCC(x = coef_blup_KidneyTotalGSH_chr8, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(19,22.5)
+plot_coefCC(x = coef_blup_KidneyTotalGSH_chr8, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Gsr Position -- Kidney Redox Potential GSSG/2GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+dev.off()
+
+######################
+
 
 

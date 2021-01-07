@@ -4,12 +4,15 @@
 
 #Removed all outliers
 #Saved data in CSV format
-#Glutathione data for the Liver and using Adjusted GSSG values 
+#Glutathione data for the Liver  using adjusted GSSG values 
+#Glutathione data for the Kidney using unadjusted GSSG values
 
 #plot info reference: https://www.displayr.com/how-to-create-a-correlation-matrix-in-r/
 
 #load my data into the session using read.csv function
-rawdata <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/correlations/data.csv")
+rawdata <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data.csv")
+rawdata <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data-GSH-QTL-paper.csv", check.names = FALSE)
+
 head(rawdata, 6)
 
 rownames(rawdata) <- rawdata$Mouse

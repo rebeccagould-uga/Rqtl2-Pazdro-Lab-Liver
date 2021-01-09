@@ -166,6 +166,17 @@ dev.off()
 
 ######################
 
+#Looking at significant peak for Liver GSH/GSSG --- Chromosome 16
+par(mar=c(4.1, 4.1, 2.6, 2.6))
+
+#using gmap (cM)
+chr = 16
+coef_blup_LiverTotalGSH_chr16 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zLiverTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+plot_coefCC(x = coef_blup_LiverTotalGSH_chr16, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH, main = "Liver GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+xlim <- c(1,9)
+plot_coefCC(x = coef_blup_LiverTotalGSH_chr16, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH, main = "Liver GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+
 
 
 

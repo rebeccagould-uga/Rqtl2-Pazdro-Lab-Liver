@@ -165,7 +165,20 @@ dev.off()
 
 ######################
 
+#set working directory
+pdf(file = "Chr16 GSH-GSSG-Ratio Peak - GSH-and-GSSG - RankZ sexgen.pdf")
+#saved to GSH GSSG Ratio results
+##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##
 
+
+chr = 16
+xlim <- c(1,9)
+plot_coefCC(x = coef_blup_LiverGSH_chr16, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverGSH, main = "Liver GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+plot_coefCC(x = coef_blup_LiverGSSG_chr16, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverGSSG, main = "Liver GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+plot_coefCC(x = coef_blup_LiverTotalGSH_chr16, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH, main = "Liver GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+plot_coefCC(x = coef_blup_LiverGSH_GSSGRatio_chr16, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverGSH_GSSGRatio, main = "Liver GSH/GSSG BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+
+dev.off()
 
 
 

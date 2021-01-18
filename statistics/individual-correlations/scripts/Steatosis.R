@@ -6,7 +6,7 @@
 #helpful link: http://www.sthda.com/english/wiki/kruskal-wallis-test-in-r
 
 
-data <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/correlations/data_na-rows_deleted.csv")
+data <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data_na-rows_deleted.csv")
 head(data, 6)
 
 data$group <- ordered(data$Steatosis,
@@ -152,6 +152,12 @@ GSHstats <- group_by(data, group) %>%
     #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
     #stat_compare_means(label = "p.signif", ref.group = "0") 
   
+  p16 <- ggboxplot(data, x = "Steatosis", y = "ASTALTRatio",
+                   color = "Steatosis", palette = "jco",
+                   ylab = "AST/ALT", xlab = "Steatosis Grade")#+ 
+  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+  #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   # # Mean plots
   # # ++++++++++++++++++++
@@ -165,7 +171,7 @@ GSHstats <- group_by(data, group) %>%
   #        ylab = "GSH (nmol/mg)", xlab = "Steatosis Grade")
   
   pdf(file = "Steatosis-plots.pdf")
-  ggarrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, ncol = 1, nrow = 1)
+  ggarrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, ncol = 1, nrow = 1)
   dev.off()
   
   

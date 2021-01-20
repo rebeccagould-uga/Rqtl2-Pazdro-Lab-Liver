@@ -15,12 +15,18 @@ data$group <- ordered(data$Ballooning,
 
 library("dplyr")
 library("ggpubr")
+library ("ggsignif")
 
 #install.packages("ggpubr")
 ## Install
 #if(!require(devtools)) install.packages("devtools")
 #devtools::install_github("kassambara/ggpubr")
 
+my_comparisons <- list( c("0", "1"), c("0", "2"), c("0", "3"), c("0", "4"), c("0", "5"),
+                        c("1", "2"), c("1", "3"), c("1", "4"),c("1", "5"),
+                        c("2", "3"), c("2", "4"),c("2", "5"),
+                        c("3", "4"),c("3", "5"),
+                        c("4", "5"))
 
 #summary stats - GSH by Ballooning grade
 #can do for any phenotype of interest
@@ -37,120 +43,137 @@ GSHstats <- group_by(data, group) %>%
 # Box plots
 # ++++++++++++++++++++
 # Plot variable by Ballooning grade and color by grade
-  
+
+#reference to get all p-values
+#ggboxplot(data, x = "Ballooning", y = "GSH",
+#         color = "Ballooning", palette = "jco",
+#        ylab = "GSH (nmol/mg)", xlab = "Hydropic Degeneration Grade")+
+#stat_compare_means(comparisons = my_comparisons, label = "p.format")
+
   p1 <- ggboxplot(data, x = "Ballooning", y = "GSH",
                   color = "Ballooning", palette = "jco",
-                  ylab = "GSH (nmol/mg)", xlab = "Hydropic Degeneration Grade")#+ 
-  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+                  ylab = "GSH (nmol/mg)", xlab = "Hydropic Degeneration Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p2 <- ggboxplot(data, x = "Ballooning", y = "GSSG",
                   color = "Ballooning", palette = "jco",
-                  ylab = "GSSG (nmol/mg)", xlab = "Hydropic Degeneration Grade")#+ 
-  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+                  ylab = "GSSG (nmol/mg)", xlab = "Hydropic Degeneration Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  #stat_compare_means(label = "p.signif", ref.group = "0")
   
   p3 <- ggboxplot(data, x = "Ballooning", y = "TotalGSH",
                   color = "Ballooning", palette = "jco",
-                  ylab = "Total GSH (nmol/mg)", xlab = "Hydropic Degeneration Grade")#+ 
-  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+                  ylab = "Total Glutathione (nmol/mg)", xlab = "Hydropic Degeneration Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  #stat_compare_means(label = "p.signif", ref.group = "0")
   
   
   p4 <- ggboxplot(data, x = "Ballooning", y = "GSHGSSGRatio",
                   color = "Ballooning", palette = "jco",
-                  ylab = "GSH/GSSG", xlab = "Hydropic Degeneration Grade")#+ 
-  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+                  ylab = "GSH/GSSG", xlab = "Hydropic Degeneration Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  #stat_compare_means(label = "p.signif", ref.group = "0")
   
   p5 <- ggboxplot(data, x = "Ballooning", y = "EhGSSG2GSH",
                   color = "Ballooning", palette = "jco",
-                  ylab = "Eh GSSG/2GSH", xlab = "Hydropic Degeneration Grade")#+ 
-  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+                  ylab = "Eh (mV)", xlab = "Hydropic Degeneration Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  #stat_compare_means(label = "p.signif", ref.group = "0")
   
   p6 <- ggboxplot(data, x = "Ballooning", y = "NADH",
                   color = "Ballooning", palette = "jco",
-                  ylab = "NADH (pmol/ug)", xlab = "Hydropic Degeneration Grade")#+ 
-  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+                  ylab = "NADH (pmol/ug)", xlab = "Hydropic Degeneration Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  #stat_compare_means(label = "p.signif", ref.group = "0")
   
   p7 <- ggboxplot(data, x = "Ballooning", y = "NADP",
                   color = "Ballooning", palette = "jco",
-                  ylab = "NADP (pmol/ug)", xlab = "Hydropic Degeneration Grade")#+ 
-  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+                  ylab = "NADP (pmol/ug)", xlab = "Hydropic Degeneration Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p8 <- ggboxplot(data, x = "Ballooning", y = "NADPH",
                   color = "Ballooning", palette = "jco",
-                  ylab = "NADPH (pmol/ug)", xlab = "Hydropic Degeneration Grade")#+ 
-  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+                  ylab = "NADPH (pmol/ug)", xlab = "Hydropic Degeneration Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  #stat_compare_means(label = "p.signif", ref.group = "0")
   
   p9 <- ggboxplot(data, x = "Ballooning", y = "NADPNADPHRatio",
                   color = "Ballooning", palette = "jco",
-                  ylab = "NADP/NADPH", xlab = "Hydropic Degeneration Grade")#+ 
-  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+                  ylab = "NADP/NADPH", xlab = "Hydropic Degeneration Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  #stat_compare_means(label = "p.signif", ref.group = "0")
   
   p10 <- ggboxplot(data, x = "Ballooning", y = "AST",
                    color = "Ballooning", palette = "jco",
-                   ylab = "AST (U/L)", xlab = "Hydropic Degeneration Grade")#+ 
-  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+                   ylab = "AST (U/L)", xlab = "Hydropic Degeneration Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  #stat_compare_means(label = "p.signif", ref.group = "0")
   
   p11 <- ggboxplot(data, x = "Ballooning", y = "ALT",
                    color = "Ballooning", palette = "jco",
-                   ylab = "ALT (U/L)", xlab = "Hydropic Degeneration Grade")#+ 
-  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+                   ylab = "ALT (U/L)", xlab = "Hydropic Degeneration Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  #stat_compare_means(label = "p.signif", ref.group = "0")
   
   p12 <- ggboxplot(data, x = "Ballooning", y = "BUN",
                    color = "Ballooning", palette = "jco",
-                   ylab = "BUN (mg/dL)", xlab = "Hydropic Degeneration Grade")#+ 
-  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+                   ylab = "BUN (mg/dL)", xlab = "Hydropic Degeneration Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  #stat_compare_means(label = "p.signif", ref.group = "0")
   
   p13 <- ggboxplot(data, x = "Ballooning", y = "Glucose",
                    color = "Ballooning", palette = "jco",
-                   ylab = "Glucose (mg/dL)", xlab = "Hydropic Degeneration Grade")#+ 
-  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+                   ylab = "Glucose (mg/dL)", xlab = "Hydropic Degeneration Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  #stat_compare_means(label = "p.signif", ref.group = "0")
   
   p14 <- ggboxplot(data, x = "Ballooning", y = "LiverWeight",
                    color = "Ballooning", palette = "jco",
-                   ylab = "Liver Weight (g)", xlab = "Hydropic Degeneration Grade")#+ 
-  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
-  #stat_compare_means(label = "p.signif", ref.group = "0") 
+                   ylab = "Liver Weight (g)", xlab = "Hydropic Degeneration Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0")
   
   p15 <- ggboxplot(data, x = "Ballooning", y = "Steatosis",
                    color = "Ballooning", palette = "jco",
-                   ylab = "Steatosis Grade", xlab = "Hydropic Degeneration Grade")#+ 
-  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+                   ylab = "Steatosis Grade", xlab = "Hydropic Degeneration Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  #stat_compare_means(label = "p.signif", ref.group = "0")
   
   p16 <- ggboxplot(data, x = "Ballooning", y = "ASTALTRatio",
                    color = "Ballooning", palette = "jco",
-                   ylab = "AST/ALT", xlab = "Hydropic Degeneration Grade")#+ 
-  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
+                   ylab = "AST/ALT", xlab = "Hydropic Degeneration Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  #stat_compare_means(label = "p.signif", ref.group = "0")
   
+  p17 <- ggboxplot(data, x = "Ballooning", y = "FinalWeight",
+                   color = "Ballooning", palette = "jco",
+                   ylab = "Body Weight (g)", xlab = "Hydropic Degeneration Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0")
+
+
+  
+  
+    
   # # Mean plots
   # # ++++++++++++++++++++
   # # Plot GSH by Ballooning grade
@@ -162,8 +185,8 @@ GSHstats <- group_by(data, group) %>%
   #        add = c("mean_se", "jitter"),
   #        ylab = "GSH (nmol/mg)", xlab = "Hydropic Degeneration Grade")
   
-  pdf(file = "Ballooning-plots.pdf")
-  ggarrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, ncol = 1, nrow = 1)
+  pdf(file = "Ballooning-plots-pvalues-symbol.pdf")
+  ggarrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, ncol = 1, nrow = 1)
   dev.off() 
   
 

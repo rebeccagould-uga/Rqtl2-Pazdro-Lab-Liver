@@ -15,6 +15,14 @@ data$group <- ordered(data$Steatosis,
 
 library("dplyr")
 library("ggpubr")
+library ("ggsignif")
+
+# Visualize: Specify the comparisons you want
+my_comparisons <- list( c("0", "1"), c("0", "2"), c("0", "3"), c("0", "5"),
+                        c("1", "2"), c("1", "3"), c("1", "5"),
+                        c("2", "3"), c("2", "5"),
+                        c("3", "5"))
+
 
 #install.packages("ggpubr")
 ## Install
@@ -38,12 +46,18 @@ GSHstats <- group_by(data, group) %>%
 # ++++++++++++++++++++
 # Plot variable by Steatosis grade and color by grade
 
+#reference to get all p-values
+#ggboxplot(data, x = "Steatosis", y = "GSH",
+ #         color = "Steatosis", palette = "jco",
+  #        ylab = "GSH (nmol/mg)", xlab = "Steatosis Grade")+
+  #stat_compare_means(comparisons = my_comparisons, label = "p.format")
+
   p1 <- ggboxplot(data, x = "Steatosis", y = "GSH",
             color = "Steatosis", palette = "jco",
-            ylab = "GSH (nmol/mg)", xlab = "Steatosis Grade")#+ 
-    #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-    #stat_compare_means(label = "p.signif", ref.group = "0") 
+            ylab = "GSH (nmol/mg)", xlab = "Steatosis Grade")+ 
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   # ggboxplot(data, x = "Steatosis", y = "GSH", color = "Steatosis", 
   #           add = "jitter", legend = "none") +
@@ -55,109 +69,118 @@ GSHstats <- group_by(data, group) %>%
   
   p2 <- ggboxplot(data, x = "Steatosis", y = "GSSG",
                   color = "Steatosis", palette = "jco",
-                  ylab = "GSSG (nmol/mg)", xlab = "Steatosis Grade")#+ 
-    #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-    #stat_compare_means(label = "p.signif", ref.group = "0") 
+                  ylab = "GSSG (nmol/mg)", xlab = "Steatosis Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p3 <- ggboxplot(data, x = "Steatosis", y = "TotalGSH",
                   color = "Steatosis", palette = "jco",
-                  ylab = "Total GSH (nmol/mg)", xlab = "Steatosis Grade")#+ 
-    #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-    #stat_compare_means(label = "p.signif", ref.group = "0") 
+                  ylab = "Total Glutathione (nmol/mg)", xlab = "Steatosis Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   
   p4 <- ggboxplot(data, x = "Steatosis", y = "GSHGSSGRatio",
                   color = "Steatosis", palette = "jco",
-                  ylab = "GSH/GSSG", xlab = "Steatosis Grade")#+ 
-    #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-    #stat_compare_means(label = "p.signif", ref.group = "0") 
+                  ylab = "GSH/GSSG", xlab = "Steatosis Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p5 <- ggboxplot(data, x = "Steatosis", y = "EhGSSG2GSH",
                   color = "Steatosis", palette = "jco",
-                  ylab = "Eh GSSG/2GSH", xlab = "Steatosis Grade")#+ 
-    #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-    #stat_compare_means(label = "p.signif", ref.group = "0") 
+                  ylab = "Eh (mV)", xlab = "Steatosis Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p6 <- ggboxplot(data, x = "Steatosis", y = "NADH",
                   color = "Steatosis", palette = "jco",
-                  ylab = "NADH (pmol/ug)", xlab = "Steatosis Grade")#+ 
-    #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-    #stat_compare_means(label = "p.signif", ref.group = "0") 
+                  ylab = "NADH (pmol/ug)", xlab = "Steatosis Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p7 <- ggboxplot(data, x = "Steatosis", y = "NADP",
                   color = "Steatosis", palette = "jco",
-                  ylab = "NADP (pmol/ug)", xlab = "Steatosis Grade")#+ 
-    #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-    #stat_compare_means(label = "p.signif", ref.group = "0") 
+                  ylab = "NADP (pmol/ug)", xlab = "Steatosis Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p8 <- ggboxplot(data, x = "Steatosis", y = "NADPH",
                   color = "Steatosis", palette = "jco",
-                  ylab = "NADPH (pmol/ug)", xlab = "Steatosis Grade")#+ 
-    #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-    #stat_compare_means(label = "p.signif", ref.group = "0") 
+                  ylab = "NADPH (pmol/ug)", xlab = "Steatosis Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p9 <- ggboxplot(data, x = "Steatosis", y = "NADPNADPHRatio",
                   color = "Steatosis", palette = "jco",
-                  ylab = "NADP/NADPH", xlab = "Steatosis Grade")#+ 
-    #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-    #stat_compare_means(label = "p.signif", ref.group = "0") 
+                  ylab = "NADP/NADPH", xlab = "Steatosis Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p10 <- ggboxplot(data, x = "Steatosis", y = "AST",
                   color = "Steatosis", palette = "jco",
-                  ylab = "AST (U/L)", xlab = "Steatosis Grade")#+ 
-    #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-    #stat_compare_means(label = "p.signif", ref.group = "0") 
+                  ylab = "AST (U/L)", xlab = "Steatosis Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p11 <- ggboxplot(data, x = "Steatosis", y = "ALT",
                    color = "Steatosis", palette = "jco",
-                   ylab = "ALT (U/L)", xlab = "Steatosis Grade")#+ 
-    #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-    #stat_compare_means(label = "p.signif", ref.group = "0") 
+                   ylab = "ALT (U/L)", xlab = "Steatosis Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
     
   p12 <- ggboxplot(data, x = "Steatosis", y = "BUN",
                    color = "Steatosis", palette = "jco",
-                   ylab = "BUN (mg/dL)", xlab = "Steatosis Grade")#+ 
-    #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-    #stat_compare_means(label = "p.signif", ref.group = "0") 
+                   ylab = "BUN (mg/dL)", xlab = "Steatosis Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p13 <- ggboxplot(data, x = "Steatosis", y = "Glucose",
                    color = "Steatosis", palette = "jco",
-                   ylab = "Glucose (mg/dL)", xlab = "Steatosis Grade")#+ 
-    #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-    #stat_compare_means(label = "p.signif", ref.group = "0") 
+                   ylab = "Glucose (mg/dL)", xlab = "Steatosis Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p14 <- ggboxplot(data, x = "Steatosis", y = "LiverWeight",
                    color = "Steatosis", palette = "jco",
-                   ylab = "Liver Weight (g)", xlab = "Steatosis Grade")#+ 
-    #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+                   ylab = "Liver Weight (g)", xlab = "Steatosis Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
     #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p15 <- ggboxplot(data, x = "Steatosis", y = "Ballooning",
                    color = "Steatosis", palette = "jco",
-                   ylab = "Hydropic Degeneration", xlab = "Steatosis Grade")#+ 
-    #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-    #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
-    #stat_compare_means(label = "p.signif", ref.group = "0") 
+                   ylab = "Hydropic Degeneration", xlab = "Steatosis Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p16 <- ggboxplot(data, x = "Steatosis", y = "ASTALTRatio",
                    color = "Steatosis", palette = "jco",
-                   ylab = "AST/ALT", xlab = "Steatosis Grade")#+ 
-  #stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comparisons p-value
-  #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
+                   ylab = "AST/ALT", xlab = "Steatosis Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
+  
+  p17 <- ggboxplot(data, x = "Steatosis", y = "FinalWeight",
+                   color = "Steatosis", palette = "jco",
+                   ylab = "Body Weight (g)", xlab = "Steatosis Grade")+ 
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  
+
   
   # # Mean plots
   # # ++++++++++++++++++++
@@ -170,9 +193,12 @@ GSHstats <- group_by(data, group) %>%
   #        add = c("mean_se", "jitter"),
   #        ylab = "GSH (nmol/mg)", xlab = "Steatosis Grade")
   
-  pdf(file = "Steatosis-plots.pdf")
-  ggarrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, ncol = 1, nrow = 1)
+  pdf(file = "Steatosis-plots-pvalues-symbol.pdf")
+  ggarrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, ncol = 1, nrow = 1)
   dev.off()
+  
+  
+  
   
   
 ############################################
@@ -228,13 +254,6 @@ GSHstats <- group_by(data, group) %>%
   library("ggplot2")
   library("ggsignif")
   
-  
-  # Visualize: Specify the comparisons you want
-  my_comparisons <- list( c("0", "1"), c("0", "2"), c("0", "3"), c("0", "5"),
-                          c("1", "2"), c("1", "3"), c("1", "5"),
-                          c("2", "3"), c("2", "5"),
-                          c("3", "5"))
-
 
 # #individual KW tests for reference
 # KW_GSH <- kruskal.test(GSH ~ Steatosis, data = data)

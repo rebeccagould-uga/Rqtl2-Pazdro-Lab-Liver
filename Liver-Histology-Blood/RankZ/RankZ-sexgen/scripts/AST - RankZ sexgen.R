@@ -4,7 +4,7 @@
 
 #LIVER HISTOLOGY AND BLOOD QTL MAPPING - AST
 
-#Load in Liver-GSH-NAD-RankZ-SexGen.Rdata
+#Load in Liver-Histology-RankZ-SexGen.Rdata
 #Run RankZ Transformation and Data Prep R Script before doing this**
 
 

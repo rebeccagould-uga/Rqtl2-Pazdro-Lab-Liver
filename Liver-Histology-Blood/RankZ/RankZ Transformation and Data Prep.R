@@ -123,6 +123,7 @@ library (RSQlite)
 #Rank Z transformations of each phenotype
   pheno$zAST = rankZ(pheno$AST)
   pheno$zALT = rankZ(pheno$ALT)
+  pheno$zASTALTRatio = rankZ(pheno$AST_ALT_Ratio)
   pheno$zSteatosis = rankZ(pheno$Liver_Steatosis)
   pheno$zBallooning = rankZ(pheno$Liver_Ballooning)
   pheno$zFibrosis = rankZ(pheno$Liver_Fibrosis)
@@ -167,6 +168,14 @@ library (RSQlite)
   boxplot(pheno$zALT~pheno$generation, main = "RankZ ALT - by generation")
   #check if it is normally distributed
   qqnorm(pheno$zALT, main = "Normal QQ Plot - RankZ ALT") 
+  
+#For AST/ALT Ratio
+  boxplot(pheno$AST_ALT_Ratio, main = "AST/ALT Box Plot")
+  boxplot(pheno$AST_ALT_Ratio~pheno$generation, main = "AST/ALT Box Plot - by generation")
+  boxplot(pheno$zASTALTRatio, main = "RankZ AST/ALT Box Plot")
+  boxplot(pheno$zASTALTRatio~pheno$generation, main = "RankZ AST/ALT - by generation")
+  #check if it is normally distributed
+  qqnorm(pheno$zASTALTRatio, main = "Normal QQ Plot - RankZ AST/ALT") 
   
 #For Fibrosis
   boxplot(pheno$Fibrosis, main = "Liver Fibrosis Box Plot")

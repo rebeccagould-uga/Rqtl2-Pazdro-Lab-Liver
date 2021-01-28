@@ -1,4 +1,4 @@
-﻿Mouse,Generation,Sex,NADH (pmol/ug),NADP (pmol/ug),NADPH (pmol/ug),NADP/NADPH,Liver Weight (g),GSH (nmol/mg),GSSG (nmol/mg),Total GSH (nmol/mg),GSH/GSSG,Eh (mV)
+Mouse,Generation,Sex,NADH (pmol/ug),NADP (pmol/ug),NADPH (pmol/ug),NADP/NADPH,Liver Weight (g),GSH (nmol/mg),GSSG (nmol/mg),Total Glutathione (nmol/mg),GSH/GSSG,Eh (mV)
 1,30,M,NA,NA,0.604,NA,1.788,46.189,0.441,47.071,104.688,-201.549
 2,30,M,3.066,NA,0.609,NA,1.922,60.649,0.526,61.701,115.305,-206.517
 3,30,M,NA,NA,0.642,NA,2.092,109.341,1.121,111.584,97.5,-212.193

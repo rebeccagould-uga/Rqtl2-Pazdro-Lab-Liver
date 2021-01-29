@@ -35,7 +35,7 @@ ls(pattern = "qtl")
 
 #use cbind to combine all of the qtlscans + take those 2D tables and combining them with another table over and over again
 ## scans is an R object containing your genome scans from scan1() that are loaded in to the R environment
-  scans <- cbind(qtlscan_LiverGSH, qtlscan_LiverGSSG, qtlscan_LiverTotalGSH, qtlscan_LiverGSH_GSSGRatio, qtlscan_LiverGSH_GSSGcovar, qtlscan_LiverNADH, qtlscan_LiverNADP, qtlscan_LiverNADPH, qtlscan_LiverNADP_NADPHRatio, qtlscan_ALT, qtlscan_AST, qtlscan_BUN)
+  scans <- cbind(qtlscan_LiverGSH, qtlscan_LiverGSSG, qtlscan_LiverTotalGSH, qtlscan_LiverGSH_GSSGRatio, qtlscan_LiverGSH_GSSGcovar, qtlscan_LiverRedoxPotentialGSSG2GSH, qtlscan_LiverNADH, qtlscan_LiverNADP, qtlscan_LiverNADPH, qtlscan_LiverNADP_NADPHRatio)
   #thresholds <- cbind(threshold_LiverGSH, threshold_LiverGSSG, threshold_LiverTotalGSH, threshold_LiverGSH_GSSGRatio, threshold_LiverGSH_GSSGcovar, threshold_LiverNADH, threshold_LiverNADP, threshold_LiverNADPH, threshold_LiverNADP_NADPHRatio, threshold_ALT, threshold_AST, threshold_BUN)
   #head(thresholds)
 

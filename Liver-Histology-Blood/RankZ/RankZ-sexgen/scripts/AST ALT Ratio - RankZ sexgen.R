@@ -48,7 +48,7 @@ pdf(file = "AST-ALT-Ratio-QTL-Results-RankZ-sexgen.pdf")
   peaksASTALTRatio <- find_peaks(scan1_output = qtlscan_ASTALTRatio, map = R01_GSH_DO_QTLdata$pmap, threshold = summary(perm_ASTALTRatio, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
   print(peaksASTALTRatio)
   
-  
+ 
   write_xlsx(list("AST ALT Ratio gmap (cM)" = gmap_peaksASTALTRatio,
                   "AST ALT Ratio pmap (Mbp)" = peaksASTALTRatio),
              "AST-ALT-Ratio-Peaks-RankZ-sexgen.xlsx")
@@ -57,7 +57,7 @@ pdf(file = "AST-ALT-Ratio-QTL-Results-RankZ-sexgen.pdf")
 ## Estimate QTL Effects (Coefficients) + Connect to SNP and Gene Databases
 ####################################################
 
-
+dev.off()
   
 ####################################################
 ## GWAS SNP Association Scan

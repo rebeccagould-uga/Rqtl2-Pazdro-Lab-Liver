@@ -30,6 +30,10 @@ library (RSQLite)
 qtlscan_KidneyTotalGSH<- scan1(genoprobs = probs, pheno = pheno["zKidneyTotalGSH"], kinship = kinship_loco, addcovar = sexgen, cores=2)
 perm_KidneyTotalGSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyTotalGSH"], addcovar = sexgen, n_perm = 1000, cores=10)
 
+Xcovar = get_x_covar(R01_GSH_DO_QTLdata)
+perm_strata = mat2strata(Xcovar)
+perm_X_KidneyTotalGSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyTotalGSH"], addcovar = sexgen, Xcovar = Xcovar, n_perm = 1, perm_Xsp = TRUE, perm_strata = perm_strata, chr_lengths = chr_lengths(R01_GSH_DO_QTLdata$gmap), cores=2)
+
 #set working directory
 pdf(file = "Total GSH QTL Results - RankZ sexgen.pdf")
 ##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##

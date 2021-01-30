@@ -32,7 +32,7 @@ perm_KidneyTotalGSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyTotalG
 
 Xcovar = get_x_covar(R01_GSH_DO_QTLdata)
 perm_strata = mat2strata(Xcovar)
-perm_X_KidneyTotalGSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyTotalGSH"], addcovar = sexgen, Xcovar = Xcovar, n_perm = 1, perm_Xsp = TRUE, perm_strata = perm_strata, chr_lengths = chr_lengths(R01_GSH_DO_QTLdata$gmap), cores=2)
+perm_X_KidneyTotalGSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyTotalGSH"], addcovar = sexgen, Xcovar = Xcovar, n_perm = 1000, perm_Xsp = TRUE, perm_strata = perm_strata, chr_lengths = chr_lengths(R01_GSH_DO_QTLdata$gmap), cores=10)
 
 #set working directory
 pdf(file = "Total GSH QTL Results - RankZ sexgen.pdf")
@@ -42,6 +42,25 @@ par(mar=c(4.1, 4.1, 2.6, 2.6))
 threshold_KidneyTotalGSH = summary(perm_KidneyTotalGSH, alpha = c(0.2, 0.1, 0.05))
 plot_scan1(x = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney Total GSH", ylim = c(0,11))
 abline(h = threshold_KidneyTotalGSH, col = c("purple", "red", "blue"), lwd = 2)
+
+summary(perm_X_KidneyTotalGSH, alpha=c(0.2, 0.1, 0.05))
+#Autosome LOD thresholds (1000 permutations)
+#zKidneyTotalGSH
+#0.2             7.01
+#0.1             7.38
+#0.05            7.98
+
+#X chromosome LOD thresholds (18090 permutations)
+#zKidneyTotalGSH
+#0.2             6.43
+#0.1             6.81
+#0.05            7.16
+
+#couldn't get to work
+plot_scan1(x = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney Total GSH", ylim = c(0,11))
+perm_X_KidneyTotalGSH_only <- perm_X_KidneyTotalGSH[["X"]]
+threshold_X_KidneyTotalGSH = summary(perm_X_KidneyTotalGSH_only, alpha = c(0.2, 0.1, 0.05))
+abline(h = threshold_X_KidneyTotalGSH, col = c("purple", "red", "blue"), lwd = 2)
 
 #using gmap (cM)
 find_peaks(scan1_output = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_KidneyTotalGSH, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)

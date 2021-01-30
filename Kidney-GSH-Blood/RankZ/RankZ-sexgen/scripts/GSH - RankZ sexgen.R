@@ -30,6 +30,23 @@ library (RSQLite)
 qtlscan_KidneyGSH <- scan1(genoprobs = probs, pheno = pheno["zKidneyGSH"], kinship = kinship_loco, addcovar = sexgen, cores=2)
 perm_KidneyGSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyGSH"], addcovar = sexgen, n_perm = 1000, cores=10)
 
+Xcovar = get_x_covar(R01_GSH_DO_QTLdata)
+perm_strata = mat2strata(Xcovar)
+perm_X_KidneyGSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyGSH"], addcovar = sexgen, Xcovar = Xcovar, n_perm = 1000, perm_Xsp = TRUE, perm_strata = perm_strata, chr_lengths = chr_lengths(R01_GSH_DO_QTLdata$gmap), cores=10)
+
+summary(perm_X_KidneyGSH, alpha=c(0.2, 0.1, 0.05))
+#Autosome LOD thresholds (1000 permutations)
+#zKidneyGSH
+#0.2        6.90
+#0.1        7.35
+#0.05       7.76
+
+#X chromosome LOD thresholds (18090 permutations)
+#zKidneyGSH
+#0.2        6.34
+#0.1        6.73
+#0.05       7.18
+
 #set working directory
 pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
 ##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##
@@ -39,6 +56,13 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
   plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney GSH", ylim = c(0,11))
   abline(h = threshold_KidneyGSH, col = c("purple", "red", "blue"), lwd = 2)
 
+  #couldn't get to work
+  plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney GSH", ylim = c(0,11))
+  perm_X_KidneyGSH_only <- perm_X_KidneyGSH[["X"]]
+  threshold_X_KidneyGSH = summary(perm_X_KidneyGSH_only, alpha = c(0.2, 0.1, 0.05))
+  abline(h = threshold_X_KidneyGSH, col = c("purple", "red", "blue"), lwd = 2)
+  
+  
 #using gmap (cM)
   find_peaks(scan1_output = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_KidneyGSH, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
   gmap_peaksGSH <- find_peaks(scan1_output = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_KidneyGSH, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)

@@ -1,5 +1,5 @@
 # R01 GSH DO Mapping Code 
-# Updated December 2020
+# Updated January 2021
 # Becca Gould 
 
 #KIDNEY GLUTATHIONE + BLOOD (BUN) MAPPING - GSH
@@ -32,20 +32,20 @@ perm_KidneyGSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyGSH"], addc
 
 Xcovar = get_x_covar(R01_GSH_DO_QTLdata)
 perm_strata = mat2strata(Xcovar)
-perm_X_KidneyGSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyGSH"], addcovar = sexgen, Xcovar = Xcovar, n_perm = 1000, perm_Xsp = TRUE, perm_strata = perm_strata, chr_lengths = chr_lengths(R01_GSH_DO_QTLdata$gmap), cores=10)
+perm_X_KidneyGSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyGSH"], addcovar = sexgen,n_perm = 1000, perm_Xsp = TRUE, perm_strata = perm_strata, chr_lengths = chr_lengths(R01_GSH_DO_QTLdata$gmap), cores=10)
 
 summary(perm_X_KidneyGSH, alpha=c(0.2, 0.1, 0.05))
 #Autosome LOD thresholds (1000 permutations)
 #zKidneyGSH
-#0.2        6.90
-#0.1        7.35
-#0.05       7.76
+#0.2        6.97
+#0.1        7.33
+#0.05       7.80
 
 #X chromosome LOD thresholds (18090 permutations)
 #zKidneyGSH
-#0.2        6.34
-#0.1        6.73
-#0.05       7.18
+#0.2        6.50
+#0.1        6.89
+#0.05       7.40
 
 #set working directory
 pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
@@ -56,12 +56,11 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
   plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney GSH", ylim = c(0,11))
   abline(h = threshold_KidneyGSH, col = c("purple", "red", "blue"), lwd = 2)
 
-  #couldn't get to work
-  plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney GSH", ylim = c(0,11))
-  perm_X_KidneyGSH_only <- perm_X_KidneyGSH[["X"]]
-  threshold_X_KidneyGSH = summary(perm_X_KidneyGSH_only, alpha = c(0.2, 0.1, 0.05))
-  abline(h = threshold_X_KidneyGSH, col = c("purple", "red", "blue"), lwd = 2)
-  
+  plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney GSH (X Chrom)", ylim = c(0,11))
+  #perm_X_KidneyGSH_only <- perm_X_KidneyGSH[["X"]]
+  #threshold_X_KidneyGSH = summary(perm_X_KidneyGSH_only, alpha = c(0.2, 0.1, 0.05))
+  #abline(h = threshold_X_KidneyGSH, col = c("purple", "red", "blue"), lwd = 2)
+  abline(h = c(6.50, 6.89, 7.40), col = c("purple", "red", "blue"), lwd = 2)
   
 #using gmap (cM)
   find_peaks(scan1_output = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_KidneyGSH, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
@@ -78,12 +77,37 @@ write_xlsx(list("GSH gmap (cM)" = gmap_peaksGSH,
                 "GSH pmap (Mbp)" = peaksGSH),
                 "GSH Peaks - RankZ sexgen.xlsx")
 
-dev.off()
-
 ####################################################
 ## Estimate QTL Effects (Coefficients) + Connect to SNP and Gene Databases
 ####################################################
 
+#For Kidney GSH --- Chromosome X
+  par(mar=c(4.1, 4.1, 2.6, 2.6))
+  
+#using gmap (cM)
+  chr = "X"
+  coef_blup_KidneyGSH_chrX <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+  plot_coefCC(x = coef_blup_KidneyGSH_chrX, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSH, main = "Kidney Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+  xlim <- c(15,40)
+  plot_coefCC(x = coef_blup_KidneyGSH_chrX, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSH, main = "Kidney Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+  
+#using pmap (Mbp)
+  chr = "X"
+  #could use ci_lo or ci_hi, but for this case, I want a specific chromosome X peak
+  #start = peaksGSH[peaksGSH$chr ==  chr,"ci_lo"]
+  #end = peaksGSH[peaksGSH$chr == chr, "ci_hi"] 
+  
+  pander(peaksGSH)
+  #based on peaksGSH, peak of interest is ~109 Mbp
+  variants_KidneyGSH_chrX <- query_variants(chr, 48.2, 52.9)
+  out_snps_KidneyGSH_chrX <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
+                                            chr = chr, start = 48.2, end = 52.9, keep_all_snps = TRUE)
+  plot_snpasso(out_snps_KidneyGSH_chrX$lod, out_snps_KidneyGSH_chrX$snpinfo, main = "Kidney GSH SNPs")
+  
+  KidneyGSH_Genes_MGI_chrX <- query_genes_mgi(chr = chr, start = 48.2, end = 52.9)
+  plot(out_snps_KidneyGSH_chrX$lod, out_snps_KidneyGSH_chrX$snpinfo, drop_hilit=1.5, genes = KidneyGSH_Genes_MGI_chrX, main = "Kidney Total GSH Genes MGI")
+  
+dev.off()
 
 ####################################################
 ## GWAS SNP Association Scan

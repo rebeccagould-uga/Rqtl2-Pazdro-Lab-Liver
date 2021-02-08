@@ -32,7 +32,7 @@ perm_KidneyTotalGSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyTotalG
 
 Xcovar = get_x_covar(R01_GSH_DO_QTLdata)
 perm_strata = mat2strata(Xcovar)
-perm_X_KidneyTotalGSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyTotalGSH"], addcovar = sexgen, Xcovar = Xcovar, n_perm = 1000, perm_Xsp = TRUE, perm_strata = perm_strata, chr_lengths = chr_lengths(R01_GSH_DO_QTLdata$gmap), cores=10)
+perm_X_KidneyTotalGSH <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyTotalGSH"], addcovar = sexgen, n_perm = 1000, perm_Xsp = TRUE, perm_strata = perm_strata, chr_lengths = chr_lengths(R01_GSH_DO_QTLdata$gmap), cores=10)
 
 #set working directory
 pdf(file = "Total GSH QTL Results - RankZ sexgen.pdf")
@@ -43,39 +43,40 @@ threshold_KidneyTotalGSH = summary(perm_KidneyTotalGSH, alpha = c(0.2, 0.1, 0.05
 plot_scan1(x = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney Total GSH", ylim = c(0,11))
 abline(h = threshold_KidneyTotalGSH, col = c("purple", "red", "blue"), lwd = 2)
 
-summary(perm_X_KidneyTotalGSH, alpha=c(0.2, 0.1, 0.05))
-#Autosome LOD thresholds (1000 permutations)
-#zKidneyTotalGSH
-#0.2             7.01
-#0.1             7.38
-#0.05            7.98
+  summary(perm_X_KidneyTotalGSH, alpha=c(0.2, 0.1, 0.05))
+  #Autosome LOD thresholds (1000 permutations)
+  #zKidneyTotalGSH
+  #0.2             6.99
+  #0.1             7.35
+  #0.05            7.75
+  
+  #X chromosome LOD thresholds (18090 permutations)
+  #zKidneyTotalGSH
+  #0.2             6.52
+  #0.1             6.95
+  #0.05            7.38
 
-#X chromosome LOD thresholds (18090 permutations)
-#zKidneyTotalGSH
-#0.2             6.43
-#0.1             6.81
-#0.05            7.16
-
-#couldn't get to work
-plot_scan1(x = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney Total GSH", ylim = c(0,11))
-perm_X_KidneyTotalGSH_only <- perm_X_KidneyTotalGSH[["X"]]
-threshold_X_KidneyTotalGSH = summary(perm_X_KidneyTotalGSH_only, alpha = c(0.2, 0.1, 0.05))
-abline(h = threshold_X_KidneyTotalGSH, col = c("purple", "red", "blue"), lwd = 2)
-
+  plot_scan1(x = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney Total GSH (X chrom)", ylim = c(0,11))
+  #perm_X_KidneyTotalGSH_only <- perm_X_KidneyTotalGSH[["X"]]
+  #threshold_X_KidneyTotalGSH = summary(perm_X_KidneyTotalGSH_only, alpha = c(0.2, 0.1, 0.05))
+  #abline(h = threshold_X_KidneyTotalGSH, col = c("purple", "red", "blue"), lwd = 2)
+  abline(h = c(6.52, 6.95, 7.38), col = c("purple", "red", "blue"), lwd = 2)
+  
+  
 #using gmap (cM)
-find_peaks(scan1_output = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_KidneyTotalGSH, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
-gmap_peaksTotalGSH <- find_peaks(scan1_output = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_KidneyTotalGSH, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
-print(gmap_peaksTotalGSH)
-
+  find_peaks(scan1_output = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_KidneyTotalGSH, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
+  gmap_peaksTotalGSH <- find_peaks(scan1_output = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_KidneyTotalGSH, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
+  print(gmap_peaksTotalGSH)
+  
 #using pmap (Mbp)
-find_peaks(scan1_output = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$pmap, threshold = summary(perm_KidneyTotalGSH, alpha = 0.2), peakdrop = 1.0, prob = 0.95, expand2markers = FALSE)
-peaksTotalGSH <- find_peaks(scan1_output = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$pmap, threshold = summary(perm_KidneyTotalGSH, alpha = 0.2), peakdrop = 1.0, prob = 0.95, expand2markers = FALSE)
-print(peaksTotalGSH)
-
-
-write_xlsx(list("Total GSH gmap (cM)" = gmap_peaksTotalGSH,
-                "Total GSH pmap (Mbp)" = peaksTotalGSH),
-           "Total GSH Peaks - RankZ sexgen.xlsx")
+  find_peaks(scan1_output = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$pmap, threshold = summary(perm_KidneyTotalGSH, alpha = 0.2), peakdrop = 1.0, prob = 0.95, expand2markers = FALSE)
+  peaksTotalGSH <- find_peaks(scan1_output = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$pmap, threshold = summary(perm_KidneyTotalGSH, alpha = 0.2), peakdrop = 1.0, prob = 0.95, expand2markers = FALSE)
+  print(peaksTotalGSH)
+  
+  
+  write_xlsx(list("Total GSH gmap (cM)" = gmap_peaksTotalGSH,
+                  "Total GSH pmap (Mbp)" = peaksTotalGSH),
+             "Total GSH Peaks - RankZ sexgen.xlsx")
 
 
 ####################################################
@@ -86,26 +87,26 @@ write_xlsx(list("Total GSH gmap (cM)" = gmap_peaksTotalGSH,
   par(mar=c(4.1, 4.1, 2.6, 2.6))
   
   #using gmap (cM)
-  chr = X
-  coef_blup_KidneyTotalGSH_chrX <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
+  chr = "X"
+  coef_blup_KidneyTotalGSH_chrX <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
   plot_coefCC(x = coef_blup_KidneyTotalGSH_chrX, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Kidney Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
-  xlim <- c(45,65)
+  xlim <- c(15,40)
   plot_coefCC(x = coef_blup_KidneyTotalGSH_chrX, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Kidney Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
   
   #using pmap (Mbp)
-  chr = X
+  chr = "X"
   #could use ci_lo or ci_hi, but for this case, I want a specific chromosome X peak
   #start = peaksTotalGSH[peaksTotalGSH$chr ==  chr,"ci_lo"]
   #end = peaksTotalGSH[peaksTotalGSH$chr == chr, "ci_hi"] 
   
   pander(peaksTotalGSH)
   #based on peaksTotalGSH, peak of interest is ~109 Mbp
-  variants_KidneyTotalGSH_chrX <- query_variants(chr, 107, 111)
+  variants_KidneyTotalGSH_chrX <- query_variants(chr, 48.2, 52.9)
   out_snps_KidneyTotalGSH_chrX <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
-                                           chr = chr, start = 107, end = 111, keep_all_snps = TRUE)
+                                           chr = chr, start = 48.2, end = 52.9, keep_all_snps = TRUE)
   plot_snpasso(out_snps_KidneyTotalGSH_chrX$lod, out_snps_KidneyTotalGSH_chrX$snpinfo, main = "Kidney Total GSH SNPs")
   
-  KidneyTotalGSH_Genes_MGI_chrX <- query_genes_mgi(chr = chr, start = 107, end = 111)
+  KidneyTotalGSH_Genes_MGI_chrX <- query_genes_mgi(chr = chr, start = 48.2, end = 52.9)
   plot(out_snps_KidneyTotalGSH_chrX$lod, out_snps_KidneyTotalGSH_chrX$snpinfo, drop_hilit=1.5, genes = KidneyTotalGSH_Genes_MGI_chrX, main = "Kidney Total GSH Genes MGI")
   
 dev.off()

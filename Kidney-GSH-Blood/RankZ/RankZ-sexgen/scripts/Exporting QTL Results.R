@@ -47,8 +47,8 @@ ls(pattern = "qtl")
 ## exporting data
 ####################################################
   #set working directory
-  write_xlsx(list("Total GSH chr2" = KidneyTotalGSH_Genes_MGI_chrX, 
-                  "GSH GSSG Ratio chr16" = KidneyGSH_GSSGRatio_Genes_MGI_chr16),
+  write_xlsx(list("GSH chrX" = KidneyGSH_Genes_MGI_chrX, 
+                  "TotalGSH chrX" = KidneyTotalGSH_Genes_MGI_chrX),
              "GlutathioneGenesMGI-RankZ-sexgen.xlsx")
   
   #set working directory - no BUN results

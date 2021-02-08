@@ -10,8 +10,9 @@
 #plot info reference: https://www.displayr.com/how-to-create-a-correlation-matrix-in-r/
 
 #load my data into the session using read.csv function
-rawdata <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data.csv")
-rawdata <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data-GSH-QTL-paper.csv", check.names = FALSE)
+  #rawdata <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data.csv")
+  #rawdata <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data-Liver-GSH-QTL-paper.csv", check.names = FALSE)
+  rawdata <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data-Kidney-QTL-paper.csv", check.names = FALSE)
 
 head(rawdata, 6)
 

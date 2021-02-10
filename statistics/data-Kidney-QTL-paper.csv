@@ -1,4 +1,4 @@
-Mouse,Generation,Sex,Kidney GSH (nmol/mg),Kidney GSSG (nmol/mg),Kidney Total Glutathione (nmol/mg),Kidney GSH/GSSG,Kidney Eh (mV),BUN (mg/dL),Liver GSH (nmol/mg),Liver GSSG (nmol/mg),Liver Total Glutathione (nmol/mg),Liver GSH/GSSG,Liver Eh (mV)
+Mouse,Generation,Sex,Renal GSH (nmol/mg),Renal GSSG (nmol/mg),Renal Total Glutathione (nmol/mg),Renal GSH/GSSG,Renal Eh (mV),BUN (mg/dL),Hepatic GSH (nmol/mg),Hepatic GSSG (nmol/mg),Hepatic Total Glutathione (nmol/mg),Hepatic GSH/GSSG,Hepatic Eh (mV)
 1,30,M,17.232,0.293,17.819,58.746,-180.497,28,46.189,0.441,47.071,104.688,-201.549
 2,30,M,14.566,0.178,14.922,81.846,-182.699,23,60.649,0.526,61.701,115.305,-206.517
 3,30,M,17.596,0.192,17.98,91.689,-186.772,26,109.341,1.121,111.584,97.5,-212.193

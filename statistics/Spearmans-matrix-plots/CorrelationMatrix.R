@@ -25,7 +25,7 @@ data = subset(rawdata, select = -c(1,2,3))
 
 #run correlations for all observations
 #use complete.obs tells R to handle missing values by case-wise deletion
-data.cor = cor(data, method = c("spearman"), use = "complete.obs")
+#data.cor = cor(data, method = c("spearman"), use = "complete.obs")
 
   #to look up a specific correlation
   #cor.test(x = data$LiverWeight, y = data$AST, method = "spearman", use = "complete.obs")
@@ -157,7 +157,7 @@ png(height=1500, width=1500, pointsize=25, file="correlation-matrix-color.png") 
   
 png(height=2500, width=2500, pointsize=25, file="correlation-matrix-heatmap.png") #create a PNG file called correlation-matrix-heatmap
   palette = colorRampPalette(c("green", "white", "red")) (20)
-  heatmap(x = data.cor, col = palette, symm = TRUE)
+  heatmap(x = data_coefficients, col = palette, symm = TRUE)
 
 dev.off()
 
@@ -169,11 +169,13 @@ dev.off()
 #set working directory
 
 pvalues <- as.data.frame(data_p)
-correlations <- as.data.frame(data.cor)
+correlations <- as.data.frame(data_coefficients)
 
 library(writexl)
+
 write_xlsx(list("Correlations" = correlations, 
                 "P Values" = pvalues),
                 "correlations and p values.xlsx")
+
 
 

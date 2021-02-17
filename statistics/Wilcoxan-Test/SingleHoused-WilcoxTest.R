@@ -24,7 +24,21 @@ data[1:10,]
 
 housing <- data$`Single-Cage`
 
-wilcox.test(data~`Single-Cage`)
+wilcox.test(data$`Kidney GSH (nmol/mg)`~housing)
+wilcox.test(data$`Kidney GSSG (nmol/mg)`~housing)
+wilcox.test(data$`Kidney Total Glutathione (nmol/mg)`~housing)
+wilcox.test(data$`Kidney GSH/GSSG`~housing)
+wilcox.test(data$`Kidney Eh (mV)`~housing)
+wilcox.test(data$`BUN`~housing)
+
+
+boxplot(data$`Kidney GSH (nmol/mg)`~housing)
+boxplot(data$`Kidney GSSG (nmol/mg)`~housing)
+boxplot(data$`Kidney Total Glutathione (nmol/mg)`~housing)
+boxplot(data$`Kidney GSH/GSSG`~housing)
+boxplot(data$`Kidney Eh (mV)`~housing)
+boxplot(data$`BUN`~housing)
+
 
 ####################################################
 ## exporting data

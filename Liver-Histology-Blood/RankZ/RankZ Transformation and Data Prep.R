@@ -16,7 +16,7 @@ library(jsonlite)
 library (data.table)
 library (RcppEigen)
 library (writexl)
-library (RSQlite)
+library (RSQLite)
 
 #For all plots, use these parameters to keep everything consistent. You can adjust them accordingly.
 #par(mar=c(4.1, 4.1, 2.6, 2.6))
@@ -127,7 +127,7 @@ library (RSQlite)
   pheno$zSteatosis = rankZ(pheno$Liver_Steatosis)
   pheno$zBallooning = rankZ(pheno$Liver_Ballooning)
   pheno$zFibrosis = rankZ(pheno$Liver_Fibrosis)
-  
+  pheno$zInflammation = rankZ(pheno$Liver_Inflammation)
   
 #####Plot the transformations  
 
@@ -184,6 +184,14 @@ library (RSQlite)
   boxplot(pheno$zFibrosis~pheno$generation, main = "RankZ Liver ReFibrosis - by generation")
   #check if it is normally distributed
   qqnorm(pheno$zFibrosis, main = "Normal QQ Plot - RankZ Liver Fibrosis") 
+  
+#For Inflammation
+  boxplot(pheno$Inflammation, main = "Liver Inflammation Box Plot")
+  boxplot(pheno$Inflammation~pheno$generation, main = "Liver Inflammation Box Plot - by generation")
+  boxplot(pheno$zInflammation, main = "RankZ Liver Inflammation Box Plot")
+  boxplot(pheno$zInflammation~pheno$generation, main = "RankZ Liver Inflammation - by generation")
+  #check if it is normally distributed
+  qqnorm(pheno$zInflammation, main = "Normal QQ Plot - RankZ Liver Inflammation") 
   
 dev.off()
   

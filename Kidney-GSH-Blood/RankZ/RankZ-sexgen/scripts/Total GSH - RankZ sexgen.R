@@ -109,6 +109,33 @@ abline(h = threshold_KidneyTotalGSH, col = c("purple", "red", "blue"), lwd = 2)
   KidneyTotalGSH_Genes_MGI_chrX <- query_genes_mgi(chr = chr, start = 48.2, end = 52.9)
   plot(out_snps_KidneyTotalGSH_chrX$lod, out_snps_KidneyTotalGSH_chrX$snpinfo, drop_hilit=1.5, genes = KidneyTotalGSH_Genes_MGI_chrX, main = "Kidney Total GSH Genes MGI")
   
+  
+#For Kidney Total GSH --- Chromosome 11
+  par(mar=c(4.1, 4.1, 2.6, 2.6))
+  
+  #using gmap (cM)
+  chr = "11"
+  coef_blup_KidneyTotalGSH_chr11 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+  plot_coefCC(x = coef_blup_KidneyTotalGSH_chr11, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Kidney Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+  xlim <- c(45,75)
+  plot_coefCC(x = coef_blup_KidneyTotalGSH_chr11, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyTotalGSH, main = "Kidney Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+  
+  #using pmap (Mbp)
+  chr = "11"
+  #could use ci_lo or ci_hi, but for this case, I want a specific chromosome 11 peak
+  #start = peaksTotalGSH[peaksTotalGSH$chr ==  chr,"ci_lo"]
+  #end = peaksTotalGSH[peaksTotalGSH$chr == chr, "ci_hi"] 
+  
+  pander(peaksTotalGSH)
+  #based on peaksTotalGSH, peak of interest is ~100 Mbp
+  variants_KidneyTotalGSH_chr11 <- query_variants(chr, 99, 102)
+  out_snps_KidneyTotalGSH_chr11 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
+                                        chr = chr, start = 99, end = 102, keep_all_snps = TRUE)
+  plot_snpasso(out_snps_KidneyTotalGSH_chr11$lod, out_snps_KidneyTotalGSH_chr11$snpinfo, main = "Kidney Total GSH SNPs")
+  
+  KidneyTotalGSH_Genes_MGI_chr11 <- query_genes_mgi(chr = chr, start = 99, end = 102)
+  plot(out_snps_KidneyTotalGSH_chr11$lod, out_snps_KidneyTotalGSH_chr11$snpinfo, drop_hilit=1.5, genes = KidneyGSH_Genes_MGI_chr11, main = "Kidney Total GSH Genes MGI")
+  
 dev.off()
 
 

@@ -48,7 +48,10 @@ ls(pattern = "qtl")
 ####################################################
   #set working directory
   write_xlsx(list("GSH chrX" = KidneyGSH_Genes_MGI_chrX, 
-                  "TotalGSH chrX" = KidneyTotalGSH_Genes_MGI_chrX),
+                  "TotalGSH chrX" = KidneyTotalGSH_Genes_MGI_chrX,
+                  "GSH chr11" = KidneyGSH_Genes_MGI_chr11,
+                  "Total GSH chr11" = KidneyTotalGSH_Genes_MGI_chr11,
+                  "Eh chr14" = KidneyEh_Genes_MGI_chr14),
              "GlutathioneGenesMGI-RankZ-sexgen.xlsx")
   
   #set working directory - no BUN results

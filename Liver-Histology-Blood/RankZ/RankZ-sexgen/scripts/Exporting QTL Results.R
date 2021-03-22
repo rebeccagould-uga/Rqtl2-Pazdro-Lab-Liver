@@ -50,7 +50,8 @@ write_xlsx(list(  "AST chr2" = AST_Genes_MGI_chr2,
              "BloodValuesGenesMGI - rankZ sexgen.xlsx")
 
 write_xlsx(list(  "Steatosis chr18" = Steatosis_Genes_MGI_chr18,
-                  "Ballooning chr6" = Ballooning_Genes_MGI_chr6),
+                  "Ballooning chr6" = Ballooning_Genes_MGI_chr6,
+                  "Steatosis chrX" = Steatosis_Genes_MGI_chrX),
              "HistologyGenesMGI - rankZ sexgen.xlsx")
   
   

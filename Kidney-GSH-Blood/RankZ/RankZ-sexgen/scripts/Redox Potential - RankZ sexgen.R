@@ -59,6 +59,32 @@ pdf(file = "Redox Potential GSSG 2GSH QTL Results - RankZ sexgen.pdf")
 ## Estimate QTL Effects (Coefficients) + Connect to SNP and Gene Databases
 ####################################################
 
+#For Kidney Eh --- Chromosome 14
+  par(mar=c(4.1, 4.1, 2.6, 2.6))
+  
+  #using gmap (cM)
+  chr = "14"
+  coef_blup_KidneyRedoxPotential_chr14 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+  plot_coefCC(x = coef_blup_KidneyRedoxPotential_chr14, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyRedoxPotentialGSSG2GSH, main = "Kidney Eh BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+  xlim <- c(0,25)
+  plot_coefCC(x = coef_blup_KidneyRedoxPotential_chr14, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyRedoxPotentialGSSG2GSH, main = "Kidney Eh BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+  
+  #using pmap (Mbp)
+  chr = "14"
+  #could use ci_lo or ci_hi, but for this case, I want a specific chromosome 14 peak
+  #start = peaksKidneyRedoxPotentialGSSG2GSH[peaksKidneyRedoxPotentialGSSG2GSH$chr ==  chr,"ci_lo"]
+  #end = peaksKidneyRedoxPotentialGSSG2GSH[peaksKidneyRedoxPotentialGSSG2GSH$chr == chr, "ci_hi"] 
+  
+  pander(peaksKidneyRedoxPotentialGSSG2GSH)
+  #based on peaksGSH, peak of interest is ~100 Mbp
+  variants_KidneyRedoxPotential_chr14 <- query_variants(chr, 21, 25)
+  out_snps_KidneyRedoxPotential_chr14 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyRedoxPotentialGSSG2GSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
+                                        chr = chr, start = 21, end = 25, keep_all_snps = TRUE)
+  plot_snpasso(out_snps_KidneyRedoxPotential_chr14$lod, out_snps_KidneyRedoxPotential_chr14$snpinfo, main = "Kidney Eh SNPs")
+  
+  KidneyEh_Genes_MGI_chr14 <- query_genes_mgi(chr = chr, start = 21, end = 25)
+  plot(out_snps_KidneyRedoxPotential_chr14$lod, out_snps_KidneyRedoxPotential_chr14$snpinfo, drop_hilit=1.5, genes = KidneyEh_Genes_MGI_chr14, main = "Kidney Eh Genes MGI")
+  
 dev.off()
 
   

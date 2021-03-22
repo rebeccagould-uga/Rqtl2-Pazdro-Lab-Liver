@@ -87,9 +87,9 @@ write_xlsx(list("GSH gmap (cM)" = gmap_peaksGSH,
 #using gmap (cM)
   chr = "X"
   coef_blup_KidneyGSH_chrX <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
-  plot_coefCC(x = coef_blup_KidneyGSH_chrX, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSH, main = "Kidney Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+  plot_coefCC(x = coef_blup_KidneyGSH_chrX, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSH, main = "Kidney GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
   xlim <- c(15,40)
-  plot_coefCC(x = coef_blup_KidneyGSH_chrX, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSH, main = "Kidney Total GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+  plot_coefCC(x = coef_blup_KidneyGSH_chrX, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSH, main = "Kidney GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
   
 #using pmap (Mbp)
   chr = "X"
@@ -105,7 +105,34 @@ write_xlsx(list("GSH gmap (cM)" = gmap_peaksGSH,
   plot_snpasso(out_snps_KidneyGSH_chrX$lod, out_snps_KidneyGSH_chrX$snpinfo, main = "Kidney GSH SNPs")
   
   KidneyGSH_Genes_MGI_chrX <- query_genes_mgi(chr = chr, start = 48.2, end = 52.9)
-  plot(out_snps_KidneyGSH_chrX$lod, out_snps_KidneyGSH_chrX$snpinfo, drop_hilit=1.5, genes = KidneyGSH_Genes_MGI_chrX, main = "Kidney Total GSH Genes MGI")
+  plot(out_snps_KidneyGSH_chrX$lod, out_snps_KidneyGSH_chrX$snpinfo, drop_hilit=1.5, genes = KidneyGSH_Genes_MGI_chrX, main = "Kidney GSH Genes MGI")
+  
+#For Kidney GSH --- Chromosome 11
+  par(mar=c(4.1, 4.1, 2.6, 2.6))
+  
+  #using gmap (cM)
+  chr = "11"
+  coef_blup_KidneyGSH_chr11 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zKidneyGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+  plot_coefCC(x = coef_blup_KidneyGSH_chr11, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSH, main = "Kidney GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
+  xlim <- c(45,75)
+  plot_coefCC(x = coef_blup_KidneyGSH_chr11, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_KidneyGSH, main = "Kidney GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+  
+  #using pmap (Mbp)
+  chr = "11"
+  #could use ci_lo or ci_hi, but for this case, I want a specific chromosome X peak
+  #start = peaksGSH[peaksGSH$chr ==  chr,"ci_lo"]
+  #end = peaksGSH[peaksGSH$chr == chr, "ci_hi"] 
+  
+  pander(peaksGSH)
+  #based on peaksGSH, peak of interest is ~100 Mbp
+  variants_KidneyGSH_chr11 <- query_variants(chr, 99, 102)
+  out_snps_KidneyGSH_chr11 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zKidneyGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
+                                       chr = chr, start = 99, end = 102, keep_all_snps = TRUE)
+  plot_snpasso(out_snps_KidneyGSH_chr11$lod, out_snps_KidneyGSH_chr11$snpinfo, main = "Kidney GSH SNPs")
+  
+  KidneyGSH_Genes_MGI_chr11 <- query_genes_mgi(chr = chr, start = 99, end = 102)
+  plot(out_snps_KidneyGSH_chr11$lod, out_snps_KidneyGSH_chr11$snpinfo, drop_hilit=1.5, genes = KidneyGSH_Genes_MGI_chr11, main = "Kidney GSH Genes MGI")
+  
   
 dev.off()
 

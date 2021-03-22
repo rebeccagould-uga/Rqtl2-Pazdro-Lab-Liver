@@ -75,12 +75,12 @@ pdf(file = "Total GSH QTL Results - RankZ sexgen.pdf")
   
   pander(peaksTotalGSH)
   #based on peaksTotalGSH, peak of interest is ~22 Mbp
-  variants_LiverTotalGSH_chr14 <- query_variants(chr, 20, 24)
+  variants_LiverTotalGSH_chr14 <- query_variants(chr, 21, 25)
   out_snps_LiverTotalGSH_chr14 <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zLiverTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
-                                       chr = chr, start = 20, end = 24, keep_all_snps = TRUE)
+                                       chr = chr, start = 21, end = 25, keep_all_snps = TRUE)
   plot_snpasso(out_snps_LiverTotalGSH_chr14$lod, out_snps_LiverTotalGSH_chr14$snpinfo, main = "Liver Total GSH SNPs")
   
-  LiverTotalGSH_Genes_MGI_chr14 <- query_genes_mgi(chr = chr, start = 20, end = 24)
+  LiverTotalGSH_Genes_MGI_chr14 <- query_genes_mgi(chr = chr, start = 21, end = 25)
   plot(out_snps_LiverTotalGSH_chr14$lod, out_snps_LiverTotalGSH_chr14$snpinfo, drop_hilit=1.5, genes = LiverTotalGSH_Genes_MGI_chr14, main = "Liver Total GSH Genes MGI")
 
   

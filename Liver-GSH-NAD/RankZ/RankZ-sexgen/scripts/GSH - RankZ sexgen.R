@@ -38,6 +38,23 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
   plot_scan1(x = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Liver GSH", ylim = c(0,11))
   abline(h = threshold_LiverGSH, col = c("purple", "red", "blue"), lwd = 2)
   
+  #segments(x0, y0, x1 = x0, y1 = y0)
+  #x0, y0 coordinates of points from which to draw.
+  #x1, y1 coordinates of points to which to draw. At least one must be supplied.
+  
+  #plotting separate autosome versus X axis significance thresholds
+  #plot_scan1(x = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Liver GSH", ylim = c(0,11))
+  #segments(x0 = 0, y0 = threshold_LiverGSH, x1 = 1690, y1 = threshold_LiverGSH, col = c("purple", "red", "blue"), "dashed")
+      #segments(x0 = 1690, y0 = 6, x1 = 2000, y1 = 6, col = "purple", "dashed")
+     #or
+      #segments(x0 = 1690, y0 = threshold_X_LiverGSH, x1 = 2000, y1 = threshold_X_LiverGSH, col = c("purple", "red", "blue"))
+      
+  #comparing plots
+  plot_scan1(x = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$gmap,  ylim = c(0,11))
+  plot_scan1(x = qtlscan_KidneyEh, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Liver GSH", "Kidney Redox Potential"), bg="gray90")
+  
+  
   #using gmap (cM)
   find_peaks(scan1_output = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_LiverGSH, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
   gmap_peaksGSH <- find_peaks(scan1_output = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_LiverGSH, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
@@ -48,6 +65,7 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
   peaksGSH <- find_peaks(scan1_output = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$pmap, threshold = summary(perm_LiverGSH, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
   print(peaksGSH)
   
+ 
   
   write_xlsx(list("GSH gmap (cM)" = gmap_peaksGSH,
                   "GSH pmap (Mbp)" = peaksGSH),

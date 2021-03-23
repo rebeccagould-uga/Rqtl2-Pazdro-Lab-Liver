@@ -30,6 +30,23 @@ library (RSQLite)
 qtlscan_Steatosis <- scan1(genoprobs = probs, pheno = pheno["zSteatosis"], kinship = kinship_loco, addcovar = sexgen, cores=10)
 perm_Steatosis <- scan1perm(genoprobs = probs, pheno = pheno["zSteatosis"], addcovar = sexgen, n_perm = 1000, cores=10)
 
+#X permutation test
+Xcovar = get_x_covar(R01_GSH_DO_QTLdata)
+perm_strata = mat2strata(Xcovar)
+perm_X_Steatosis <- scan1perm(genoprobs = probs, pheno = pheno["zSteatosis"], addcovar = sexgen, n_perm = 1000, perm_Xsp = TRUE, perm_strata = perm_strata, chr_lengths = chr_lengths(R01_GSH_DO_QTLdata$gmap), cores=10)
+
+summary(perm_X_Steatosis, alpha=c(0.2, 0.1, 0.05))
+#Autosome LOD thresholds (1000 permutations)
+#zSteatosis
+#0.2        7.32
+#0.1        7.82
+#0.05       8.44
+
+#X chromosome LOD thresholds (18090 permutations)
+#zSteatosis
+#0.2        7.73
+#0.1        8.41
+#0.05       8.83
 
 #set working directory
 pdf(file = "Steatosis QTL Results - RankZ sexgen.pdf")
@@ -37,29 +54,23 @@ pdf(file = "Steatosis QTL Results - RankZ sexgen.pdf")
 
   par(mar=c(4.1, 4.1, 2.6, 2.6))
   threshold_Steatosis = summary(perm_Steatosis, alpha = c(0.2, 0.1, 0.05))
+  threshold_X_Steatosis = summary(perm_X_Steatosis, alpha = c(0.2, 0.1, 0.05))
+  
   plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Steatosis", ylim = c(0,11))
   abline(h = threshold_Steatosis, col = c("purple", "red", "blue"), lwd = 2)
 
-#X permutation test
-  Xcovar = get_x_covar(R01_GSH_DO_QTLdata)
-  perm_strata = mat2strata(Xcovar)
-  perm_X_Steatosis <- scan1perm(genoprobs = probs, pheno = pheno["zSteatosis"], addcovar = sexgen, n_perm = 1000, perm_Xsp = TRUE, perm_strata = perm_strata, chr_lengths = chr_lengths(R01_GSH_DO_QTLdata$gmap), cores=10)
- 
-  summary(perm_X_Steatosis, alpha=c(0.2, 0.1, 0.05))
-  #Autosome LOD thresholds (1000 permutations)
-  #zSteatosis
-  #0.2        7.32
-  #0.1        7.82
-  #0.05       8.44
-  
-  #X chromosome LOD thresholds (18090 permutations)
-  #zSteatosis
-  #0.2        7.73
-  #0.1        8.41
-  #0.05       8.83
-  
   plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Steatosis (X Chrom)", ylim = c(0,11))
   abline(h = c(7.73, 8.41, 8.83), col = c("purple", "red", "blue"), lwd = 2)
+  
+  #plotting separate autosome versus X axis significance thresholds
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Steatosis (Autosome vs X)", ylim = c(0,11))
+  segments(x0 = 0, y0 = threshold_X_Steatosis$A, x1 = 1695, y1 =   threshold_X_Steatosis$A, col = c("purple", "red", "blue"), "dashed")
+  segments(x0 = 1695, y0 = threshold_X_Steatosis$X, x1 = 2000, y1 = threshold_X_Steatosis$X, col = c("purple", "red", "blue"), "dashed")
+  
+  #plotting separate autosome versus X axis significance thresholds
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Steatosis (Autosome vs X)", ylim = c(0,11))
+  segments(x0 = 0, y0 = threshold_X_Steatosis$A, x1 = 1695, y1 =   threshold_X_Steatosis$A, col = c("purple", "red", "blue"))
+  segments(x0 = 1695, y0 = threshold_X_Steatosis$X, x1 = 2000, y1 = threshold_X_Steatosis$X, col = c("purple", "red", "blue"))
   
   
 #using gmap (cM)

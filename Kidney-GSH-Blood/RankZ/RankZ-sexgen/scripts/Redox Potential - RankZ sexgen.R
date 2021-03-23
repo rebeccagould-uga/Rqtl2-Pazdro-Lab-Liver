@@ -55,6 +55,10 @@ pdf(file = "Redox Potential GSSG 2GSH QTL Results - RankZ sexgen.pdf")
              "Redox Potential GSSG 2GSH Peaks - RankZ sexgen.xlsx")
 
 
+  #to compare with Liver GSH
+  #saveRDS(qtlscan_KidneyRedoxPotentialGSSG2GSH, file = "~/Rqtl2-Glutathione-Genetics/Kidney-GSH-Blood/QTL-Eh-Kidney.rds")
+  
+  
 ####################################################
 ## Estimate QTL Effects (Coefficients) + Connect to SNP and Gene Databases
 ####################################################

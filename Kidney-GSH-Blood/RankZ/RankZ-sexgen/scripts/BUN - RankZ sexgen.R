@@ -37,6 +37,8 @@ pdf(file = "BUN-QTL-Results-RankZ-sexgen.pdf")
   threshold_BUN = summary(perm_BUN, alpha = c(0.2, 0.1, 0.05))
   plot_scan1(x = qtlscan_BUN, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for BUN", ylim = c(0,11))
   abline(h = threshold_BUN, col = c("purple", "red", "blue"), lwd = 2)
+  plot_scan1(x = qtlscan_BUN, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for BUN", ylim = c(0,11))
+  abline(h = threshold_BUN, col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
   
   #using gmap (cM)
   find_peaks(scan1_output = qtlscan_BUN, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_BUN, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)

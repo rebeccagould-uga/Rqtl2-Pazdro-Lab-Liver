@@ -37,6 +37,8 @@ pdf(file = "AST-QTL-Results-RankZ-sexgen.pdf")
   threshold_AST = summary(perm_AST, alpha = c(0.2, 0.1, 0.05))
   plot_scan1(x = qtlscan_AST, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for AST", ylim = c(0,11))
   abline(h = threshold_AST, col = c("purple", "red", "blue"), lwd = 2)
+  plot_scan1(x = qtlscan_AST, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for AST", ylim = c(0,11))
+  abline(h = threshold_AST, col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
   
   #using gmap (cM)
   find_peaks(scan1_output = qtlscan_AST, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_AST, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)

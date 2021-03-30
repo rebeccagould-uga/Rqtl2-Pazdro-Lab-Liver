@@ -36,6 +36,13 @@ pdf(file = "Total GSH QTL Results - RankZ sexgen.pdf")
   threshold_LiverTotalGSH = summary(perm_LiverTotalGSH, alpha = c(0.2, 0.1, 0.05))
   plot_scan1(x = qtlscan_LiverTotalGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Liver Total GSH", ylim = c(0,11))
   abline(h = threshold_LiverTotalGSH, col = c("purple", "red", "blue"), lwd = 2)
+  plot_scan1(x = qtlscan_LiverTotalGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Liver Total GSH", ylim = c(0,11))
+  abline(h = threshold_LiverTotalGSH, col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
+  
+  #comparing plots
+  plot_scan1(x = qtlscan_LiverTotalGSH, map = R01_GSH_DO_QTLdata$gmap,  ylim = c(0,11))
+  plot_scan1(x = qtlscan_KidneyEh, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic Total Glutathione", "Renal Eh"), bg="gray90")
   
   #using gmap (cM)
   find_peaks(scan1_output = qtlscan_LiverTotalGSH, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_LiverTotalGSH, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)

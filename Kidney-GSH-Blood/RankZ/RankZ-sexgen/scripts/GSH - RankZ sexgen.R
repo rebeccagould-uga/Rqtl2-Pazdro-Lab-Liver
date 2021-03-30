@@ -57,20 +57,24 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
   
   plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney GSH", ylim = c(0,11))
   abline(h = threshold_KidneyGSH, col = c("purple", "red", "blue"), lwd = 2)
+  plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney GSH", ylim = c(0,11))
+  abline(h = threshold_KidneyGSH, col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
 
   plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney GSH (X Chrom)", ylim = c(0,11))
   #perm_X_KidneyGSH_only <- perm_X_KidneyGSH[["X"]]
   abline(h = c(6.50, 6.89, 7.40), col = c("purple", "red", "blue"), lwd = 2)
+  plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney GSH (X Chrom)", ylim = c(0,11))
+  abline(h = c(6.50, 6.89, 7.40), col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
   
   #plotting separate autosome versus X axis significance thresholds
   plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney GSH (Autosome vs X)", ylim = c(0,11))
-  segments(x0 = 0, y0 = threshold_X_KidneyGSH$A, x1 = 1695, y1 =   threshold_X_KidneyGSH$A, col = c("purple", "red", "blue"), "dashed")
-  segments(x0 = 1695, y0 = threshold_X_KidneyGSH$X, x1 = 2000, y1 = threshold_X_KidneyGSH$X, col = c("purple", "red", "blue"), "dashed")
+  segments(x0 = 0, y0 = threshold_X_KidneyGSH$A, x1 = 1695, y1 =   threshold_X_KidneyGSH$A, col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
+  segments(x0 = 1695, y0 = threshold_X_KidneyGSH$X, x1 = 2000, y1 = threshold_X_KidneyGSH$X, col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
   
   #plotting separate autosome versus X axis significance thresholds
   plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney GSH (Autosome vs X)", ylim = c(0,11))
-  segments(x0 = 0, y0 = threshold_X_KidneyGSH$A, x1 = 1695, y1 =   threshold_X_KidneyGSH$A, col = c("purple", "red", "blue"))
-  segments(x0 = 1695, y0 = threshold_X_KidneyGSH$X, x1 = 2000, y1 = threshold_X_KidneyGSH$X, col = c("purple", "red", "blue"))
+  segments(x0 = 0, y0 = threshold_X_KidneyGSH$A, x1 = 1695, y1 =   threshold_X_KidneyGSH$A, col = c("purple", "red", "blue"), lwd = 2)
+  segments(x0 = 1695, y0 = threshold_X_KidneyGSH$X, x1 = 2000, y1 = threshold_X_KidneyGSH$X, col = c("purple", "red", "blue"), lwd = 2)
   
 
 #using gmap (cM)

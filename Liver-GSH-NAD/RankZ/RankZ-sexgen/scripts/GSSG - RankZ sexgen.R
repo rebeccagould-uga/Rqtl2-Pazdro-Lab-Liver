@@ -34,6 +34,8 @@ pdf(file = "GSSG QTL Results - RankZ sexgen.pdf")
   par(mar=c(4.1, 4.1, 2.6, 2.6))
   threshold_LiverGSSG = summary(perm_LiverGSSG, alpha = c(0.2, 0.1, 0.05))
   plot_scan1(x = qtlscan_LiverGSSG, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Liver GSSG", ylim = c(0,11))
+  abline(h = threshold_LiverGSSG, col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
+  plot_scan1(x = qtlscan_LiverGSSG, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Liver GSSG", ylim = c(0,11))
   abline(h = threshold_LiverGSSG, col = c("purple", "red", "blue"), lwd = 2)
   
   #using gmap (cM)

@@ -38,7 +38,9 @@ pdf(file = "Inflammation QTL Results - RankZ sexgen.pdf")
   threshold_Inflammation = summary(perm_Inflammation, alpha = c(0.2, 0.1, 0.05))
   plot_scan1(x = qtlscan_Inflammation, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Inflammation", ylim = c(0,11))
   abline(h = threshold_Inflammation, col = c("purple", "red", "blue"), lwd = 2)
-
+  plot_scan1(x = qtlscan_Inflammation, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Inflammation", ylim = c(0,11))
+  abline(h = threshold_Inflammation, col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
+  
 #using gmap (cM)
   find_peaks(scan1_output = qtlscan_Inflammation, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_Inflammation, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
   gmap_peaksInflammation <- find_peaks(scan1_output = qtlscan_Inflammation, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_Inflammation, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)

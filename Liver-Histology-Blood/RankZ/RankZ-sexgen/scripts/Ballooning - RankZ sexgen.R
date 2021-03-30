@@ -38,7 +38,9 @@ pdf(file = "Ballooning QTL Results - RankZ sexgen.pdf")
   threshold_Ballooning = summary(perm_Ballooning, alpha = c(0.2, 0.1, 0.05))
   plot_scan1(x = qtlscan_Ballooning, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Ballooning", ylim = c(0,11))
   abline(h = threshold_Ballooning, col = c("purple", "red", "blue"), lwd = 2)
-
+  plot_scan1(x = qtlscan_Ballooning, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Ballooning", ylim = c(0,11))
+  abline(h = threshold_Ballooning, col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
+  
 #using gmap (cM)
   find_peaks(scan1_output = qtlscan_Ballooning, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_Ballooning, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
   gmap_peaksBallooning <- find_peaks(scan1_output = qtlscan_Ballooning, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_Ballooning, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
@@ -59,7 +61,7 @@ write_xlsx(list("Ballooning gmap (cM)" = gmap_peaksBallooning,
 ## Estimate QTL Effects (Coefficients) + Connect to SNP and Gene Databases
 ####################################################
 
-#For Ballooning --- Chromosome 2
+#For Ballooning --- Chromosome 6
   par(mar=c(4.1, 4.1, 2.6, 2.6))
 
   #using gmap (cM)

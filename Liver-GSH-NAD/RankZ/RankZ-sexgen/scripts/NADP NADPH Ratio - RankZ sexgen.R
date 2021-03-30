@@ -31,27 +31,29 @@ perm_LiverNADP_NADPHRatio <- scan1perm(genoprobs = probs, pheno = pheno["zLiverN
 #set working directory
 pdf(file = "NADP NADPH Ratio QTL Results - RankZ sexgen.pdf")
 ##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##
-
-par(mar=c(4.1, 4.1, 2.6, 2.6))
-threshold_LiverNADP_NADPHRatio = summary(perm_LiverNADP_NADPHRatio, alpha = c(0.2, 0.1, 0.05))
-plot_scan1(x = qtlscan_LiverNADP_NADPHRatio, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Liver NADP/NADPH Ratio", ylim = c(0,11))
-abline(h = threshold_LiverNADP_NADPHRatio, col = c("purple", "red", "blue"), lwd = 2)
-
-#using gmap (cM)
-find_peaks(scan1_output = qtlscan_LiverNADP_NADPHRatio, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_LiverNADP_NADPHRatio, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
-gmap_peaksNADP_NADPHRatio <- find_peaks(scan1_output = qtlscan_LiverNADP_NADPHRatio, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_LiverNADP_NADPHRatio, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
-print(gmap_peaksNADP_NADPHRatio)
-
-#using pmap (Mbp)
-find_peaks(scan1_output = qtlscan_LiverNADP_NADPHRatio, map = R01_GSH_DO_QTLdata$pmap, threshold = summary(perm_LiverNADP_NADPHRatio, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
-peaksNADP_NADPHRatio <- find_peaks(scan1_output = qtlscan_LiverNADP_NADPHRatio, map = R01_GSH_DO_QTLdata$pmap, threshold = summary(perm_LiverNADP_NADPHRatio, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
-print(peaksNADP_NADPHRatio)
-
-
-write_xlsx(list("NADP NADPH Ratio gmap (cM)" = gmap_peaksNADP_NADPHRatio,
-                "NADP NADPH Ratio pmap (Mbp)" = peaksNADP_NADPHRatio),
-           "NADP NADPH Ratio Peaks - RankZ sexgen.xlsx")
-
+              
+  par(mar=c(4.1, 4.1, 2.6, 2.6))
+  threshold_LiverNADP_NADPHRatio = summary(perm_LiverNADP_NADPHRatio, alpha = c(0.2, 0.1, 0.05))
+  plot_scan1(x = qtlscan_LiverNADP_NADPHRatio, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Liver NADP/NADPH Ratio", ylim = c(0,11))
+  abline(h = threshold_LiverNADP_NADPHRatio, col = c("purple", "red", "blue"), lwd = 2)
+  plot_scan1(x = qtlscan_LiverNADP_NADPHRatio, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Liver NADP/NADPH Ratio", ylim = c(0,11))
+  abline(h = threshold_LiverNADP_NADPHRatio, col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
+  
+  #using gmap (cM)
+  find_peaks(scan1_output = qtlscan_LiverNADP_NADPHRatio, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_LiverNADP_NADPHRatio, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
+  gmap_peaksNADP_NADPHRatio <- find_peaks(scan1_output = qtlscan_LiverNADP_NADPHRatio, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_LiverNADP_NADPHRatio, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
+  print(gmap_peaksNADP_NADPHRatio)
+  
+  #using pmap (Mbp)
+  find_peaks(scan1_output = qtlscan_LiverNADP_NADPHRatio, map = R01_GSH_DO_QTLdata$pmap, threshold = summary(perm_LiverNADP_NADPHRatio, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
+  peaksNADP_NADPHRatio <- find_peaks(scan1_output = qtlscan_LiverNADP_NADPHRatio, map = R01_GSH_DO_QTLdata$pmap, threshold = summary(perm_LiverNADP_NADPHRatio, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
+  print(peaksNADP_NADPHRatio)
+  
+  
+  write_xlsx(list("NADP NADPH Ratio gmap (cM)" = gmap_peaksNADP_NADPHRatio,
+                  "NADP NADPH Ratio pmap (Mbp)" = peaksNADP_NADPHRatio),
+             "NADP NADPH Ratio Peaks - RankZ sexgen.xlsx")
+            
 
 ####################################################
 ## Estimate QTL Effects (Coefficients) + Connect to SNP and Gene Databases

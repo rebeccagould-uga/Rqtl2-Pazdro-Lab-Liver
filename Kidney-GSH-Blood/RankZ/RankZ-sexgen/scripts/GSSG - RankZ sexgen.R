@@ -31,26 +31,28 @@ perm_KidneyGSSG <- scan1perm(genoprobs = probs, pheno = pheno["zKidneyGSSG"], ad
 #set working directory
 pdf(file = "GSSG QTL Results - RankZ sexgen.pdf")
 ##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##
-
-par(mar=c(4.1, 4.1, 2.6, 2.6))
-threshold_KidneyGSSG = summary(perm_KidneyGSSG, alpha = c(0.2, 0.1, 0.05))
-plot_scan1(x = qtlscan_KidneyGSSG, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney GSSG", ylim = c(0,11))
-abline(h = threshold_KidneyGSSG, col = c("purple", "red", "blue"), lwd = 2)
-
-#using gmap (cM)
-find_peaks(scan1_output = qtlscan_KidneyGSSG, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_KidneyGSSG, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
-gmap_peaksGSSG <- find_peaks(scan1_output = qtlscan_KidneyGSSG, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_KidneyGSSG, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
-print(gmap_peaksGSSG)
-
-#using pmap (Mbp)
-find_peaks(scan1_output = qtlscan_KidneyGSSG, map = R01_GSH_DO_QTLdata$pmap, threshold = summary(perm_KidneyGSSG, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
-peaksGSSG <- find_peaks(scan1_output = qtlscan_KidneyGSSG, map = R01_GSH_DO_QTLdata$pmap, threshold = summary(perm_KidneyGSSG, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
-print(peaksGSSG)
-
-
-write_xlsx(list("GSSG gmap (cM)" = gmap_peaksGSSG,
-                "GSSG pmap (Mbp)" = peaksGSSG),
-           "GSSG Peaks - RankZ sexgen.xlsx")
+  
+  par(mar=c(4.1, 4.1, 2.6, 2.6))
+  threshold_KidneyGSSG = summary(perm_KidneyGSSG, alpha = c(0.2, 0.1, 0.05))
+  plot_scan1(x = qtlscan_KidneyGSSG, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney GSSG", ylim = c(0,11))
+  abline(h = threshold_KidneyGSSG, col = c("purple", "red", "blue"), lwd = 2)
+  plot_scan1(x = qtlscan_KidneyGSSG, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney GSSG", ylim = c(0,11))
+  abline(h = threshold_KidneyGSSG, col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
+  
+  #using gmap (cM)
+  find_peaks(scan1_output = qtlscan_KidneyGSSG, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_KidneyGSSG, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
+  gmap_peaksGSSG <- find_peaks(scan1_output = qtlscan_KidneyGSSG, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_KidneyGSSG, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
+  print(gmap_peaksGSSG)
+  
+  #using pmap (Mbp)
+  find_peaks(scan1_output = qtlscan_KidneyGSSG, map = R01_GSH_DO_QTLdata$pmap, threshold = summary(perm_KidneyGSSG, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
+  peaksGSSG <- find_peaks(scan1_output = qtlscan_KidneyGSSG, map = R01_GSH_DO_QTLdata$pmap, threshold = summary(perm_KidneyGSSG, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
+  print(peaksGSSG)
+  
+  
+  write_xlsx(list("GSSG gmap (cM)" = gmap_peaksGSSG,
+                  "GSSG pmap (Mbp)" = peaksGSSG),
+             "GSSG Peaks - RankZ sexgen.xlsx")
 
 
 ####################################################

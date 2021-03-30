@@ -36,6 +36,8 @@ pdf(file = "NADH QTL Results - RankZ sexgen.pdf")
   threshold_LiverNADH = summary(perm_LiverNADH, alpha = c(0.2, 0.1, 0.05))
   plot_scan1(x = qtlscan_LiverNADH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Liver NADH", ylim = c(0,11))
   abline(h = threshold_LiverNADH, col = c("purple", "red", "blue"), lwd = 2)
+  plot_scan1(x = qtlscan_LiverNADH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Liver NADH", ylim = c(0,11))
+  abline(h = threshold_LiverNADH, col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
   
   #using gmap (cM)
   find_peaks(scan1_output = qtlscan_LiverNADH, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_LiverNADH, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)

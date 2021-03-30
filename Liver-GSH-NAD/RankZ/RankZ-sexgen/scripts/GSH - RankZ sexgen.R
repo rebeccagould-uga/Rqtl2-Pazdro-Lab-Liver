@@ -37,6 +37,8 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
   threshold_LiverGSH = summary(perm_LiverGSH, alpha = c(0.2, 0.1, 0.05))
   plot_scan1(x = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Liver GSH", ylim = c(0,11))
   abline(h = threshold_LiverGSH, col = c("purple", "red", "blue"), lwd = 2)
+  plot_scan1(x = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Liver GSH", ylim = c(0,11))
+  abline(h = threshold_LiverGSH, col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
   
   #segments(x0, y0, x1 = x0, y1 = y0)
   #x0, y0 coordinates of points from which to draw.
@@ -52,7 +54,7 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
   #comparing plots
   plot_scan1(x = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$gmap,  ylim = c(0,11))
   plot_scan1(x = qtlscan_KidneyEh, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", add = TRUE)
-  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Liver GSH", "Kidney Redox Potential"), bg="gray90")
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic GSH", "Renal Eh"), bg="gray90")
   
   
   #using gmap (cM)

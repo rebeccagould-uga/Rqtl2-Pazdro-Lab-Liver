@@ -58,19 +58,23 @@ pdf(file = "Steatosis QTL Results - RankZ sexgen.pdf")
   
   plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Steatosis", ylim = c(0,11))
   abline(h = threshold_Steatosis, col = c("purple", "red", "blue"), lwd = 2)
-
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Steatosis", ylim = c(0,11))
+  abline(h = threshold_Steatosis, col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
+  
   plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Steatosis (X Chrom)", ylim = c(0,11))
   abline(h = c(7.73, 8.41, 8.83), col = c("purple", "red", "blue"), lwd = 2)
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Steatosis (X Chrom)", ylim = c(0,11))
+  abline(h = c(7.73, 8.41, 8.83), col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
   
   #plotting separate autosome versus X axis significance thresholds
   plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Steatosis (Autosome vs X)", ylim = c(0,11))
-  segments(x0 = 0, y0 = threshold_X_Steatosis$A, x1 = 1695, y1 =   threshold_X_Steatosis$A, col = c("purple", "red", "blue"), "dashed")
-  segments(x0 = 1695, y0 = threshold_X_Steatosis$X, x1 = 2000, y1 = threshold_X_Steatosis$X, col = c("purple", "red", "blue"), "dashed")
+  segments(x0 = 0, y0 = threshold_X_Steatosis$A, x1 = 1695, y1 =   threshold_X_Steatosis$A, col = c("purple", "red", "blue"), lwd = 2)
+  segments(x0 = 1695, y0 = threshold_X_Steatosis$X, x1 = 2000, y1 = threshold_X_Steatosis$X, col = c("purple", "red", "blue"), lwd = 2)
   
   #plotting separate autosome versus X axis significance thresholds
   plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Steatosis (Autosome vs X)", ylim = c(0,11))
-  segments(x0 = 0, y0 = threshold_X_Steatosis$A, x1 = 1695, y1 =   threshold_X_Steatosis$A, col = c("purple", "red", "blue"))
-  segments(x0 = 1695, y0 = threshold_X_Steatosis$X, x1 = 2000, y1 = threshold_X_Steatosis$X, col = c("purple", "red", "blue"))
+  segments(x0 = 0, y0 = threshold_X_Steatosis$A, x1 = 1695, y1 =   threshold_X_Steatosis$A, col = c("purple", "red", "blue"), "dashed", lwd = 2)
+  segments(x0 = 1695, y0 = threshold_X_Steatosis$X, x1 = 2000, y1 = threshold_X_Steatosis$X, col = c("purple", "red", "blue"), "dashed", lwd = 2)
   
   
 #using gmap (cM)

@@ -90,6 +90,7 @@ pdf(file = "Total GSH QTL Results - RankZ sexgen.pdf")
   LiverTotalGSH_Genes_MGI_chr14 <- query_genes_mgi(chr = chr, start = 21, end = 25)
   plot(out_snps_LiverTotalGSH_chr14$lod, out_snps_LiverTotalGSH_chr14$snpinfo, drop_hilit=1.5, genes = LiverTotalGSH_Genes_MGI_chr14, main = "Liver Total GSH Genes MGI")
 
+  plot_genes (LiverTotalGSH_Genes_MGI_chr14, main = "Liver Total GSH Genes MGI")
   
 #For Liver Total GSH --- Chromosome 18
   par(mar=c(4.1, 4.1, 2.6, 2.6))

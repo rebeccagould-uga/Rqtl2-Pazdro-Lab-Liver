@@ -85,6 +85,8 @@ pdf(file = "AST-QTL-Results-RankZ-sexgen.pdf")
   AST_Genes_MGI_chr2 <- query_genes_mgi(chr = chr, start = start, end = end)
   plot(out_snps_AST_chr2$lod, out_snps_AST_chr2$snpinfo, drop_hilit=1.5, genes = AST_Genes_MGI_chr2, main = "AST Genes MGI")
   
+  plot_genes(AST_Genes_MGI_chr2, main = "AST Genes MGI")
+  
 #For AST --- Chromosome 16
   par(mar=c(4.1, 4.1, 2.6, 2.6))
 
@@ -111,6 +113,9 @@ pdf(file = "AST-QTL-Results-RankZ-sexgen.pdf")
   AST_Genes_MGI_chr16 <- query_genes_mgi(chr = chr, start = start - 1, end = end + 1)
   plot(out_snps_AST_chr16$lod, out_snps_AST_chr16$snpinfo, drop_hilit=1.5, genes = AST_Genes_MGI_chr16, main = "AST Genes MGI")
 
+  plot_genes(AST_Genes_MGI_chr16, main = "AST Genes MGI")
+  
+  
 dev.off()
 
   

@@ -122,7 +122,9 @@ write_xlsx(list("Steatosis gmap (cM)" = gmap_peaksSteatosis,
   
   Steatosis_Genes_MGI_chr18 <- query_genes_mgi(chr = chr, start = 16, end = 18)
   plot(out_snps_Steatosis_chr18$lod, out_snps_Steatosis_chr18$snpinfo, drop_hilit=1.5, genes = Steatosis_Genes_MGI_chr18, main = "Steatosis Genes MGI")
-
+  
+  plot_genes(Steatosis_Genes_MGI_chr18, main = "Steatosis Genes MGI")
+  
   
 #For Steatosis --- Chromosome X
   par(mar=c(4.1, 4.1, 2.6, 2.6))
@@ -148,6 +150,8 @@ write_xlsx(list("Steatosis gmap (cM)" = gmap_peaksSteatosis,
   
   Steatosis_Genes_MGI_chrX <- query_genes_mgi(chr = chr, start = 46, end = 53)
   plot(out_snps_Steatosis_chrX$lod, out_snps_Steatosis_chrX$snpinfo, drop_hilit=1.5, genes = Steatosis_Genes_MGI_chrX, main = "Steatosis Genes MGI")
+  
+  plot_genes(Steatosis_Genes_MGI_chrX, main = "Steatosis Genes MGI")
   
 dev.off()
   

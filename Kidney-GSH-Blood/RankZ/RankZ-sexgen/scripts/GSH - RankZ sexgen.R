@@ -122,6 +122,8 @@ write_xlsx(list("GSH gmap (cM)" = gmap_peaksGSH,
   KidneyGSH_Genes_MGI_chrX <- query_genes_mgi(chr = chr, start = 48.2, end = 52.9)
   plot(out_snps_KidneyGSH_chrX$lod, out_snps_KidneyGSH_chrX$snpinfo, drop_hilit=1.5, genes = KidneyGSH_Genes_MGI_chrX, main = "Kidney GSH Genes MGI")
   
+  plot_genes(KidneyGSH_Genes_MGI_chrX, main = "Kidney GSH Genes MGI")
+  
 #For Kidney GSH --- Chromosome 11
   par(mar=c(4.1, 4.1, 2.6, 2.6))
   
@@ -147,6 +149,8 @@ write_xlsx(list("GSH gmap (cM)" = gmap_peaksGSH,
   
   KidneyGSH_Genes_MGI_chr11 <- query_genes_mgi(chr = chr, start = 99, end = 102)
   plot(out_snps_KidneyGSH_chr11$lod, out_snps_KidneyGSH_chr11$snpinfo, drop_hilit=1.5, genes = KidneyGSH_Genes_MGI_chr11, main = "Kidney GSH Genes MGI")
+  
+  plot_genes(KidneyGSH_Genes_MGI_chr11, main = "Kidney GSH Genes MGI")
   
   
 dev.off()

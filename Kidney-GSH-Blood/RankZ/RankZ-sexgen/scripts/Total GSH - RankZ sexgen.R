@@ -123,6 +123,8 @@ summary(perm_X_KidneyTotalGSH, alpha=c(0.2, 0.1, 0.05))
   KidneyTotalGSH_Genes_MGI_chrX <- query_genes_mgi(chr = chr, start = 48.2, end = 52.9)
   plot(out_snps_KidneyTotalGSH_chrX$lod, out_snps_KidneyTotalGSH_chrX$snpinfo, drop_hilit=1.5, genes = KidneyTotalGSH_Genes_MGI_chrX, main = "Kidney Total GSH Genes MGI")
   
+  plot_genes(KidneyTotalGSH_Genes_MGI_chrX, main = "Kidney Total GSH Genes MGI")
+  
   
 #For Kidney Total GSH --- Chromosome 11
   par(mar=c(4.1, 4.1, 2.6, 2.6))
@@ -149,6 +151,9 @@ summary(perm_X_KidneyTotalGSH, alpha=c(0.2, 0.1, 0.05))
   
   KidneyTotalGSH_Genes_MGI_chr11 <- query_genes_mgi(chr = chr, start = 99, end = 102)
   plot(out_snps_KidneyTotalGSH_chr11$lod, out_snps_KidneyTotalGSH_chr11$snpinfo, drop_hilit=1.5, genes = KidneyGSH_Genes_MGI_chr11, main = "Kidney Total GSH Genes MGI")
+  
+  plot_genes(KidneyTotalGSH_Genes_MGI_chr11, main = "Kidney Total GSH Genes MGI")
+  
   
 dev.off()
 

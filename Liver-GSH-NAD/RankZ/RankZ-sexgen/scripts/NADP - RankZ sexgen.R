@@ -87,6 +87,8 @@ pdf(file = "NADP QTL Results - RankZ sexgen.pdf")
   LiverNADP_Genes_MGI_chr3 <- query_genes_mgi(chr = chr, start = start-1, end = end+1)
   plot(out_snps_LiverNADP_chr3$lod, out_snps_LiverNADP_chr3$snpinfo, drop_hilit=1.5, genes = LiverNADP_Genes_MGI_chr3, main = "Liver NADP Genes MGI")
 
+  plot_genes (LiverNADP_Genes_MGI_chr3, main = "Liver NADP Genes MGI")
+  
 #For Liver NADP --- Chromosome 8
   par(mar=c(4.1, 4.1, 2.6, 2.6))
   
@@ -113,7 +115,8 @@ pdf(file = "NADP QTL Results - RankZ sexgen.pdf")
   LiverNADP_Genes_MGI_chr8 <- query_genes_mgi(chr = chr, start = 60, end = 66)
   plot(out_snps_LiverNADP_chr8$lod, out_snps_LiverNADP_chr8$snpinfo, drop_hilit=1.5, genes = LiverNADP_Genes_MGI_chr8, main = "Liver NADP Genes MGI")
 
-
+  plot_genes (LiverNADP_Genes_MGI_chr8, main = "Liver NADP Genes MGI")
+  
 dev.off()
 
   

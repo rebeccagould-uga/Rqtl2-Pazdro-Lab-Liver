@@ -91,6 +91,8 @@ pdf(file = "Redox Potential GSSG 2GSH QTL Results - RankZ sexgen.pdf")
   KidneyEh_Genes_MGI_chr14 <- query_genes_mgi(chr = chr, start = 21, end = 25)
   plot(out_snps_KidneyRedoxPotential_chr14$lod, out_snps_KidneyRedoxPotential_chr14$snpinfo, drop_hilit=1.5, genes = KidneyEh_Genes_MGI_chr14, main = "Kidney Eh Genes MGI")
   
+  plot_genes(KidneyEh_Genes_MGI_chr14, main = "Kidney Eh Genes MGI")
+  
 dev.off()
 
   

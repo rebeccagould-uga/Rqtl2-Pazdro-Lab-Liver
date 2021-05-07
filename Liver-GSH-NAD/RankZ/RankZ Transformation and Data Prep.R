@@ -2,13 +2,7 @@
 # Updated November 2020
 # Becca Gould 
 
-#LIVER GLUTATHIONE AND BLOOD QTL MAPPING - RankZ TRANSFORMATION AND DATA PREP
-
-#Make a folder under users (for me, my user is "becca") and title it based on your project. For mine, it's R01_GSH_DO_mapping. Then make a data, results, scripts, and docs folder.
-
-setwd("/users/becca/R01_GSH_DO_mapping_Liver/data")
-
-#I can use "~" instead of "/users/becca/" everytime as it represents my home base
+#LIVER GLUTATHIONE AND NAD QTL MAPPING - RankZ TRANSFORMATION AND DATA PREP
 
 #load the command line tools - see https://github.com/Rdatatable/data.table/wiki/Installation for more information - must do every time you open up the Rproject!
 library(qtl2)
@@ -98,14 +92,6 @@ library (RSQlite)
 #both added covariates must be numeric, not characters 
   pheno$sex <- as.numeric(pheno$sex)
   pheno$generation <- as.numeric(pheno$generation)  
-
-  #when I ran this, it still gives a faulty covariate file
-  #sex <- (pheno$sex == "1")*1
-  #names(sex) <- rownames(pheno$sex)
-  #sex
-  #gen <- (pheno$generation)
-  #names(gen) <- rownames(pheno$generation)
-  #gen
 
 #check pheno file
   pheno[1:10,]

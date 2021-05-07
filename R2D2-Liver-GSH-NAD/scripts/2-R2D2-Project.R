@@ -23,47 +23,71 @@ library (RSQLite)
 #Run 1-R2D2-Setup.R prior to this script
 
 
-# pull genotype frequencies 
-pull <- pull_genoprobpos(probs, map = R01_GSH_DO_QTLdata$gmap, 2, 47)
-head(pull)
 
 
-####################################################
+########################################################################################################
+##
+##
+##
+########################################################################################################
+
+  # pull genotype frequencies 
+  pull <- pull_genoprobpos(probs, map = R01_GSH_DO_QTLdata$gmap, 2, 47)
+  head(pull)
+
+
+
+
+
+
+########################################################################################################
 ## Testing regression matrix - is it ill-conditioned? 
 ## why the covariates affected the scan
-####################################################
+########################################################################################################
 
-# instructions from Gary Churchill
-
-# kappa() computes the condition number of a matrix
-# Construct a matrix with the genoprobs at the maker locus.  It should have 8 columns A-H.  Compute kappa.
-# Repeat this but drop column H and replace it with a column of all ones – kappa should be the same.
-# Now add a column with 1 for females and 0 for males…compute kappa.
-# Next add several column with dummy variables for cohort…compute kappa.
-# Just to get a feel for things, swap in genotypes from loci where there is no problem.
-# You can compute the Sex and Cohort columns using the model.matrix() function,
-# e.g. model.matrix( ~Sex, data=my.dataframe) or model.matrix(~Sex+Cohort, data=my.dataframe)
-
-kappa()
-
-# Fit1 model
-#sex
-#BLUPs
-fit1(genoprobs = probs, pheno = pheno["zLiverGSH"], kinship = kinship_loco, addcovar = sex, model = "normal", se = TRUE, blup = TRUE, cores = 2)
-#default
-fit1(genoprobs = probs, pheno = pheno["zLiverGSH"], kinship = kinship_loco, addcovar = sex, model = "normal", se = TRUE, blup = FALSE, cores = 2)
-#sexgen  
-#BLUPs
-fit1(genoprobs = probs, pheno = pheno["zLiverGSH"], kinship = kinship_loco, addcovar = sexgen, model = "normal", se = TRUE, blup = TRUE, cores = 2)
-#default
-fit1(genoprobs = probs, pheno = pheno["zLiverGSH"], kinship = kinship_loco, addcovar = sexgen, model = "normal", se = TRUE, blup = FALSE, cores = 2)
+  # instructions from Gary Churchill
+  
+  # kappa() computes the condition number of a matrix
+  # Construct a matrix with the genoprobs at the maker locus.  It should have 8 columns A-H.  Compute kappa.
+  # Repeat this but drop column H and replace it with a column of all ones – kappa should be the same.
+  # Now add a column with 1 for females and 0 for males…compute kappa.
+  # Next add several column with dummy variables for cohort…compute kappa.
+  # Just to get a feel for things, swap in genotypes from loci where there is no problem.
+  # You can compute the Sex and Cohort columns using the model.matrix() function,
+  # e.g. model.matrix( ~Sex, data=my.dataframe) or model.matrix(~Sex+Cohort, data=my.dataframe)
+  
+  kappa()
 
 
 
 
-####################################################
-## Liver GSH - Chromosome 2
-####################################################
+
+
+########################################################################################################
+## 
+## Fit1 model
+##
+########################################################################################################
+
+  #sex
+  #BLUPs
+  fit1(genoprobs = probs, pheno = pheno["zLiverGSH"], kinship = kinship_loco, addcovar = sex, model = "normal", se = TRUE, blup = TRUE, cores = 2)
+  #default
+  fit1(genoprobs = probs, pheno = pheno["zLiverGSH"], kinship = kinship_loco, addcovar = sex, model = "normal", se = TRUE, blup = FALSE, cores = 2)
+  #sexgen  
+  #BLUPs
+  fit1(genoprobs = probs, pheno = pheno["zLiverGSH"], kinship = kinship_loco, addcovar = sexgen, model = "normal", se = TRUE, blup = TRUE, cores = 2)
+  #default
+  fit1(genoprobs = probs, pheno = pheno["zLiverGSH"], kinship = kinship_loco, addcovar = sexgen, model = "normal", se = TRUE, blup = FALSE, cores = 2)
+
+
+
+
+########################################################################################################
+## 
+## Liver GSH (WSB - Chromosome 2)
+##
+########################################################################################################
 
 # QTL scans - sex
   #qtlscan_LiverGSH_sex <- scan1(genoprobs = probs, pheno = pheno["zLiverGSH"], kinship = kinship_loco, addcovar = sex, cores=2)
@@ -73,11 +97,12 @@ fit1(genoprobs = probs, pheno = pheno["zLiverGSH"], kinship = kinship_loco, addc
 
     threshold_LiverGSH_sex = summary(perm_LiverGSH_sex, alpha = 0.05)
     par(mar=c(4.1, 4.1, 2.6, 2.6))
+    #plot
     plot_scan1(x = qtlscan_LiverGSH_sex, map = R01_GSH_DO_QTLdata$gmap, main = "Genome Scan for Liver GSH - sex", ylim = c(0,11))
-    
+    #plot with sig thresholds
     plot_scan1(x = qtlscan_LiverGSH_sex, map = R01_GSH_DO_QTLdata$gmap, main = "Genome Scan for Liver GSH - sex", ylim = c(0,11))
     abline(h = threshold_LiverGSH_sex, col = "blue", lwd = 2, lty = "dashed")
-  
+    #plot chr2 only
     plot_scan1(x = qtlscan_LiverGSH_sex, map = R01_GSH_DO_QTLdata$gmap, chr = 2, main = "Genome Scan for Liver GSH - sex", ylim = c(0,11))
     
     #using gmap (cM)
@@ -94,11 +119,12 @@ fit1(genoprobs = probs, pheno = pheno["zLiverGSH"], kinship = kinship_loco, addc
 
     par(mar=c(4.1, 4.1, 2.6, 2.6))
     threshold_LiverGSH_sexgen = summary(perm_LiverGSH_sexgen, alpha = 0.05)
+    #plot
     plot_scan1(x = qtlscan_LiverGSH_sexgen, map = R01_GSH_DO_QTLdata$gmap, main = "Genome Scan for Liver GSH - sex + gen", ylim = c(0,11))
-    
+    #plot with sig thresholds
     plot_scan1(x = qtlscan_LiverGSH_sexgen, map = R01_GSH_DO_QTLdata$gmap, main = "Genome Scan for Liver GSH - sex + gen", ylim = c(0,11))
     abline(h = threshold_LiverGSH_sexgen, col = "blue", lwd = 2, lty = "dashed")
-  
+    #plot chr2 only
     plot_scan1(x = qtlscan_LiverGSH_sexgen, map = R01_GSH_DO_QTLdata$gmap, chr = 2, main = "Genome Scan for Liver GSH - sex + gen", ylim = c(0,11))
     
     #using gmap (cM)
@@ -146,9 +172,16 @@ fit1(genoprobs = probs, pheno = pheno["zLiverGSH"], kinship = kinship_loco, addc
   dev.off()
     
     
-####################################################
-## Allele Plots
-####################################################
+  
+  
+  
+  
+  
+########################################################################################################
+##
+##Allele Plots
+##
+########################################################################################################
     
 # Identify QTL scan names
   ls(pattern = "qtl")

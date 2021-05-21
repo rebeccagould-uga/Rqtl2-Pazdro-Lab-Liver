@@ -13,7 +13,10 @@
   #rawdata <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data.csv")
   #rawdata <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data-Liver-GSH-QTL-paper.csv", check.names = FALSE)
   #rawdata <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data-Liver-Histology-QTL-paper.csv", check.names = FALSE)
-  rawdata <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data-Kidney-QTL-paper.csv", check.names = FALSE)
+  #rawdata <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data-Kidney-QTL-paper.csv", check.names = FALSE)
+  #rawdata <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data-Kidney-QTL-paper-GSHonly.csv", check.names = FALSE)
+  #rawdata <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data-Kidney-QTL-paper-KidneyLiverGSH.csv", check.names = FALSE)
+  rawdata <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data-Kidney-QTL-paper-KidneyGSHLiverNAD.csv", check.names = FALSE)
 
 head(rawdata, 6)
 

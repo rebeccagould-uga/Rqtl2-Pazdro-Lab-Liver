@@ -1,10 +1,9 @@
 #Plotting Spearmans Rank (rho) correlations 
-#R01 GSH Kidney Data
+#R01 GSH Renal Data
 
 
 #Removed all outliers
 #Saved data in CSV format
-#Glutathione data for the Liver and using Adjusted GSSG values 
 
 
 library(ggplot2)
@@ -266,7 +265,7 @@ p19 <- ggscatter(data, x = "KidneyTotalGSH", y = "KidneyGSH",
           cor.coeff.args = list(method = "spearman", label.x.npc = "center", label.sep = "\n"),
           cor.method = "spearman",
           xlab = "Renal Total GSH (nmol/mg)", 
-          ylab = "GSH (nmol/mg)")
+          ylab = "Renal GSH (nmol/mg)")
 
 p20 <- ggscatter(data, x = "KidneyTotalGSH", y = "KidneyGSH", 
           color = "black", #color of points
@@ -345,7 +344,7 @@ p25 <- ggscatter(data, x = "KidneyTotalGSH", y = "KidneyEh",
                  cor.coeff.args = list(method = "spearman", label.x.npc = "center", label.sep = "\n"),
                  cor.method = "spearman",
                  xlab = "Renal Total GSH (nmol/mg)", 
-                 ylab = "Kidney Eh (mV)")
+                 ylab = "Renal Eh (mV)")
 
 p26 <- ggscatter(data, x = "KidneyTotalGSH", y = "KidneyEh", 
                  color = "black", #color of points
@@ -358,7 +357,7 @@ p26 <- ggscatter(data, x = "KidneyTotalGSH", y = "KidneyEh",
                  facet.by = "Sex",
                  panel.labs = list(Sex = c("F", "M")),
                  xlab = "Renal Total GSH (nmol/mg)", 
-                 ylab = "Kidney Eh (mV)")
+                 ylab = "Renal Eh (mV)")
 
 ####
 
@@ -371,7 +370,7 @@ p27 <- ggscatter(data, x = "KidneyTotalGSH", y = "LiverGSH",
                  cor.coeff.args = list(method = "spearman", label.x.npc = "center", label.sep = "\n"),
                  cor.method = "spearman",
                  xlab = "Renal Total GSH (nmol/mg)", 
-                 ylab = "Liver GSH (nmol/mg)")
+                 ylab = "Hepatic GSH (nmol/mg)")
 
 p28 <- ggscatter(data, x = "KidneyTotalGSH", y = "LiverGSH", 
                  color = "black", #color of points
@@ -384,7 +383,7 @@ p28 <- ggscatter(data, x = "KidneyTotalGSH", y = "LiverGSH",
                  facet.by = "Sex",
                  panel.labs = list(Sex = c("F", "M")),
                  xlab = "Renal Total GSH (nmol/mg)", 
-                 ylab = "Liver GSH (nmol/mg)")
+                 ylab = "Hepatic GSH (nmol/mg)")
 
 ####
 
@@ -397,7 +396,7 @@ p29 <- ggscatter(data, x = "KidneyTotalGSH", y = "LiverGSSG",
                  cor.coeff.args = list(method = "spearman", label.x.npc = "center", label.sep = "\n"),
                  cor.method = "spearman",
                  xlab = "Renal Total GSH (nmol/mg)", 
-                 ylab = "Liver GSSG (nmol/mg)")
+                 ylab = "Hepatic GSSG (nmol/mg)")
 
 p30 <- ggscatter(data, x = "KidneyTotalGSH", y = "LiverGSSG", 
                  color = "black", #color of points
@@ -410,7 +409,7 @@ p30 <- ggscatter(data, x = "KidneyTotalGSH", y = "LiverGSSG",
                  facet.by = "Sex",
                  panel.labs = list(Sex = c("F", "M")),
                  xlab = "Renal Total GSH (nmol/mg)", 
-                 ylab = "Liver GSSG (nmol/mg)")
+                 ylab = "Hepatic GSSG (nmol/mg)")
 
 ####
 
@@ -423,7 +422,7 @@ p31 <- ggscatter(data, x = "KidneyTotalGSH", y = "LiverTotalGSH",
                  cor.coeff.args = list(method = "spearman", label.x.npc = "center", label.sep = "\n"),
                  cor.method = "spearman",
                  xlab = "Renal Total GSH (nmol/mg)", 
-                 ylab = "Liver Total GSH (nmol/mg)")
+                 ylab = "Hepatic Total GSH (nmol/mg)")
 
 p32 <- ggscatter(data, x = "KidneyTotalGSH", y = "LiverTotalGSH", 
                  color = "black", #color of points
@@ -436,7 +435,7 @@ p32 <- ggscatter(data, x = "KidneyTotalGSH", y = "LiverTotalGSH",
                  facet.by = "Sex",
                  panel.labs = list(Sex = c("F", "M")),
                  xlab = "Renal Total GSH (nmol/mg)", 
-                 ylab = "Liver Total GSH (nmol/mg)")
+                 ylab = "Hepatic Total GSH (nmol/mg)")
 
 ####
 
@@ -449,7 +448,7 @@ p33 <- ggscatter(data, x = "KidneyTotalGSH", y = "LiverGSHGSSGRatio",
                  cor.coeff.args = list(method = "spearman", label.x.npc = "center", label.sep = "\n"),
                  cor.method = "spearman",
                  xlab = "Renal Total GSH (nmol/mg)", 
-                 ylab = "Liver GSH/GSSG")
+                 ylab = "Hepatic GSH/GSSG")
 
 p34 <- ggscatter(data, x = "KidneyTotalGSH", y = "LiverGSHGSSGRatio", 
                  color = "black", #color of points
@@ -462,7 +461,7 @@ p34 <- ggscatter(data, x = "KidneyTotalGSH", y = "LiverGSHGSSGRatio",
                  facet.by = "Sex",
                  panel.labs = list(Sex = c("F", "M")),
                  xlab = "Renal Total GSH (nmol/mg)", 
-                 ylab = "Liver GSH/GSSG")
+                 ylab = "Hepatic GSH/GSSG")
 
 
 ####
@@ -476,7 +475,7 @@ p35 <- ggscatter(data, x = "KidneyTotalGSH", y = "LiverEh",
                  cor.coeff.args = list(method = "spearman", label.x.npc = "center", label.sep = "\n"),
                  cor.method = "spearman",
                  xlab = "Renal Total GSH (nmol/mg)", 
-                 ylab = "Liver Eh (mV)")
+                 ylab = "Hepatic Eh (mV)")
 
 p36 <- ggscatter(data, x = "KidneyTotalGSH", y = "LiverEh", 
                  color = "black", #color of points
@@ -489,7 +488,7 @@ p36 <- ggscatter(data, x = "KidneyTotalGSH", y = "LiverEh",
                  facet.by = "Sex",
                  panel.labs = list(Sex = c("F", "M")),
                  xlab = "Renal Total GSH (nmol/mg)", 
-                 ylab = "Liver Eh (mV)")
+                 ylab = "Hepatic Eh (mV)")
 
 ggarrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, ncol = 1, nrow = 2)
 

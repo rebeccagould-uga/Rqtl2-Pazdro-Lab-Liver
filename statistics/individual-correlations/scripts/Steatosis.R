@@ -89,7 +89,7 @@ GSHstats <- group_by(data, group) %>%
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
-  p5 <- ggboxplot(data, x = "Steatosis", y = "EhGSSG2GSH",
+  p5 <- ggboxplot(data, x = "Steatosis", y = "Eh",
                   color = "Steatosis", palette = "jco",
                   ylab = "Eh (mV)", xlab = "Steatosis Grade")+
     stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
@@ -138,9 +138,9 @@ GSHstats <- group_by(data, group) %>%
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
     
-  p12 <- ggboxplot(data, x = "Steatosis", y = "BUN",
+  p12 <- ggboxplot(data, x = "Steatosis", y = "LiverWeightBodyWeight",
                    color = "Steatosis", palette = "jco",
-                   ylab = "BUN (mg/dL)", xlab = "Steatosis Grade")+ 
+                   ylab = "Liver Weight/Body Weight (%)", xlab = "Steatosis Grade")+ 
   stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
@@ -159,7 +159,7 @@ GSHstats <- group_by(data, group) %>%
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
     #stat_compare_means(label = "p.signif", ref.group = "0") 
   
-  p15 <- ggboxplot(data, x = "Steatosis", y = "Ballooning",
+  p15 <- ggboxplot(data, x = "Steatosis", y = "HydropicDegeneration",
                    color = "Steatosis", palette = "jco",
                    ylab = "Hydropic Degeneration", xlab = "Steatosis Grade")+ 
   stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
@@ -173,7 +173,7 @@ GSHstats <- group_by(data, group) %>%
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
-  p17 <- ggboxplot(data, x = "Steatosis", y = "FinalWeight",
+  p17 <- ggboxplot(data, x = "Steatosis", y = "BodyWeight",
                    color = "Steatosis", palette = "jco",
                    ylab = "Body Weight (g)", xlab = "Steatosis Grade")+ 
   stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))

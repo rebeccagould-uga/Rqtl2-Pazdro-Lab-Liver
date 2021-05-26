@@ -6,7 +6,7 @@
 #helpful link: http://www.sthda.com/english/wiki/kruskal-wallis-test-in-r
 
 
-data <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data_na-rows_deleted.csv")
+data <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data-Liver-Histology-QTL-paper-narowsdeleted.csv", na.strings = "NA")
 head(data, 6)
 
 data$group <- ordered(data$Fibrosis,
@@ -38,7 +38,24 @@ GSHstats <- group_by(data, group) %>%
     IQR = IQR(GSH, na.rm = TRUE)
   )
 
+FibrosisStats <- group_by(data, group) %>%
+  summarise(
+    count = n(),
+    mean = mean(Fibrosis, na.rm = TRUE),
+    sd = sd(Fibrosis, na.rm = TRUE),
+    median = median(Fibrosis, na.rm = TRUE),
+    IQR = IQR(Fibrosis, na.rm = TRUE)
+  )
 
+#by sex
+FibrosisStatsSex <- group_by(data, group, Sex) %>%
+  summarise(
+    count = n(),
+    mean = mean(Fibrosis, na.rm = TRUE),
+    sd = sd(Fibrosis, na.rm = TRUE),
+    median = median(Fibrosis, na.rm = TRUE),
+    IQR = IQR(Fibrosis, na.rm = TRUE)
+  )
 # Box plots
 # ++++++++++++++++++++
 # Plot variable by Fibrosis grade and color by grade

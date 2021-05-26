@@ -61,7 +61,6 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
   abline(h = threshold_KidneyGSH, col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
 
   plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney GSH (X Chrom)", ylim = c(0,11))
-  #perm_X_KidneyGSH_only <- perm_X_KidneyGSH[["X"]]
   abline(h = c(6.50, 6.89, 7.40), col = c("purple", "red", "blue"), lwd = 2)
   plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney GSH (X Chrom)", ylim = c(0,11))
   abline(h = c(6.50, 6.89, 7.40), col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
@@ -75,8 +74,47 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
   plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Kidney GSH (Autosome vs X)", ylim = c(0,11))
   segments(x0 = 0, y0 = threshold_X_KidneyGSH$A, x1 = 1695, y1 =   threshold_X_KidneyGSH$A, col = c("purple", "red", "blue"), lwd = 2)
   segments(x0 = 1695, y0 = threshold_X_KidneyGSH$X, x1 = 2000, y1 = threshold_X_KidneyGSH$X, col = c("purple", "red", "blue"), lwd = 2)
-  
 
+  ##############################  
+  
+  #comparing plots - Kidney GSH and Total GSH with Steatosis - cM
+  plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap, col = "darkslateblue", ylim = c(0,11))
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Renal GSH", "Steatosis"), bg="gray90")
+  
+  plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap, col = "darkslateblue", chr = "X", ylim = c(0,11))
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", chr = "X", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Renal GSH", "Steatosis"), bg="gray90")
+  
+  plot_scan1(x = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$gmap, ylim = c(0,11))
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Renal Total Glutathione", "Steatosis"), bg="gray90")
+  
+  plot_scan1(x = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$gmap, chr = "X", ylim = c(0,11))
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", chr = "X", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Renal Total Glutathione", "Steatosis"), bg="gray90")
+  
+  #comparing plots - Kidney GSH and Total GSH with Steatosis - Mbp
+  plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$pmap, col = "darkslateblue", ylim = c(0,11))
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Renal GSH", "Steatosis"), bg="gray90")
+  
+  plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$pmap, col = "darkslateblue", chr = "X", ylim = c(0,11))
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", chr = "X", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Renal GSH", "Steatosis"), bg="gray90")
+  
+  plot_scan1(x = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$pmap, ylim = c(0,11))
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Renal Total Glutathione", "Steatosis"), bg="gray90")
+  
+  plot_scan1(x = qtlscan_KidneyTotalGSH, map = R01_GSH_DO_QTLdata$pmap, chr = "X", ylim = c(0,11))
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", chr = "X", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Renal Total Glutathione", "Steatosis"), bg="gray90")
+  
+  
+  ##############################  
+  
+  
 #using gmap (cM)
   find_peaks(scan1_output = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_KidneyGSH, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)
   gmap_peaksGSH <- find_peaks(scan1_output = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_KidneyGSH, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)

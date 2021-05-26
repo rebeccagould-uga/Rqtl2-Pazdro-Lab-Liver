@@ -6,7 +6,7 @@
 #helpful link: http://www.sthda.com/english/wiki/kruskal-wallis-test-in-r
 
 
-data <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data_na-rows_deleted.csv")
+data <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data-Liver-Histology-QTL-paper-narowsdeleted.csv", na.strings = "NA")
 head(data, 6)
 
 data$group <- ordered(data$HydropicDegeneration,
@@ -37,6 +37,25 @@ GSHstats <- group_by(data, group) %>%
     sd = sd(GSH, na.rm = TRUE),
     median = median(GSH, na.rm = TRUE),
     IQR = IQR(GSH, na.rm = TRUE)
+  )
+
+HDStats <- group_by(data, group) %>%
+  summarise(
+    count = n(),
+    mean = mean(HydropicDegeneration, na.rm = TRUE),
+    sd = sd(HydropicDegeneration, na.rm = TRUE),
+    median = median(HydropicDegeneration, na.rm = TRUE),
+    IQR = IQR(HydropicDegeneration, na.rm = TRUE)
+  )
+
+#by sex
+HDStatsSex <- group_by(data, group, Sex) %>%
+  summarise(
+    count = n(),
+    mean = mean(HydropicDegeneration, na.rm = TRUE),
+    sd = sd(HydropicDegeneration, na.rm = TRUE),
+    median = median(HydropicDegeneration, na.rm = TRUE),
+    IQR = IQR(HydropicDegeneration, na.rm = TRUE)
   )
 
 

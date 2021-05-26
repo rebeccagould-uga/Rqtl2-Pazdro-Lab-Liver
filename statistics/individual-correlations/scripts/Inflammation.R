@@ -44,7 +44,7 @@ InflammationStats <- group_by(data, group) %>%
   summarise(
     count = n(),
     mean = mean(Inflammation, na.rm = TRUE),
-    sd = sd(GSH, na.rm = TRUE),
+    sd = sd(Inflammation, na.rm = TRUE),
     median = median(Inflammation, na.rm = TRUE),
     IQR = IQR(Inflammation, na.rm = TRUE)
   )
@@ -54,7 +54,7 @@ InflammationStatsSex <- group_by(data, group, Sex) %>%
   summarise(
     count = n(),
     mean = mean(Inflammation, na.rm = TRUE),
-    sd = sd(GSH, na.rm = TRUE),
+    sd = sd(Inflammation, na.rm = TRUE),
     median = median(Inflammation, na.rm = TRUE),
     IQR = IQR(Inflammation, na.rm = TRUE)
   )

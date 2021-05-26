@@ -50,12 +50,80 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
       #segments(x0 = 1690, y0 = 6, x1 = 2000, y1 = 6, col = "purple", "dashed")
      #or
       #segments(x0 = 1690, y0 = threshold_X_LiverGSH, x1 = 2000, y1 = threshold_X_LiverGSH, col = c("purple", "red", "blue"))
-      
-  #comparing plots
-  plot_scan1(x = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$gmap,  ylim = c(0,11))
+ 
+  ############################## 
+  
+  #comparing plots - Liver GSH with  Kidney Eh - cM
+  plot_scan1(x = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$gmap, ylim = c(0,11))
   plot_scan1(x = qtlscan_KidneyEh, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", add = TRUE)
   legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic GSH", "Renal Eh"), bg="gray90")
   
+    plot_scan1(x = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$gmap, chr = "14", ylim = c(0,11))
+    plot_scan1(x = qtlscan_KidneyEh, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", chr = "14", add = TRUE)
+    legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic GSH", "Renal Eh"), bg="gray90")
+  
+    plot_scan1(x = qtlscan_LiverTotalGSH, map = R01_GSH_DO_QTLdata$gmap,  ylim = c(0,11))
+    plot_scan1(x = qtlscan_KidneyEh, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", add = TRUE)
+    legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic Total Glutathione", "Renal Eh"), bg="gray90")
+    
+    plot_scan1(x = qtlscan_LiverTotalGSH, map = R01_GSH_DO_QTLdata$gmap, chr = "14", ylim = c(0,11))
+    plot_scan1(x = qtlscan_KidneyEh, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", chr = "14", add = TRUE)
+    legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic Total Glutathione", "Renal Eh"), bg="gray90")
+    
+  #comparing plots - Liver GSH with  Kidney Eh - Mbp
+    plot_scan1(x = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$pmap, ylim = c(0,11))
+    plot_scan1(x = qtlscan_KidneyEh, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", add = TRUE)
+    legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic GSH", "Renal Eh"), bg="gray90")
+    
+    plot_scan1(x = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$pmap, chr = "14", ylim = c(0,11))
+    plot_scan1(x = qtlscan_KidneyEh, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", chr = "14", add = TRUE)
+    legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic GSH", "Renal Eh"), bg="gray90")
+    
+    plot_scan1(x = qtlscan_LiverTotalGSH, map = R01_GSH_DO_QTLdata$pmap,  ylim = c(0,11))
+    plot_scan1(x = qtlscan_KidneyEh, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", add = TRUE)
+    legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic Total Glutathione", "Renal Eh"), bg="gray90")
+    
+    plot_scan1(x = qtlscan_LiverTotalGSH, map = R01_GSH_DO_QTLdata$pmap, chr = "14", ylim = c(0,11))
+    plot_scan1(x = qtlscan_KidneyEh, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", chr = "14", add = TRUE)
+    legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic Total Glutathione", "Renal Eh"), bg="gray90")
+    
+  ############################## 
+    
+  #comparing plots - Liver Glutathione with Steatosis - cM
+  plot_scan1(x = qtlscan_LiverGSSG, map = R01_GSH_DO_QTLdata$gmap, ylim = c(0,11))
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic GSSG", "Steatosis"), bg="gray90")
+    
+  plot_scan1(x = qtlscan_LiverGSSG, map = R01_GSH_DO_QTLdata$gmap, chr = "18",  ylim = c(0,11))
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", chr = "18", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic GSSG", "Steatosis"), bg="gray90")
+  
+  plot_scan1(x = qtlscan_LiverTotalGSH, map = R01_GSH_DO_QTLdata$gmap, ylim = c(0,11))
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic Total Glutathione", "Steatosis"), bg="gray90")
+  
+  plot_scan1(x = qtlscan_LiverTotalGSH, map = R01_GSH_DO_QTLdata$gmap, chr = "18", ylim = c(0,11))
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", chr = "18", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic Total Glutathione", "Steatosis"), bg="gray90")
+  
+  #comparing plots - Liver Glutathione with Steatosis - Mbp
+  plot_scan1(x = qtlscan_LiverGSSG, map = R01_GSH_DO_QTLdata$pmap, ylim = c(0,11))
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic GSSG", "Steatosis"), bg="gray90")
+  
+  plot_scan1(x = qtlscan_LiverGSSG, map = R01_GSH_DO_QTLdata$pmap, chr = "18",  ylim = c(0,11))
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", chr = "18", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic GSSG", "Steatosis"), bg="gray90")
+  
+  plot_scan1(x = qtlscan_LiverTotalGSH, map = R01_GSH_DO_QTLdata$pmap, ylim = c(0,11))
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic Total Glutathione", "Steatosis"), bg="gray90")
+  
+  plot_scan1(x = qtlscan_LiverTotalGSH, map = R01_GSH_DO_QTLdata$pmap, chr = "18", ylim = c(0,11))
+  plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", chr = "18", add = TRUE)
+  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic Total Glutathione", "Steatosis"), bg="gray90")
+  
+  ############################## 
   
   #using gmap (cM)
   find_peaks(scan1_output = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$gmap, threshold = summary(perm_LiverGSH, alpha = 0.2), peakdrop = 1.8, drop = 1.5, expand2markers = FALSE)

@@ -54,9 +54,11 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
   ############################## 
   
   #comparing plots - Liver GSH with  Kidney Eh - cM
-  plot_scan1(x = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$gmap, ylim = c(0,11))
-  plot_scan1(x = qtlscan_KidneyEh, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", add = TRUE)
-  legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic GSH", "Renal Eh"), bg="gray90")
+  pdf(file = "KidneyEh-LiverGlutathione-Overlay-cM.pdf")
+    par(mar=c(4.1, 4.1, 2.6, 2.6))
+    plot_scan1(x = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$gmap, ylim = c(0,11))
+    plot_scan1(x = qtlscan_KidneyEh, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", add = TRUE)
+    legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic GSH", "Renal Eh"), bg="gray90")
   
     plot_scan1(x = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$gmap, chr = "14", ylim = c(0,11))
     plot_scan1(x = qtlscan_KidneyEh, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", chr = "14", add = TRUE)
@@ -70,7 +72,11 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
     plot_scan1(x = qtlscan_KidneyEh, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", chr = "14", add = TRUE)
     legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic Total Glutathione", "Renal Eh"), bg="gray90")
     
+    dev.off()
+    
   #comparing plots - Liver GSH with  Kidney Eh - Mbp
+  pdf(file = "KidneyEh-LiverGlutathione-Overlay-Mbp.pdf")
+    par(mar=c(4.1, 4.1, 2.6, 2.6))
     plot_scan1(x = qtlscan_LiverGSH, map = R01_GSH_DO_QTLdata$pmap, ylim = c(0,11))
     plot_scan1(x = qtlscan_KidneyEh, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", add = TRUE)
     legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic GSH", "Renal Eh"), bg="gray90")
@@ -87,9 +93,13 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
     plot_scan1(x = qtlscan_KidneyEh, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", chr = "14", add = TRUE)
     legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic Total Glutathione", "Renal Eh"), bg="gray90")
     
+    dev.off()
+    
   ############################## 
     
   #comparing plots - Liver Glutathione with Steatosis - cM
+  pdf(file = "Steatosis-LiverGlutathione-Overlay-cM.pdf")
+  par(mar=c(4.1, 4.1, 2.6, 2.6))
   plot_scan1(x = qtlscan_LiverGSSG, map = R01_GSH_DO_QTLdata$gmap, ylim = c(0,11))
   plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", add = TRUE)
   legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic GSSG", "Steatosis"), bg="gray90")
@@ -106,7 +116,11 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
   plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", chr = "18", add = TRUE)
   legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic Total Glutathione", "Steatosis"), bg="gray90")
   
+  dev.off()
+  
   #comparing plots - Liver Glutathione with Steatosis - Mbp
+  pdf(file = "Steatosis-LiverGlutathione-Overlay-Mbp.pdf")
+  par(mar=c(4.1, 4.1, 2.6, 2.6))
   plot_scan1(x = qtlscan_LiverGSSG, map = R01_GSH_DO_QTLdata$pmap, ylim = c(0,11))
   plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", add = TRUE)
   legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic GSSG", "Steatosis"), bg="gray90")
@@ -122,6 +136,8 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
   plot_scan1(x = qtlscan_LiverTotalGSH, map = R01_GSH_DO_QTLdata$pmap, chr = "18", ylim = c(0,11))
   plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", chr = "18", add = TRUE)
   legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Hepatic Total Glutathione", "Steatosis"), bg="gray90")
+  
+  dev.off()
   
   ############################## 
   

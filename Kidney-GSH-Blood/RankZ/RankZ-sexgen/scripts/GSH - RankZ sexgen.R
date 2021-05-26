@@ -76,8 +76,10 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
   segments(x0 = 1695, y0 = threshold_X_KidneyGSH$X, x1 = 2000, y1 = threshold_X_KidneyGSH$X, col = c("purple", "red", "blue"), lwd = 2)
 
   ##############################  
-  
+ 
   #comparing plots - Kidney GSH and Total GSH with Steatosis - cM
+  #pdf(file = "Steatosis-KidneyGlutathione-Overlay-cM.pdf")
+  par(mar=c(4.1, 4.1, 2.6, 2.6))
   plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$gmap, col = "darkslateblue", ylim = c(0,11))
   plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", add = TRUE)
   legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Renal GSH", "Steatosis"), bg="gray90")
@@ -94,7 +96,11 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
   plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$gmap, col = "#009999", chr = "X", add = TRUE)
   legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Renal Total Glutathione", "Steatosis"), bg="gray90")
   
+  #dev.off()
+  
   #comparing plots - Kidney GSH and Total GSH with Steatosis - Mbp
+  #pdf(file = "Steatosis-KidneyGlutathione-Overlay-Mbp.pdf")
+  par(mar=c(4.1, 4.1, 2.6, 2.6))
   plot_scan1(x = qtlscan_KidneyGSH, map = R01_GSH_DO_QTLdata$pmap, col = "darkslateblue", ylim = c(0,11))
   plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", add = TRUE)
   legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Renal GSH", "Steatosis"), bg="gray90")
@@ -111,6 +117,7 @@ pdf(file = "GSH QTL Results - RankZ sexgen.pdf")
   plot_scan1(x = qtlscan_Steatosis, map = R01_GSH_DO_QTLdata$pmap, col = "#009999", chr = "X", add = TRUE)
   legend("topleft", lwd=2, col=c("darkslateblue", "#009999"), c("Renal Total Glutathione", "Steatosis"), bg="gray90")
   
+  #dev.off()
   
   ##############################  
   

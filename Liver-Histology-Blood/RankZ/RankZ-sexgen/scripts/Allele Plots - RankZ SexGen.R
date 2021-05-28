@@ -37,7 +37,7 @@ library (pander)
 
 #use cbind to combine all of the qtlscans + take those 2D tables and combining them with another table over and over again
 ## scans is an R object containing your genome scans from scan1() that are loaded in to the R environment 
-scans <- cbind(qtlscan_AST, qtlscan_ALT, qtlscan_ASTALTRatio, qtlscan_Ballooning, qtlscan_Steatosis, qtlscan_LiverWeight)
+scans <- cbind(qtlscan_AST, qtlscan_ALT, qtlscan_ASTALTRatio, qtlscan_Ballooning, qtlscan_Steatosis, qtlscan_LiverWeight, qtlscan_BodyWeight, qtlscan_LiverWeightBodyWeight)
 
 #thresholds <- cbind(threshold_LiverGSH, threshold_LiverGSSG, threshold_LiverTotalGSH, threshold_LiverGSH_GSSGRatio, threshold_LiverGSH_GSSGcovar, threshold_LiverNADH, threshold_LiverNADP, threshold_LiverNADPH, threshold_LiverNADP_NADPHRatio, threshold_ALT, threshold_AST, threshold_BUN)
 #head(thresholds)

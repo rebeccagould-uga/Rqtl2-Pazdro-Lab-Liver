@@ -66,7 +66,7 @@ library (RSQLite)
 
 #calculate the kinship loco
 #you can increase the cores amount if you have more cores in your computer. For mine, I have 18 cores available so to speed it up, I'll use 10 of them.
-  kinship_loco <- calc_kinship(probs = probs, "loco", use_allele_probs = TRUE, cores = 2)
+  kinship_loco <- calc_kinship(probs = probs, "loco", use_allele_probs = TRUE, cores = 10)
 
 #Create the r plot of the kinship matrix
 #pdf('output/rplot_kinship.pdf')

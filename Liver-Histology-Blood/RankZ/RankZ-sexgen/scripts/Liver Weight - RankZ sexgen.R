@@ -30,16 +30,23 @@ library (RSQLite)
 qtlscan_LiverWeight <- scan1(genoprobs = probs, pheno = pheno["zLiverWeight"], kinship = kinship_loco, addcovar = sexgen, cores=2)
 perm_LiverWeight <- scan1perm(genoprobs = probs, pheno = pheno["zLiverWeight"], addcovar = sexgen, n_perm = 1000, cores=10)
 
+qtlscan_BodyWeight <- scan1(genoprobs = probs, pheno = pheno["zBodyWeight"], kinship = kinship_loco, addcovar = sexgen, cores=2)
+perm_BodyWeight <- scan1perm(genoprobs = probs, pheno = pheno["zBodyWeight"], addcovar = sexgen, n_perm = 1000, cores=10)
+
+qtlscan_LiverWeightBodyWeight <- scan1(genoprobs = probs, pheno = pheno["zLiverWeightBodyWeight"], kinship = kinship_loco, addcovar = sexgen, cores=2)
+perm_LiverWeightBodyWeight <- scan1perm(genoprobs = probs, pheno = pheno["zLiverWeightBodyWeight"], addcovar = sexgen, n_perm = 1000, cores=10)
+
+
 #set working directory
-pdf(file = "LiverWeight QTL Results - RankZ sexgen.pdf")
+pdf(file = "Liver Weight QTL Results - RankZ sexgen.pdf")
 ##NOW SAVING ALL PLOTS AND TABLES ONTO A PDF##
 
 par(mar=c(4.1, 4.1, 2.6, 2.6))
 threshold_LiverWeight = summary(perm_LiverWeight, alpha = c(0.2, 0.1, 0.05))
 
-plot_scan1(x = qtlscan_LiverWeight, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for LiverWeight", ylim = c(0,11))
+plot_scan1(x = qtlscan_LiverWeight, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Liver Weight", ylim = c(0,11))
 abline(h = threshold_LiverWeight, col = c("purple", "red", "blue"), lwd = 2)
-plot_scan1(x = qtlscan_LiverWeight, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for LiverWeight", ylim = c(0,11))
+plot_scan1(x = qtlscan_LiverWeight, map = R01_GSH_DO_QTLdata$gmap,  main = "Genome Scan for Liver Weight", ylim = c(0,11))
 abline(h = threshold_LiverWeight, col = c("purple", "red", "blue"), lwd = 2, lty = "dashed")
 
 #using gmap (cM)
@@ -103,6 +110,11 @@ out_gwas_LiverWeight <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pm
 par(mar=c(4.1, 4.1, 2.6, 2.6))
 plot(out_gwas_LiverWeight$lod, out_gwas_LiverWeight$snpinfo, altcol="green4", gap=0, main = "LiverWeight GWAS", ylim = c(0,6))
 dev.off()
+
+out_gwas_BodyWeight <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zBodyWeight"], kinship = kinship_loco, addcovar = sexgen, query_func=query_variants, cores=10)
+
+out_gwas_LiverWeightBodyWeight <- scan1snps(genoprobs = probs, map = R01_GSH_DO_QTLdata$pmap, pheno = pheno["zLiverWeightBodyWeight"], kinship = kinship_loco, addcovar = sexgen, query_func=query_variants, cores=10)
+
 
 ####################################################
 ## Heritability calculation - the ratio of genetic variance to total variance using a linear mixed model

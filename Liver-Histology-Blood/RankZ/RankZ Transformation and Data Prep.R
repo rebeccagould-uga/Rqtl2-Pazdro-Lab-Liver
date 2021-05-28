@@ -128,6 +128,10 @@ library (RSQLite)
   pheno$zBallooning = rankZ(pheno$Liver_Ballooning)
   pheno$zFibrosis = rankZ(pheno$Liver_Fibrosis)
   pheno$zInflammation = rankZ(pheno$Liver_Inflammation)
+  pheno$zLiverWeight = rankZ(pheno$Liver_Weight)
+  pheno$zBodyWeight = rankZ(pheno$Final_Weight)
+  pheno$zLiverWeightBodyWeight = rankZ(pheno$Liver_Weight_Final_Weight_Ratio)
+  
   
 #####Plot the transformations  
 

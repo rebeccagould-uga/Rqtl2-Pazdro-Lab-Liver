@@ -22,6 +22,9 @@ library (RSQLite)
 #Load in R2D2-Liver-GSH-NAD-RankZ.Rdata
 #Run 1-R2D2-Setup.R prior to this script
 
+
+par(mar=c(4.1, 4.1, 2.6, 2.6))
+
   
 ########################################################################################################
 ##
@@ -34,9 +37,13 @@ library (RSQLite)
     
 # use cbind to combine all of the qtlscans + take those 2D tables and combining them with another table over and over again
 # scans is an R object containing your genome scans from scan1() that are loaded in to the R environment 
-  scans_sex <- cbind(qtlscan_LiverGSH_sex, qtlscan_LiverGSSG_sex, qtlscan_LiverTotalGSH_sex, qtlscan_LiverEh_sex, qtlscan_LiverNADP_sex, qtlscan_LiverNADPH_sex, qtlscan_LiverNADP_NADPHRatio_sex)
-  scans_sexgen <- cbind(qtlscan_LiverGSH_sexgen, qtlscan_LiverGSSG_sexgen, qtlscan_LiverTotalGSH_sexgen, qtlscan_LiverEh_sexgen, qtlscan_LiverNADP_sexgen, qtlscan_LiverNADPH_sexgen, qtlscan_LiverNADP_NADPHRatio_sexgen)
-  
+  #scans_sex <- cbind(qtlscan_LiverGSH_sex, qtlscan_LiverGSSG_sex, qtlscan_LiverTotalGSH_sex, qtlscan_LiverEh_sex, qtlscan_LiverNADP_sex, qtlscan_LiverNADPH_sex, qtlscan_LiverNADP_NADPHRatio_sex)
+  #scans_sexgen <- cbind(qtlscan_LiverGSH_sexgen, qtlscan_LiverGSSG_sexgen, qtlscan_LiverTotalGSH_sexgen, qtlscan_LiverEh_sexgen, qtlscan_LiverNADP_sexgen, qtlscan_LiverNADPH_sexgen, qtlscan_LiverNADP_NADPHRatio_sexgen)
+
+  scans_sex <- cbind(qtlscan_LiverGSH_sex, qtlscan_LiverGSSG_sex, qtlscan_LiverNADP_sex, qtlscan_LiverNADPH_sex, qtlscan_LiverNADP_NADPHRatio_sex)
+  scans_sexgen <- cbind(qtlscan_LiverGSH_sexgen, qtlscan_LiverGSSG_sexgen, qtlscan_LiverNADP_sexgen, qtlscan_LiverNADPH_sexgen, qtlscan_LiverNADP_NADPHRatio_sexgen)
+
+
 # Probability plotting function (created by Greg Keele)
     
     prob_plot <- function(pheno_vec,
@@ -66,10 +73,10 @@ library (RSQLite)
   names(pheno)
 
   #pheno_mat is the matrix of outcomes (phenotypes)
-  pheno_mat <- as.matrix(pheno[c(36:42)])
+  pheno_mat <- as.matrix(pheno[c(36:37,40:42)])
     
   #check rownames to make sure they are already set as the write row names
-  rownames(pheno[c(36:42)])
+  rownames(pheno[c(36:37,40:42)])
     
     
 # Gather QTL peaks from all scans with LOD scores > 6
@@ -95,7 +102,7 @@ library (RSQLite)
   #setwd
   write_xlsx(list("QTL List RankZ Sex - cM" = qtl_gmap_sex,
                   "QTL List RankZ Sex - Mbp" = qtl_pmap_sex,
-                  "QTL List RankZ SexGeb=n - cM" = qtl_gmap_sexgen,
+                  "QTL List RankZ SexGen - cM" = qtl_gmap_sexgen,
                   "QTL List RankZ SexGen - Mbp" = qtl_pmap_sexgen),
                "QTL List LOD Score 6.xlsx")
  

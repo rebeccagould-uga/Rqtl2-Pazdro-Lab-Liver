@@ -24,6 +24,8 @@ library (RSQLite)
 
 pdf(file = "Founder-Effects.pdf")
 
+par(mar=c(4.1, 4.1, 2.6, 2.6))
+
 
 ########################################################################################################
 ## 
@@ -97,6 +99,42 @@ pdf(file = "Founder-Effects.pdf")
     plot_coefCC(x = coef_def_LiverGSSG_chr2_sexgen, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverGSSG_sexgen, main = "Liver GSSG default - sex + gen", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
     
     
+########################################################################################################
+## 
+## Liver Total GSH (WSB - Chromosome 2)
+##
+########################################################################################################
+    
+    # founder allele effects 
+    chr = 2
+    
+    #sex
+    #BLUPs
+    coef_blup_LiverTotalGSH_chr2_sex <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zLiverTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sex, cores = 2)
+    plot_coefCC(x = coef_blup_LiverTotalGSH_chr2_sex, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH_sex, main = "Liver TotalGSH BLUPs - sex ", legend = "bottomleft", bgcolor="gray95")
+    xlim <- c(45,65)
+    plot_coefCC(x = coef_blup_LiverTotalGSH_chr2_sex, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH_sex, main = "Liver TotalGSH BLUPs - sex", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+    
+    #default
+    coef_def_LiverTotalGSH_chr2_sex <- scan1coef(genoprobs =  probs[,chr], pheno = pheno["zLiverTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sex, cores = 2)
+    plot_coefCC(x = coef_def_LiverTotalGSH_chr2_sex, map = R01_GSH_DO_QTLdata$gmap[chr], columns = 1:8, main = "Liver TotalGSH default - sex ", legend = "bottomleft", bgcolor="gray95")
+    xlim <- c(45,65)
+    plot_coefCC(x = coef_def_LiverTotalGSH_chr2_sex, map = R01_GSH_DO_QTLdata$gmap[chr], columns = 1:8, main = "Liver TotalGSH default - sex ", legend = "bottomleft", bgcolor="gray95", xlim=xlim)
+    
+    #sexgen
+    #BLUPs
+    coef_blup_LiverTotalGSH_chr2_sexgen <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zLiverTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+    plot_coefCC(x = coef_blup_LiverTotalGSH_chr2_sexgen, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH_sexgen, main = "Liver TotalGSH BLUPs - sex + gen", legend = "bottomleft", bgcolor="gray95")
+    xlim <- c(45,65)
+    plot_coefCC(x = coef_blup_LiverTotalGSH_chr2_sexgen, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH_sexgen, main = "Liver TotalGSH BLUPs - sex + gen", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+    
+    #default
+    coef_def_LiverTotalGSH_chr2_sexgen <- scan1coef(genoprobs =  probs[,chr], pheno = pheno["zLiverTotalGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
+    plot_coefCC(x = coef_def_LiverTotalGSH_chr2_sexgen, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH_sexgen, main = "Liver TotalGSH default - sex + gen", legend = "bottomleft", bgcolor="gray95")
+    xlim <- c(45,65)
+    plot_coefCC(x = coef_def_LiverTotalGSH_chr2_sexgen, map = R01_GSH_DO_QTLdata$gmap, scan1_output = qtlscan_LiverTotalGSH_sexgen, main = "Liver TotalGSH default - sex + gen", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
+    
+
 ########################################################################################################
 ## 
 ## Liver Eh (WSB - Chromosome 2)

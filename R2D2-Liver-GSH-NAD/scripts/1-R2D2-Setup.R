@@ -3,7 +3,7 @@
 # Updated May 2021
 
 #### Phenotypes ####
-# Chr 2 (WSB): GSH, GSSG, Total GSH, Eh, NADP, NADP/NADPH
+# Chr 2 (WSB): GSH, GSSG, Total GSH (omitted), Eh, NADP, NADP/NADPH
 # Chr 14 (NOD): NADPH, NADP/NADPH
 
 

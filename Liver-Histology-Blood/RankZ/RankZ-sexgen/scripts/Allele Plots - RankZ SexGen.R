@@ -37,7 +37,7 @@ library (pander)
 
 #use cbind to combine all of the qtlscans + take those 2D tables and combining them with another table over and over again
 ## scans is an R object containing your genome scans from scan1() that are loaded in to the R environment 
-scans <- cbind(qtlscan_AST, qtlscan_ALT, qtlscan_ASTALTRatio, qtlscan_Ballooning, qtlscan_Steatosis, qtlscan_LiverWeight, qtlscan_BodyWeight, qtlscan_LiverWeightBodyWeight)
+scans <- cbind(qtlscan_AST, qtlscan_ALT, qtlscan_ASTALTRatio, qtlscan_Steatosis, qtlscan_Ballooning, qtlscan_Inflammation, qtlscan_LiverWeight, qtlscan_BodyWeight, qtlscan_LiverWeightBodyWeight)
 
 #thresholds <- cbind(threshold_LiverGSH, threshold_LiverGSSG, threshold_LiverTotalGSH, threshold_LiverGSH_GSSGRatio, threshold_LiverGSH_GSSGcovar, threshold_LiverNADH, threshold_LiverNADP, threshold_LiverNADPH, threshold_LiverNADP_NADPHRatio, threshold_ALT, threshold_AST, threshold_BUN)
 #head(thresholds)
@@ -81,10 +81,10 @@ prob_plot <- function(pheno_vec,
     names(pheno)
     #from this, I've identified I only need columns 24-34
     #pheno_mat is the matrix of outcomes (phenotypes)
-    pheno_mat <- as.matrix(pheno[c(36:39)])
+    pheno_mat <- as.matrix(pheno[c(36:38,40:45)])
     
   #check rownames to make sure they are already set as the write row names (they are)
-    rownames(pheno[c(36:39)])
+    rownames(pheno[c(36:38,40:45)])
 
 
 ####################################################
@@ -112,7 +112,7 @@ prob_plot <- function(pheno_vec,
 #setwd
   write_xlsx(list("QTL List RankZ SexGen - cM" = qtl_gmap,
                 "QTL List RankZ SexGen - Mbp" = qtl_pmap),
-           "QTL List - RankZ sexgen.xlsx")
+           "Liver-Histology-QTL-List-RankZ sexgen.xlsx")
 #gives print out of all LOD peaks > 6
 #later edited by Becca --> "Final QTL results - RankZ"
 

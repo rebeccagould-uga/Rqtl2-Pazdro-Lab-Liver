@@ -10,14 +10,14 @@ data <- read.csv(file = "~/Rqtl2-Glutathione-Genetics/statistics/data-Liver-Hist
 head(data, 6)
 
 data$group <- ordered(data$Fibrosis,
-                         levels = c("0", "1", "2", "3", "4", "5"))
+                         levels = c("0", "1", "2"))
 
 
 library("dplyr")
 library("ggpubr")
 
 # Visualize: Specify the comparisons you want
-my_comparisons <- list( c("0", "1"), c("0", "2"), c("0", "3"), c("0", "5"),
+my_comparisons <- list( c("0", "1"), c("0", "2"),
                         c("1", "2"))
 
 
@@ -60,9 +60,7 @@ FibrosisStatsSex <- group_by(data, group, Sex) %>%
 # ++++++++++++++++++++
 # Plot variable by Fibrosis grade and color by grade
 
-pdf(file = "Fibrosis-plots-pvalues.pdf")
-
-  p1 <- ggboxplot(data, x = "Fibrosis", y = "GSH",
+  p1 <- ggboxplot(data, x = "Fibrosis", y = "LiverGSH",
             color = "Fibrosis", palette = "jco",
             ylab = "GSH (nmol/mg)", xlab = "Fibrosis Grade")#+ 
   p1 + stat_compare_means(comparisons = my_comparisons) # Add pairwise comparisons p-value
@@ -77,14 +75,14 @@ pdf(file = "Fibrosis-plots-pvalues.pdf")
   #   stat_compare_means(label = "p.signif", method = "t.test",
   #                      ref.group = ".all.", hide.ns = TRUE)      # Pairwise comparison against all
   
-  p2 <- ggboxplot(data, x = "Fibrosis", y = "GSSG",
+  p2 <- ggboxplot(data, x = "Fibrosis", y = "LiverGSSG",
                   color = "Fibrosis", palette = "jco",
                   ylab = "GSSG (nmol/mg)", xlab = "Fibrosis Grade")#+ 
   p2 + stat_compare_means(comparisons = my_comparisons) # Add pairwise comparisons p-value
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
-  p3 <- ggboxplot(data, x = "Fibrosis", y = "TotalGSH",
+  p3 <- ggboxplot(data, x = "Fibrosis", y = "LiverTotalGSH",
                   color = "Fibrosis", palette = "jco",
                   ylab = "Total Glutathione (nmol/mg)", xlab = "Fibrosis Grade")#+ 
   p3 + stat_compare_means(comparisons = my_comparisons) # Add pairwise comparisons p-value
@@ -92,14 +90,14 @@ pdf(file = "Fibrosis-plots-pvalues.pdf")
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   
-  p4 <- ggboxplot(data, x = "Fibrosis", y = "GSHGSSGRatio",
+  p4 <- ggboxplot(data, x = "Fibrosis", y = "LiverGSHGSSGRatio",
                   color = "Fibrosis", palette = "jco",
                   ylab = "GSH/GSSG", xlab = "Fibrosis Grade")#+ 
   p4 + stat_compare_means(comparisons = my_comparisons) # Add pairwise comparisons p-value
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
-  p5 <- ggboxplot(data, x = "Fibrosis", y = "EhGSSG2GSH",
+  p5 <- ggboxplot(data, x = "Fibrosis", y = "LiverEh",
                   color = "Fibrosis", palette = "jco",
                   ylab = "Eh", xlab = "Fibrosis Grade")#+ 
   p5 + stat_compare_means(comparisons = my_comparisons) # Add pairwise comparisons p-value
@@ -183,7 +181,47 @@ pdf(file = "Fibrosis-plots-pvalues.pdf")
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
-dev.off()
+  
+  p17 <- ggboxplot(data, x = "Fibrosis", y = "KidneyGSH",
+                   color = "Fibrosis", palette = "jco",
+                   ylab = "Kidney GSH (nmol/mg)", xlab = "Fibrosis Grade")+ 
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  
+  
+  p18 <- ggboxplot(data, x = "Fibrosis", y = "KidneyGSSG",
+                   color = "Fibrosis", palette = "jco",
+                   ylab = "Kidney GSSG (nmol/mg)", xlab = "Fibrosis Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  
+  
+  p19 <- ggboxplot(data, x = "Fibrosis", y = "KidneyTotalGSH",
+                   color = "Fibrosis", palette = "jco",
+                   ylab = "Kidney Total Glutathione (nmol/mg)", xlab = "Fibrosis Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  
+  
+  p20 <- ggboxplot(data, x = "Fibrosis", y = "KidneyGSHGSSGRatio",
+                   color = "Fibrosis", palette = "jco",
+                   ylab = "Kidney GSH/GSSG", xlab = "Fibrosis Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  
+  
+  p21 <- ggboxplot(data, x = "Fibrosis", y = "KidneyEh",
+                   color = "Fibrosis", palette = "jco",
+                   ylab = "Kidney Eh (mV)", xlab = "Fibrosis Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  
+  
   
   
   # # Mean plots
@@ -197,8 +235,8 @@ dev.off()
   #        add = c("mean_se", "jitter"),
   #        ylab = "GSH (nmol/mg)", xlab = "Fibrosis Grade")
   
-  pdf(file = "Fibrosis-plots.pdf")
-  ggarrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, ncol = 1, nrow = 1)
+  pdf(file = "Fibrosis-plots-pvalues.pdf")
+  ggarrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, ncol = 1, nrow = 1)
   dev.off()
   
   

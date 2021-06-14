@@ -69,38 +69,38 @@ HDStatsSex <- group_by(data, group, Sex) %>%
 #        ylab = "GSH (nmol/mg)", xlab = "Hydropic Degeneration Grade")+
 #stat_compare_means(comparisons = my_comparisons, label = "p.format")
 
-  p1 <- ggboxplot(data, x = "HydropicDegeneration", y = "GSH",
+  p1 <- ggboxplot(data, x = "HydropicDegeneration", y = "LiverGSH",
                   color = "HydropicDegeneration", palette = "jco",
-                  ylab = "GSH (nmol/mg)", xlab = "Hydropic Degeneration Grade")+ 
+                  ylab = "Liver GSH (nmol/mg)", xlab = "Hydropic Degeneration Grade")+ 
   stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
-  p2 <- ggboxplot(data, x = "HydropicDegeneration", y = "GSSG",
+  p2 <- ggboxplot(data, x = "HydropicDegeneration", y = "LiverGSSG",
                   color = "HydropicDegeneration", palette = "jco",
-                  ylab = "GSSG (nmol/mg)", xlab = "Hydropic Degeneration Grade")+ 
+                  ylab = "Liver GSSG (nmol/mg)", xlab = "Hydropic Degeneration Grade")+ 
   stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0")
   
-  p3 <- ggboxplot(data, x = "HydropicDegeneration", y = "TotalGSH",
+  p3 <- ggboxplot(data, x = "HydropicDegeneration", y = "LiverTotalGSH",
                   color = "HydropicDegeneration", palette = "jco",
-                  ylab = "Total Glutathione (nmol/mg)", xlab = "Hydropic Degeneration Grade")+ 
+                  ylab = "Liver Total Glutathione (nmol/mg)", xlab = "Hydropic Degeneration Grade")+ 
   stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0")
   
   
-  p4 <- ggboxplot(data, x = "HydropicDegeneration", y = "GSHGSSGRatio",
+  p4 <- ggboxplot(data, x = "HydropicDegeneration", y = "LiverGSHGSSGRatio",
                   color = "HydropicDegeneration", palette = "jco",
-                  ylab = "GSH/GSSG", xlab = "Hydropic Degeneration Grade")+ 
+                  ylab = "Liver GSH/GSSG", xlab = "Hydropic Degeneration Grade")+ 
   stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0")
   
-  p5 <- ggboxplot(data, x = "HydropicDegeneration", y = "Eh",
+  p5 <- ggboxplot(data, x = "HydropicDegeneration", y = "LiverEh",
                   color = "HydropicDegeneration", palette = "jco",
-                  ylab = "Eh (mV)", xlab = "Hydropic Degeneration Grade")+ 
+                  ylab = "Liver Eh (mV)", xlab = "Hydropic Degeneration Grade")+ 
   stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0")
@@ -189,7 +189,42 @@ HDStatsSex <- group_by(data, group, Sex) %>%
   #stat_compare_means(method = "kruskal.test", label.y = 100)+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0")
 
-
+  p18 <- ggboxplot(data, x = "HydropicDegeneration", y = "KidneyGSH",
+                   color = "HydropicDegeneration", palette = "jco",
+                   ylab = "Kidney GSH (nmol/mg)", xlab = "Hydropic Degeneration Grade")+ 
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  
+  
+  p19 <- ggboxplot(data, x = "HydropicDegeneration", y = "KidneyGSSG",
+                   color = "HydropicDegeneration", palette = "jco",
+                   ylab = "Kidney GSSG (nmol/mg)", xlab = "Hydropic Degeneration Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  
+  p20 <- ggboxplot(data, x = "HydropicDegeneration", y = "KidneyTotalGSH",
+                   color = "HydropicDegeneration", palette = "jco",
+                   ylab = "Kidney Total Glutathione (nmol/mg)", xlab = "Hydropic Degeneration Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  
+  
+  p21 <- ggboxplot(data, x = "HydropicDegeneration", y = "KidneyGSHGSSGRatio",
+                   color = "HydropicDegeneration", palette = "jco",
+                   ylab = "Kidney GSH/GSSG", xlab = "Hydropic Degeneration Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  
+  p22 <- ggboxplot(data, x = "HydropicDegeneration", y = "KidneyEh",
+                   color = "HydropicDegeneration", palette = "jco",
+                   ylab = "Kidney Eh (mV)", xlab = "Hydropic Degeneration Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   
     
@@ -205,8 +240,9 @@ HDStatsSex <- group_by(data, group, Sex) %>%
   #        ylab = "GSH (nmol/mg)", xlab = "Hydropic Degeneration Grade")
   
   pdf(file = "HydropicDegeneration-plots-pvalues-symbol.pdf")
-  ggarrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, ncol = 1, nrow = 1)
-  dev.off() 
+  ggarrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, ncol = 1, nrow = 1)
+  dev.off()
+  
   
 
 

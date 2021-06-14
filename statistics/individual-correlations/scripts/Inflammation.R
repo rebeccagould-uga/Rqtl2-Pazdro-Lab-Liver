@@ -70,10 +70,10 @@ InflammationStatsSex <- group_by(data, group, Sex) %>%
   #        ylab = "GSH (nmol/mg)", xlab = "Inflammation Grade")+
   #stat_compare_means(comparisons = my_comparisons, label = "p.format")
 
-  p1 <- ggboxplot(data, x = "Inflammation", y = "GSH",
+  p1 <- ggboxplot(data, x = "Inflammation", y = "LiverGSH",
             color = "Inflammation", palette = "jco",
-            ylab = "GSH (nmol/mg)", xlab = "Inflammation Grade")+ 
-    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+            ylab = "Liver GSH (nmol/mg)", xlab = "Inflammation Grade")+ 
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
@@ -85,127 +85,162 @@ InflammationStatsSex <- group_by(data, group, Sex) %>%
   #   stat_compare_means(label = "p.signif", method = "t.test",
   #                      ref.group = ".all.", hide.ns = TRUE)      # Pairwise comparison against all
   
-  p2 <- ggboxplot(data, x = "Inflammation", y = "GSSG",
+  p2 <- ggboxplot(data, x = "Inflammation", y = "LiverGSSG",
                   color = "Inflammation", palette = "jco",
-                  ylab = "GSSG (nmol/mg)", xlab = "Inflammation Grade")+
-    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+                  ylab = "Liver GSSG (nmol/mg)", xlab = "Inflammation Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
-  p3 <- ggboxplot(data, x = "Inflammation", y = "TotalGSH",
+  p3 <- ggboxplot(data, x = "Inflammation", y = "LiverTotalGSH",
                   color = "Inflammation", palette = "jco",
-                  ylab = "Total Glutathione (nmol/mg)", xlab = "Inflammation Grade")+
-    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+                  ylab = "Liver Total Glutathione (nmol/mg)", xlab = "Inflammation Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   
-  p4 <- ggboxplot(data, x = "Inflammation", y = "GSHGSSGRatio",
+  p4 <- ggboxplot(data, x = "Inflammation", y = "LiverGSHGSSGRatio",
                   color = "Inflammation", palette = "jco",
-                  ylab = "GSH/GSSG", xlab = "Inflammation Grade")+
-    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+                  ylab = "Liver GSH/GSSG", xlab = "Inflammation Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
-  p5 <- ggboxplot(data, x = "Inflammation", y = "Eh",
+  p5 <- ggboxplot(data, x = "Inflammation", y = "LiverEh",
                   color = "Inflammation", palette = "jco",
-                  ylab = "Eh (mV)", xlab = "Inflammation Grade")+
-    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+                  ylab = "Liver Eh (mV)", xlab = "Inflammation Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p6 <- ggboxplot(data, x = "Inflammation", y = "NADH",
                   color = "Inflammation", palette = "jco",
                   ylab = "NADH (pmol/ug)", xlab = "Inflammation Grade")+ 
-  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p7 <- ggboxplot(data, x = "Inflammation", y = "NADP",
                   color = "Inflammation", palette = "jco",
                   ylab = "NADP (pmol/ug)", xlab = "Inflammation Grade")+ 
-  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p8 <- ggboxplot(data, x = "Inflammation", y = "NADPH",
                   color = "Inflammation", palette = "jco",
                   ylab = "NADPH (pmol/ug)", xlab = "Inflammation Grade")+ 
-  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p9 <- ggboxplot(data, x = "Inflammation", y = "NADPNADPHRatio",
                   color = "Inflammation", palette = "jco",
                   ylab = "NADP/NADPH", xlab = "Inflammation Grade")+ 
-  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p10 <- ggboxplot(data, x = "Inflammation", y = "AST",
                   color = "Inflammation", palette = "jco",
                   ylab = "AST (U/L)", xlab = "Inflammation Grade")+ 
-  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p11 <- ggboxplot(data, x = "Inflammation", y = "ALT",
                    color = "Inflammation", palette = "jco",
                    ylab = "ALT (U/L)", xlab = "Inflammation Grade")+ 
-  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
     
   p12 <- ggboxplot(data, x = "Inflammation", y = "LiverWeightBodyWeight",
                    color = "Inflammation", palette = "jco",
                    ylab = "Liver Weight/Body Weight (%)", xlab = "Inflammation Grade")+ 
-  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p13 <- ggboxplot(data, x = "Inflammation", y = "Glucose",
                    color = "Inflammation", palette = "jco",
                    ylab = "Glucose (mg/dL)", xlab = "Inflammation Grade")+ 
-  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p14 <- ggboxplot(data, x = "Inflammation", y = "LiverWeight",
                    color = "Inflammation", palette = "jco",
                    ylab = "Liver Weight (g)", xlab = "Inflammation Grade")+ 
-  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
     #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p15 <- ggboxplot(data, x = "Inflammation", y = "HydropicDegeneration",
                    color = "Inflammation", palette = "jco",
                    ylab = "Hydropic Degeneration Grade", xlab = "Inflammation Grade")+ 
-  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p16 <- ggboxplot(data, x = "Inflammation", y = "ASTALTRatio",
                    color = "Inflammation", palette = "jco",
                    ylab = "AST/ALT", xlab = "Inflammation Grade")+ 
-  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p17 <- ggboxplot(data, x = "Inflammation", y = "BodyWeight",
                    color = "Inflammation", palette = "jco",
                    ylab = "Body Weight (g)", xlab = "Inflammation Grade")+ 
-  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   p18 <- ggboxplot(data, x = "Inflammation", y = "Steatosis",
                    color = "Inflammation", palette = "jco",
                    ylab = "Steatosis Grade", xlab = "Inflammation Grade")+ 
-    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format", symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  
+  p19 <- ggboxplot(data, x = "Inflammation", y = "KidneyGSH",
+                   color = "Inflammation", palette = "jco",
+                   ylab = "Kidney GSH (nmol/mg)", xlab = "Inflammation Grade")+ 
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
   #stat_compare_means(method = "kruskal.test")+ # Add global p-value
   #stat_compare_means(label = "p.signif", ref.group = "0") 
   
   
+  p20 <- ggboxplot(data, x = "Inflammation", y = "KidneyGSSG",
+                   color = "Inflammation", palette = "jco",
+                   ylab = "Kidney GSSG (nmol/mg)", xlab = "Inflammation Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  
+  p21 <- ggboxplot(data, x = "Inflammation", y = "KidneyTotalGSH",
+                   color = "Inflammation", palette = "jco",
+                   ylab = "Kidney Total Glutathione (nmol/mg)", xlab = "Inflammation Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  
+  
+  p22 <- ggboxplot(data, x = "Inflammation", y = "KidneyGSHGSSGRatio",
+                   color = "Inflammation", palette = "jco",
+                   ylab = "Kidney GSH/GSSG", xlab = "Inflammation Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
+  
+  p23 <- ggboxplot(data, x = "Inflammation", y = "KidneyEh",
+                   color = "Inflammation", palette = "jco",
+                   ylab = "Kidney Eh (mV)", xlab = "Inflammation Grade")+
+    stat_compare_means(comparisons = my_comparisons, hide.ns = TRUE, label = "p.format") #, symnum.args = list(cutpoints = c(0, 0.001, 0.05, 1), symbols = c("**", "*", "ns")))
+  #stat_compare_means(method = "kruskal.test")+ # Add global p-value
+  #stat_compare_means(label = "p.signif", ref.group = "0") 
 
   
   # # Mean plots
@@ -219,8 +254,8 @@ InflammationStatsSex <- group_by(data, group, Sex) %>%
   #        add = c("mean_se", "jitter"),
   #        ylab = "GSH (nmol/mg)", xlab = "Inflammation Grade")
   
-  pdf(file = "Inflammation-plots-pvalues-symbol.pdf")
-  ggarrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, ncol = 1, nrow = 1)
+  pdf(file = "Inflammation-plots-pvalues.pdf")
+  ggarrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, ncol = 1, nrow = 1)
   dev.off()
   
   

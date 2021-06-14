@@ -54,6 +54,9 @@ write_xlsx(list(  "Steatosis chr18" = Steatosis_Genes_MGI_chr18,
                   "Steatosis chrX" = Steatosis_Genes_MGI_chrX),
              "HistologyGenesMGI - rankZ sexgen.xlsx")
   
-  
+write_xlsx(list(  "Liver Weight chr11" = LiverWeight_Genes_MGI_chr11,
+                  "LW BW Ratio chr11" = LiverWeightBodyWeight_Genes_MGI_chr11,
+                  "LW BW Ratio chr12" = LiverWeightBodyWeight_Genes_MGI_chr12),
+           "WeightsGenesMGI - rankZ sexgen.xlsx")  
   
   

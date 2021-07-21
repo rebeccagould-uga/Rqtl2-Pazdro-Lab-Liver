@@ -48,7 +48,7 @@ library (RSQLite)
   # instructions from Gary Churchill
   
   # kappa() computes the condition number of a matrix
-  # Construct a matrix with the genoprobs at the maker locus.  It should have 8 columns A-H.  Compute kappa.
+  # Construct a matrix with the genoprobs at the marker locus.  It should have 8 columns A-H.  Compute kappa.
   # Repeat this but drop column H and replace it with a column of all ones – kappa should be the same.
   # Now add a column with 1 for females and 0 for males…compute kappa.
   # Next add several column with dummy variables for cohort…compute kappa.
@@ -56,12 +56,27 @@ library (RSQLite)
   # You can compute the Sex and Cohort columns using the model.matrix() function,
   # e.g. model.matrix( ~Sex, data=my.dataframe) or model.matrix(~Sex+Cohort, data=my.dataframe)
   
-  kappa()
+  # Construct a matrix with the genoprobs at the marker locus.  It should have 8 columns A-H.  Compute kappa.
+  chr2_UNC3398043 <- (probs$`2`)[,,"UNC3398043"]
+  kappa(chr2_UNC3398043)
+  #1451987
 
-
-
-
-
+  # Repeat this but drop column H and replace it with a column of all ones – kappa should be the same
+  chr2_UNC3398043[, "H"]
+  chr2_UNC3398043[, "H"] <- 1
+  kappa(chr2_UNC3398043)
+  #52720252
+  
+  # Now add a column with 1 for females and 0 for males…compute kappa
+  
+  # Next add several column with dummy variables for cohort…compute kappa
+  
+  # Just to get a feel for things, swap in genotypes from loci where there is no problem.
+  
+  # You can compute the Sex and Cohort columns using the model.matrix() function,
+  # e.g. model.matrix( ~Sex, data=my.dataframe) or model.matrix(~Sex+Cohort, data=my.dataframe)
+  
+  
 
 ########################################################################################################
 ## 
